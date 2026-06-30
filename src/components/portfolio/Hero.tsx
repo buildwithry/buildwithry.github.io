@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Lightbulb } from "lucide-react";
+import { ArrowRight, Calendar, Download } from "lucide-react";
 import automationIcon from "@/assets/automation-icon.png";
 import adrianPhoto from "/lovable-uploads/892fb2d8-1fb5-4b9c-9831-7db3e194f5e9.png";
 const Hero = () => {
@@ -10,15 +10,15 @@ const Hero = () => {
           <div className="text-center lg:text-left">
             <div className="mb-8">
               <h1 className="font-ubuntu text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                I help businesses 
+                I build
                 <span className="text-gradient block">
-                  automate workflows
+                  AI voice agents &amp; CRM automation
                 </span>
-                and scale effortlessly
+                that book, qualify, and never sleep
               </h1>
-              
+
               <p className="font-colfax text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Specialist in <span className="font-semibold text-primary">GoHighLevel</span>, <span className="font-semibold text-primary">Zapier</span>, <span className="font-semibold text-primary">Make</span>, and <span className="font-semibold text-primary">n8n</span> — building AI-powered workflows that cut costs, eliminate errors, and drive revenue 24/7.
+                HighLevel Certified Admin specializing in <span className="font-semibold text-primary">AI voice agents (VAPI, Retell)</span>, <span className="font-semibold text-primary">GoHighLevel</span>, and <span className="font-semibold text-primary">n8n / Make</span> — voice agents and workflows that capture leads, book appointments, and sync to your CRM 24/7.
               </p>
             </div>
             
@@ -37,6 +37,10 @@ const Hero = () => {
               <Button variant="outline" size="lg" className="text-lg px-8 py-6 hover-lift border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold" onClick={() => window.open('https://calendly.com/buildwithry/30min', '_blank')}>
                 Book a Free Strategy Call
                 <Calendar className="ml-2 h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="lg" className="text-lg px-8 py-6 hover-lift font-semibold" onClick={() => window.open('/Adrian_Agdan_Resume.pdf', '_blank')}>
+                Download Résumé
+                <Download className="ml-2 h-5 w-5" />
               </Button>
             </div>
             
