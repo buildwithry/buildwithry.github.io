@@ -9,6 +9,9 @@ import makeCaseStudy from "/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2
 import n8nCaseStudy from "/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.png";
 import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png";
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
+const nousHermesThumbnail = "/lovable-uploads/project-nous-hermes.svg";
+const aiJobHunterThumbnail = "/lovable-uploads/project-ai-job-hunter.svg";
+const shopifyPlannerThumbnail = "/lovable-uploads/project-shopify-inventory.svg";
 const projects = [{
   title: "AI-Powered Content Creation Workflow",
   description: "Marketing Agency: Automated content creation pipeline that transforms Google Drive files into AI-generated content distributed across multiple social platforms.",
@@ -70,6 +73,42 @@ const projects = [{
   platform: "VAPI + n8n + GHL + Supabase",
   videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9",
   detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Claude Code used to build and refine prompts and integrations"]
+}, {
+  title: "Nous Hermes — Autonomous Job-Hunter Agent",
+  description: "Personal R&D: An autonomous AI agent that runs 24/7 on a VPS, scrapes job boards twice daily, scores every new role against a target profile, and delivers the top matches to Telegram — remembering everything and improving over time.",
+  technologies: ["Python", "Claude (Anthropic)", "Hermes Agent", "Telegram", "Docker", "VPS"],
+  features: ["Runs autonomously 24/7 on a Hostinger VPS", "Scrapes 4 job boards twice daily", "AI-scores each role and pushes top matches to Telegram", "Persistent memory — never repeats a job"],
+  category: "Agentic AI",
+  client: "Personal R&D Project",
+  problem: "Manually checking multiple job boards every day was slow, inconsistent, and easy to drop — and the best remote roles get filled fast.",
+  solution: "Built an autonomous agent on the Nous Research Hermes framework that hunts jobs on a schedule, scores them with Claude, learns from feedback, and reports to Telegram — fully hands-off and deployed in Docker on a VPS.",
+  automationImage: nousHermesThumbnail,
+  platform: "Hermes Agent + Claude + Docker",
+  detailedWorkflow: ["Scheduler fires twice daily (6PM + 1AM)", "Agent scrapes OnlineJobs.ph, LinkedIn, Jobicy, RemoteOK", "New jobs deduped against persistent memory", "Claude Haiku scores each role against the target profile", "Top 10 matches sent to Telegram, one per message with an apply angle", "Agent learns from reactions to improve future scoring", "Available on-demand via Telegram for ad-hoc questions"]
+}, {
+  title: "AI Job Hunter — n8n Tailoring Pipeline",
+  description: "Personal R&D: A self-hosted n8n pipeline that fetches remote roles from multiple sources, AI-scores each for fit, and — only for strong matches — auto-tailors a resume and cover letter before alerting Slack and logging to a tracker.",
+  technologies: ["n8n", "Gemini", "Claude Sonnet", "Apify", "Slack API", "Google Sheets"],
+  features: ["Multi-source fetch with dedupe and pre-filtering", "Free-tier Gemini scoring across high volume", "Cost-gated Claude tailoring (only for matches ≥ 8/10)", "Per-match Slack alerts + Google Sheet tracker"],
+  category: "AI Automation",
+  client: "Personal R&D Project",
+  problem: "The real bottleneck in job hunting isn't finding roles — it's writing a tailored application for each one, which is too slow to do at volume.",
+  solution: "Built a self-hosted n8n workflow that fans out across job sources, scores every role with Gemini for free, and gates expensive Claude tailoring behind an 8/10 threshold — keeping spend under a hard monthly ceiling while automating the writing.",
+  automationImage: aiJobHunterThumbnail,
+  platform: "n8n + Gemini + Claude",
+  detailedWorkflow: ["Scheduled trigger fans out to fetch nodes (Upwork, RemoteOK, OnlineJobs.ph, more)", "Results normalized, deduped, and pre-filtered", "Gemini Flash scores each role 0–10 for fit", "Branch: only roles scoring ≥ 8 advance", "Claude Sonnet tailors a resume + short cover letter", "Each strong match posts its own Slack message", "Every scored job logged to a Google Sheet tracker"]
+}, {
+  title: "Shopify Inventory Planner",
+  description: "Ecommerce: A transparent demand-forecasting and reorder system that ingests Shopify exports and works out what to reorder, how much, and by when — output as an auditable Excel dashboard and a plain-language weekly update.",
+  technologies: ["Python", "pandas", "openpyxl", "Excel", "Forecasting"],
+  features: ["Recency-weighted sales velocity per SKU", "Safety stock + reorder points with lead-time variability", "Stock-out and order-by dates per product", "Color-coded REORDER / SOON / OK / OVERSTOCK status"],
+  category: "Data & Forecasting",
+  client: "Premium Ecommerce Brand",
+  problem: "A growing brand was reordering on gut feel — leading to stock-outs on best-sellers and cash tied up in overstocked SKUs, with no clear signal of what to order or when.",
+  solution: "Built a Python forecasting pipeline that turns raw Shopify exports into a per-SKU reorder model with live Excel formulas the owner can audit, plus a weekly 'order this / at risk / fine' summary that fits a 10-minute routine.",
+  automationImage: shopifyPlannerThumbnail,
+  platform: "Python + pandas + Excel",
+  detailedWorkflow: ["Ingest Shopify product, order, inventory and lead-time exports", "Compute recency-weighted sales velocity (7/28/84-day windows)", "Calculate safety stock from demand and lead-time variability", "Derive reorder point, days of cover, and stock-out date", "Flag the last safe order-by date per SKU", "Apply flagged promos so reorder points rise before a campaign", "Output Excel dashboard with live formulas + weekly markdown update"]
 }];
 const Projects = () => {
   return (

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="'Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bgJ" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0e2a3a"/>
+    </linearGradient>
+    <linearGradient id="accJ" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <marker id="arrJ" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="600" fill="url(#bgJ)"/>
+  <text x="60" y="78" fill="#fff" font-size="38" font-weight="700">AI Job Hunter</text>
+  <text x="60" y="116" fill="url(#accJ)" font-size="22" font-weight="600">n8n AI scoring + auto-tailoring pipeline</text>
+
+  <g text-anchor="middle">
+    <!-- Stage boxes -->
+    <rect x="60" y="180" width="170" height="90" rx="14" fill="#1e293b" stroke="#475569"/>
+    <text x="145" y="220" fill="#e2e8f0" font-size="17" font-weight="600">Fetch sources</text>
+    <text x="145" y="244" fill="#7dd3fc" font-size="13">Upwork · RemoteOK</text>
+    <text x="145" y="262" fill="#7dd3fc" font-size="13">OnlineJobs · more</text>
+
+    <rect x="60" y="330" width="170" height="80" rx="14" fill="#1e293b" stroke="#475569"/>
+    <text x="145" y="368" fill="#e2e8f0" font-size="17" font-weight="600">Dedupe</text>
+    <text x="145" y="390" fill="#7dd3fc" font-size="13">+ pre-filter</text>
+
+    <rect x="300" y="255" width="180" height="90" rx="14" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="390" y="295" fill="#fbbf24" font-size="17" font-weight="600">Gemini score</text>
+    <text x="390" y="319" fill="#fcd34d" font-size="13">relevance 0–10</text>
+
+    <rect x="545" y="255" width="180" height="90" rx="14" fill="url(#accJ)"/>
+    <text x="635" y="295" fill="#06281f" font-size="17" font-weight="700">Claude Sonnet</text>
+    <text x="635" y="319" fill="#06281f" font-size="13">tailor CV + letter</text>
+
+    <rect x="790" y="180" width="150" height="80" rx="14" fill="#1e293b" stroke="#475569"/>
+    <text x="865" y="218" fill="#e2e8f0" font-size="17" font-weight="600">Slack</text>
+    <text x="865" y="240" fill="#7dd3fc" font-size="13">per-match alert</text>
+
+    <rect x="790" y="340" width="150" height="80" rx="14" fill="#1e293b" stroke="#475569"/>
+    <text x="865" y="378" fill="#e2e8f0" font-size="17" font-weight="600">Google Sheet</text>
+    <text x="865" y="400" fill="#7dd3fc" font-size="13">tracker log</text>
+
+    <!-- gate label -->
+    <text x="512" y="392" fill="#34d399" font-size="14" font-weight="700">gated ≥ 8/10</text>
+  </g>
+
+  <g stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrJ)">
+    <path d="M230 240 L298 285"/>
+    <path d="M230 360 L298 315"/>
+    <path d="M480 300 L543 300"/>
+    <path d="M725 290 L788 230"/>
+    <path d="M725 310 L788 365"/>
+  </g>
+</svg>
