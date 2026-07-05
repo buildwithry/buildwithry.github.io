@@ -28,19 +28,21 @@ const skillCategories = [
   }
 ];
 
+const uploadAsset = (fileName: string) => `${import.meta.env.BASE_URL}lovable-uploads/${fileName}`;
+
 const toolLogos: Array<{ name: string; logo: string; isImage?: boolean; color?: string }> = [
-  { name: "Make", logo: "/lovable-uploads/f15c7435-1271-49b9-bdad-f8a3d32a0d96.png", isImage: true },
-  { name: "Zapier", logo: "/lovable-uploads/30c27be1-6af6-4eab-90b2-91c98060f650.png", isImage: true },
-  { name: "GoHighLevel", logo: "/lovable-uploads/0340a356-7341-4d91-862e-5c9c3cab01a6.png", isImage: true },
-  { name: "n8n", logo: "/lovable-uploads/c63b961b-4b50-4cb6-b67f-81379d4ddf08.png", isImage: true },
-  { name: "Supabase", logo: "/lovable-uploads/9350b8c6-c661-4b02-83e9-104503868b53.png", isImage: true },
-  { name: "Airtable", logo: "/lovable-uploads/07fe4fb3-fe96-49d0-b139-0661d025aac4.png", isImage: true },
-  { name: "Shopify", logo: "/lovable-uploads/1ff04e66-8787-43cc-8330-a31015e5fb5f.png", isImage: true },
-  { name: "Stripe", logo: "/lovable-uploads/b5921b0a-1425-4503-9614-12d902642cf8.png", isImage: true },
-  { name: "Twilio", logo: "/lovable-uploads/5e34f1ab-63df-40f7-a73c-06850eeaefc7.png", isImage: true },
-  { name: "Canva", logo: "/lovable-uploads/b69b54a6-4046-48ad-b1c8-1709499985e7.png", isImage: true },
-  { name: "Slack", logo: "/lovable-uploads/729b14df-7b5c-478f-a162-f79980da1ac1.png", isImage: true },
-  { name: "Asana", logo: "/lovable-uploads/0430b2e9-867b-484e-b727-9f05b427238a.png", isImage: true }
+  { name: "Make", logo: uploadAsset("f15c7435-1271-49b9-bdad-f8a3d32a0d96.png"), isImage: true },
+  { name: "Zapier", logo: uploadAsset("30c27be1-6af6-4eab-90b2-91c98060f650.png"), isImage: true },
+  { name: "GoHighLevel", logo: uploadAsset("0340a356-7341-4d91-862e-5c9c3cab01a6.png"), isImage: true },
+  { name: "n8n", logo: uploadAsset("c63b961b-4b50-4cb6-b67f-81379d4ddf08.png"), isImage: true },
+  { name: "Supabase", logo: uploadAsset("9350b8c6-c661-4b02-83e9-104503868b53.png"), isImage: true },
+  { name: "Airtable", logo: uploadAsset("07fe4fb3-fe96-49d0-b139-0661d025aac4.png"), isImage: true },
+  { name: "Shopify", logo: uploadAsset("1ff04e66-8787-43cc-8330-a31015e5fb5f.png"), isImage: true },
+  { name: "Stripe", logo: uploadAsset("b5921b0a-1425-4503-9614-12d902642cf8.png"), isImage: true },
+  { name: "Twilio", logo: uploadAsset("5e34f1ab-63df-40f7-a73c-06850eeaefc7.png"), isImage: true },
+  { name: "Canva", logo: uploadAsset("b69b54a6-4046-48ad-b1c8-1709499985e7.png"), isImage: true },
+  { name: "Slack", logo: uploadAsset("729b14df-7b5c-478f-a162-f79980da1ac1.png"), isImage: true },
+  { name: "Asana", logo: uploadAsset("0430b2e9-867b-484e-b727-9f05b427238a.png"), isImage: true }
 ];
 
 const Skills = () => {
@@ -59,37 +61,28 @@ const Skills = () => {
         {/* Animated Tools Logos */}
         <div className="mb-16">
           <div className="relative overflow-hidden py-8">
-            <div className="flex animate-scroll-right space-x-8 w-max">
+            <div className="flex animate-scroll-right space-x-6 w-max">
               {[...toolLogos, ...toolLogos].map((tool, index) => (
                 <div
                   key={index}
                   className="flex-shrink-0 group cursor-pointer"
+                  title={tool.name}
                 >
-                  <div className="transparent rounded-xl p-6 hover:shadow-lg smooth-animation hover:scale-110 border border-gray-200/20">
-                    <div className="flex items-center justify-center">
-                      <div className="h-20 w-20 group-hover:scale-125 smooth-animation flex items-center justify-center transparent rounded-lg">
-                        {tool.isImage ? (
-                          <img 
-                            src={tool.logo} 
-                            alt={tool.name} 
-                            className="h-16 w-16 object-contain transparent rounded"
-                            style={
-                              ['Shopify', 'Stripe', 'Slack', 'Asana', 'GoHighLevel'].includes(tool.name)
-                                ? { 
-                                    filter: 'contrast(110%) brightness(1.1)',
-                                    mixBlendMode: 'multiply',
-                                    backgroundColor: 'transparent'
-                                  }
-                                : {}
-                            }
-                          />
-                        ) : (
-                          <div className={`text-4xl ${tool.color}`}>
-                            {tool.logo}
-                          </div>
-                        )}
-                      </div>
+                  <div className="bg-white rounded-2xl p-4 hover:shadow-xl smooth-animation hover:scale-110 border border-border/60 flex flex-col items-center justify-center gap-2 w-32 h-32">
+                    <div className="flex-1 flex items-center justify-center w-full">
+                      <img
+                        src={tool.logo}
+                        alt={`${tool.name} logo`}
+                        loading="lazy"
+                        className="max-h-14 max-w-[80%] object-contain"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
                     </div>
+                    <span className="text-xs font-semibold text-gray-700 truncate max-w-full">
+                      {tool.name}
+                    </span>
                   </div>
                 </div>
               ))}

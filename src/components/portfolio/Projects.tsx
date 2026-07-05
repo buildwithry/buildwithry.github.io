@@ -9,6 +9,7 @@ import makeCaseStudy from "/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2
 import n8nCaseStudy from "/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.png";
 import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png";
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
+const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
 const nousHermesThumbnail = "/lovable-uploads/project-nous-hermes.svg";
 const aiJobHunterThumbnail = "/lovable-uploads/project-ai-job-hunter.svg";
 const shopifyPlannerThumbnail = "/lovable-uploads/project-shopify-inventory.svg";
@@ -73,6 +74,36 @@ const projects = [{
   platform: "VAPI + n8n + GHL + Supabase",
   videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9",
   detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Claude Code used to build and refine prompts and integrations"]
+}, {
+  title: "ASMR AI Video Creator",
+  description: "Content Creator: Fully automated daily ASMR video generation and publishing pipeline that creates, renders, and posts videos to Facebook and YouTube with zero manual work.",
+  technologies: ["n8n", "Google Gemini", "Google Veo", "Google Sheets", "Facebook Graph API", "YouTube API", "Gmail"],
+  features: ["100% automated daily video generation", "AI-written prompts, titles, and captions", "Auto-publishing to Facebook and YouTube", "Safety filter and error handling with email alerts"],
+  category: "AI Content Automation",
+  client: "Content Creator",
+  problem: "Producing and publishing daily ASMR video content across multiple platforms required hours of manual work — writing prompts, generating videos, formatting captions, and uploading to each channel.",
+  solution: "Built an n8n workflow that runs every day at 12:00 AM: it picks a random pending fruit from a Google Sheet, uses Gemini to generate the Veo prompt, title, and caption, generates the video with Google Veo, then uploads it to Facebook and YouTube automatically. Includes JWT auth, safety-filter handling, and email alerts on errors.",
+  automationImage: asmrThumbnail,
+  platform: "n8n + Gemini + Veo",
+  detailedWorkflow: [
+    "Schedule trigger fires every day at 12:00 AM",
+    "Reads Google Sheet and gets all fruits with status = Pending",
+    "Randomly selects one pending fruit (with style)",
+    "Gemini generates Veo prompt, YouTube title, and description/caption",
+    "Checks if Gemini returned an error — sends email alert and stops if so",
+    "Builds JWT payload, signs it, and exchanges it for a Google access token",
+    "Sends prompt to Google Veo to generate the video (returns operation ID)",
+    "Waits, then polls Veo to check if the video is ready",
+    "Handles safety-filter and error branches (stops workflow with notification)",
+    "Converts the returned Base64 video into an MP4 file",
+    "Uploads the video to Facebook via the Graph API with generated caption",
+    "Uploads the video to YouTube with generated title and description",
+    "Updates the Google Sheet row: status = Posted, posted_at = today"
+  ],
+  sampleLinks: [
+    { label: "Facebook Reel sample", url: "https://www.facebook.com/reel/1245462175306768/?s=single_unit" },
+    { label: "YouTube Shorts sample", url: "https://www.youtube.com/shorts/yudXdZTOQPM" }
+  ]
 }, {
   title: "Nous Hermes — Autonomous Job-Hunter Agent",
   description: "Personal R&D: An autonomous AI agent that runs 24/7 on a VPS, scrapes job boards twice daily, scores every new role against a target profile, and delivers the top matches to Telegram — remembering everything and improving over time.",
@@ -292,8 +323,29 @@ const Projects = () => {
                               ))}
                             </ul>
                           </div>
+
+                          {(project as any).sampleLinks && (
+                            <div>
+                              <h4 className="font-bold text-lg mb-2">Sample Output</h4>
+                              <ul className="space-y-2">
+                                {(project as any).sampleLinks.map((link: { label: string; url: string }, i: number) => (
+                                  <li key={i} className="flex items-start text-sm">
+                                    <ExternalLink className="w-4 h-4 mr-2 mt-0.5 text-primary flex-shrink-0" />
+                                    <a
+                                      href={link.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-primary hover:underline break-all"
+                                    >
+                                      {link.label}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
-                        
+
                         <div className="space-y-4">
                           <div>
                             <h4 className="font-bold text-lg mb-2">Workflow Process</h4>
