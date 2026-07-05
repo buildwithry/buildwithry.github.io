@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 620" font-family="'Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="accA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+    <marker id="arrA" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L6,2.5 L0,5 Z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="620" fill="#161616"/>
+  <text x="40" y="46" fill="#fff" font-size="26" font-weight="700">3. ASMR AI Video Creator - FB/YT</text>
+  <text x="40" y="72" fill="url(#accA)" font-size="16" font-weight="600">n8n workflow · runs every day at 12:00 AM</text>
+
+  <!-- node style helper via repeated groups -->
+  <g font-size="12.5" font-weight="600" text-anchor="middle">
+    <!-- main row -->
+    <rect x="30"  y="190" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="90" y="222" fill="#e5e7eb">Schedule</text>
+    <text x="90" y="237" fill="#e5e7eb">Trigger</text>
+
+    <rect x="180" y="190" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="240" y="222" fill="#e5e7eb">Config</text>
+
+    <rect x="330" y="190" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="390" y="222" fill="#e5e7eb">List of</text>
+    <text x="390" y="237" fill="#e5e7eb">Fruits</text>
+
+    <rect x="480" y="190" width="130" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="545" y="222" fill="#e5e7eb">Pick Random</text>
+    <text x="545" y="237" fill="#e5e7eb">Fruit</text>
+
+    <rect x="640" y="190" width="140" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="710" y="222" fill="#e5e7eb">Generate</text>
+    <text x="710" y="237" fill="#e5e7eb">Prompt</text>
+
+    <rect x="810" y="190" width="130" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="875" y="222" fill="#e5e7eb">check for</text>
+    <text x="875" y="237" fill="#e5e7eb">error</text>
+
+    <!-- gemini + parser beneath Generate Prompt -->
+    <rect x="655" y="300" width="110" height="52" rx="10" fill="#1f2937" stroke="#3f3f46"/>
+    <text x="710" y="322" fill="#93c5fd" font-size="11">Google Gemini</text>
+    <text x="710" y="337" fill="#93c5fd" font-size="11">Chat Model</text>
+
+    <rect x="775" y="300" width="120" height="52" rx="10" fill="#1f2937" stroke="#3f3f46"/>
+    <text x="835" y="322" fill="#93c5fd" font-size="11">Structured</text>
+    <text x="835" y="337" fill="#93c5fd" font-size="11">Output Parser</text>
+
+    <!-- error branch -->
+    <rect x="855" y="90" width="150" height="56" rx="10" fill="#3b1f2b" stroke="#7f1d3a"/>
+    <text x="930" y="115" fill="#fda4af">Send a message</text>
+    <text x="930" y="130" fill="#fda4af" font-size="11">Gmail alert</text>
+
+    <!-- success chain -->
+    <rect x="980" y="190" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1040" y="215" fill="#e5e7eb">Secret</text>
+    <text x="1040" y="230" fill="#e5e7eb">Payload</text>
+
+    <rect x="1130" y="190" width="100" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1180" y="222" fill="#e5e7eb">Sign JWT</text>
+
+    <rect x="1260" y="190" width="150" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1335" y="215" fill="#e5e7eb">Exchange JWT</text>
+    <text x="1335" y="230" fill="#e5e7eb" font-size="11">for Access Token</text>
+
+    <rect x="1440" y="190" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1500" y="222" fill="#e5e7eb">Edit Fields</text>
+
+    <!-- second row: generate + poll -->
+    <rect x="1440" y="290" width="120" height="56" rx="10" fill="url(#accA)"/>
+    <text x="1500" y="322" fill="#1a1025">Generate Video</text>
+
+    <rect x="1260" y="380" width="100" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1310" y="412" fill="#e5e7eb">Wait</text>
+
+    <rect x="1090" y="380" width="150" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="1165" y="405" fill="#e5e7eb">Get Generated</text>
+    <text x="1165" y="420" fill="#e5e7eb">Video</text>
+
+    <rect x="940" y="380" width="100" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="990" y="412" fill="#e5e7eb">IsDone?</text>
+
+    <rect x="790" y="380" width="100" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="840" y="412" fill="#e5e7eb">IsFiltered?</text>
+
+    <rect x="640" y="380" width="100" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="690" y="412" fill="#e5e7eb">IsError?</text>
+
+    <rect x="490" y="380" width="120" height="56" rx="10" fill="#232323" stroke="#3f3f46"/>
+    <text x="550" y="405" fill="#e5e7eb">Convert to</text>
+    <text x="550" y="420" fill="#e5e7eb">File</text>
+
+    <!-- publish outputs -->
+    <rect x="330" y="330" width="130" height="56" rx="10" fill="#1e3a5f" stroke="#2563eb"/>
+    <text x="395" y="355" fill="#93c5fd">Facebook</text>
+    <text x="395" y="370" fill="#93c5fd" font-size="11">Graph API</text>
+
+    <rect x="330" y="430" width="130" height="56" rx="10" fill="#4c1d1d" stroke="#dc2626"/>
+    <text x="395" y="455" fill="#fca5a5">Upload a</text>
+    <text x="395" y="470" fill="#fca5a5" font-size="11">video (YouTube)</text>
+
+    <rect x="150" y="330" width="150" height="56" rx="10" fill="#14342a" stroke="#16a34a"/>
+    <text x="225" y="355" fill="#86efac">Update List of</text>
+    <text x="225" y="370" fill="#86efac" font-size="11">Fruits (FB)</text>
+
+    <rect x="150" y="430" width="150" height="56" rx="10" fill="#14342a" stroke="#16a34a"/>
+    <text x="225" y="455" fill="#86efac">Update List of</text>
+    <text x="225" y="470" fill="#86efac" font-size="11">Fruits (YT)</text>
+  </g>
+
+  <!-- connectors -->
+  <g stroke="#52525b" stroke-width="1.6" fill="none" marker-end="url(#arrA)">
+    <path d="M150 218 L178 218"/>
+    <path d="M300 218 L328 218"/>
+    <path d="M450 218 L478 218"/>
+    <path d="M610 218 L638 218"/>
+    <path d="M710 246 L710 298"/>
+    <path d="M785 326 L775 326"/>
+    <path d="M780 218 L808 218"/>
+    <path d="M940 200 L928 148"/>
+    <path d="M940 236 L978 218"/>
+    <path d="M1100 218 L1128 218"/>
+    <path d="M1230 218 L1258 218"/>
+    <path d="M1410 218 L1438 218"/>
+    <path d="M1500 246 L1500 288"/>
+    <path d="M1440 318 L1360 400"/>
+    <path d="M1260 408 L1240 408"/>
+    <path d="M1090 408 L1040 408"/>
+    <path d="M940 408 L890 408"/>
+    <path d="M790 408 L740 408"/>
+    <path d="M640 408 L610 408"/>
+    <path d="M490 400 L460 365"/>
+    <path d="M490 415 L460 455"/>
+    <path d="M330 355 L300 355"/>
+    <path d="M330 455 L300 455"/>
+  </g>
+</svg>
