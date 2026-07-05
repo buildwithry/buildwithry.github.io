@@ -9,7 +9,7 @@ import makeCaseStudy from "/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2
 import n8nCaseStudy from "/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.png";
 import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png";
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
-const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.svg";
+const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
 const nousHermesThumbnail = "/lovable-uploads/project-nous-hermes.svg";
 const aiJobHunterThumbnail = "/lovable-uploads/project-ai-job-hunter.svg";
 const shopifyPlannerThumbnail = "/lovable-uploads/project-shopify-inventory.svg";
