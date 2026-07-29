@@ -10,6 +10,7 @@ import n8nCaseStudy from "/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.
 import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png";
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
 const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
+const metaReceptionistThumbnail = "/lovable-uploads/ai-meta-receptionist-v3.png";
 const nousHermesThumbnail = "/lovable-uploads/project-nous-hermes.svg";
 const aiJobHunterThumbnail = "/lovable-uploads/project-ai-job-hunter.svg";
 const shopifyPlannerThumbnail = "/lovable-uploads/project-shopify-inventory.svg";
@@ -75,6 +76,28 @@ const projects = [{
   platform: "VAPI + n8n + GHL + Supabase",
   videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9",
   detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Claude Code used to build and refine prompts and integrations"]
+}, {
+  title: "AI Meta Receptionist",
+  description: "Dermatology Fellowship: An AI receptionist for Instagram and Facebook that reads comments and DMs, replies like a human, extracts contact details, and pushes qualified leads into the GHL pipeline automatically.",
+  technologies: ["GoHighLevel", "n8n", "Instagram Graph API", "Facebook Graph API", "OpenAI", "Slack"],
+  features: ["Auto-detects IG/FB comment and DM leads", "Human-sounding personalized replies in 5–20 seconds", "Extracts phone/email even with typos", "Auto-moves leads through CRM pipeline stages"],
+  category: "Social Media AI",
+  client: "Dermatology Fellowship",
+  problem: "Social media leads from Instagram and Facebook comments and DMs were slipping through the cracks — coordinators had to manually read every message, chase contact details, and create CRM records by hand.",
+  solution: "Built an AI social media receptionist on n8n and GoHighLevel that monitors Meta comments and messages, responds with tailored human-like replies, cleans and extracts contact info, creates opportunities, and escalates qualified leads through pipeline stages — with Slack alerts for errors and API limits.",
+  automationImage: metaReceptionistThumbnail,
+  platform: "GHL + n8n + Meta APIs",
+  videoUrl: "https://kommodo.ai/recordings/0n2i09stXxdQADTRfDgV",
+  detailedWorkflow: [
+    "Monitors Instagram and Facebook comments and direct messages",
+    "AI classifies intent and identifies interested leads",
+    "Sends a tailored, human-sounding reply within 5–20 seconds",
+    "Extracts phone numbers and emails, correcting common typos",
+    "Creates or updates the contact and opportunity in GoHighLevel",
+    "Moves qualified leads through the correct pipeline stage automatically",
+    "Knowledge base of business context powers accurate AI answers",
+    "Automation logs push real-time Slack alerts on errors or API limits"
+  ]
 }, {
   title: "ASMR AI Video Creator",
   description: "Content Creator: Fully automated daily ASMR video generation and publishing pipeline that creates, renders, and posts videos to Facebook and YouTube with zero manual work.",
