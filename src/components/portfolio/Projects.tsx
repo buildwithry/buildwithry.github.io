@@ -24,6 +24,7 @@ const projects = [{
   solution: "Built Zapier workflow: Google Drive upload → AI content generation → automated posting to LinkedIn, Instagram, and Facebook.",
   automationImage: zapierCaseStudy,
   platform: "Zapier + AI",
+  videoUrl: "https://kommodo.ai/recordings/0n2i09stXxdQADTRfDgV?onlyRecording=1",
   detailedWorkflow: ["File uploaded to Google Drive triggers workflow", "Zapier filters by file type (mp4 format)", "AI by Zapier transcribes video content", "Second AI step creates optimized social media posts", "Content splits into platform-specific paths", "LinkedIn post created with professional tone", "Instagram content formatted with hashtags", "Facebook page post published automatically"]
 }, {
   title: "Client Onboarding Automation System", 
