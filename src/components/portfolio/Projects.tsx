@@ -11,6 +11,7 @@ import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
 const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
 const metaReceptionistThumbnail = "/lovable-uploads/ai-meta-receptionist-v3.png";
+const ghlConversationAiThumbnail = "/lovable-uploads/ghl-conversation-ai-ava.jpg";
 const nousHermesThumbnail = "/lovable-uploads/project-nous-hermes.svg";
 const aiJobHunterThumbnail = "/lovable-uploads/project-ai-job-hunter.svg";
 const shopifyPlannerThumbnail = "/lovable-uploads/project-shopify-inventory.svg";
@@ -96,6 +97,27 @@ const projects = [{
     "Moves qualified leads through the correct pipeline stage automatically",
     "Knowledge base of business context powers accurate AI answers",
     "Automation logs push real-time Slack alerts on errors or API limits"
+  ]
+}, {
+  title: "GHL Conversation AI \"Agent AVA\"",
+  description: "Multi-Channel Business: HighLevel's native Conversation AI agent (Ava) deployed across SMS, Instagram, Messenger, and web chat to talk to every lead 24/7, qualify them, and book the appointment before they lose interest.",
+  technologies: ["GoHighLevel", "Conversation AI", "SMS", "Instagram", "Messenger"],
+  features: ["24/7 AI conversations across every channel", "Qualifies and engages leads with smart routing", "Books appointments automatically and instantly", "Higher conversion rate from faster response times"],
+  category: "Conversational AI",
+  client: "Multi-Channel Business",
+  problem: "Leads messaging in through SMS, Instagram, or Messenger outside business hours went unanswered for hours, and by the time someone replied, the lead had already moved on to a competitor.",
+  solution: "Configured GoHighLevel's Conversation AI agent (Ava) to automate, engage, and convert across every messaging channel: answering instantly, qualifying the lead, routing them to the right follow-up, and booking the appointment directly on the calendar.",
+  automationImage: ghlConversationAiThumbnail,
+  platform: "GoHighLevel Conversation AI (Ava)",
+  videoUrl: "https://kommodo.ai/recordings/xPGDgbjahr1RKd5XzECV?onlyRecording=1",
+  detailedWorkflow: [
+    "Lead messages in via SMS, Instagram, Messenger, or web chat",
+    "Ava responds instantly with a natural, on-brand greeting",
+    "AI qualifies the lead by asking the right follow-up questions",
+    "Smart routing directs the conversation based on intent",
+    "Ava books the appointment straight onto the calendar",
+    "Conversation and contact details sync to the GHL CRM",
+    "Follow-up sequences trigger automatically for unbooked leads"
   ]
 }, {
   title: "ASMR AI Video Creator",
