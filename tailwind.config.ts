@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -19,10 +20,12 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'display': ['Inter', 'Helvetica Neue', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				'body': ['Inter', 'Helvetica Neue', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
 				'ubuntu': ['Ubuntu', 'sans-serif'],
-				'colfax': ['Inter', 'sans-serif'], // Using Inter as Colfax alternative
-				'futuristic': ['Orbitron', 'sans-serif'], // For "Build with RY" logo
-				'anonymous': ['Anonymous Pro', 'monospace'], // For typewriter effect
+				'colfax': ['Inter', 'sans-serif'],
+				'futuristic': ['Orbitron', 'sans-serif'],
+				'anonymous': ['Anonymous Pro', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -30,6 +33,13 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				'deep-ink': '#000d10',
+				'pure-white': '#ffffff',
+				'cool-ash': '#8e8e95',
+				'pebble': '#d5d3d4',
+				'midnight-hull': '#0f0f1c',
+				'charcoal-deck': '#151623',
+				'clay-ember': '#bc7155',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -170,5 +180,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;

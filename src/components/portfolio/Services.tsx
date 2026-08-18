@@ -1,67 +1,87 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Bot, Settings, LineChart, Globe, Mail } from "lucide-react";
+import { Bot, Zap, Settings, LineChart, Globe, Mail, ArrowUpRight } from "lucide-react";
 
 const services = [
   {
-    icon: <Bot className="h-8 w-8" />,
-    title: "GoHighLevel Setup & Optimization",
-    description: "Complete GHL funnel creation, email campaigns, and pipeline management to maximize your conversion rates."
+    icon: <Bot className="h-6 w-6 stroke-[1.5]" />,
+    title: "GoHighLevel Architecture & Setup",
+    description: "End-to-end GHL sub-account provisioning, custom pipeline engineering, calendar routing, and automated onboarding sequences tailored for high-ticket conversion."
   },
   {
-    icon: <Zap className="h-8 w-8" />,
-    title: "Workflow Automation",
-    description: "Custom automation workflows using Make.com, Zapier, and n8n to streamline your business processes."
+    icon: <Zap className="h-6 w-6 stroke-[1.5]" />,
+    title: "AI Voice Agents (VAPI & Retell)",
+    description: "Custom conversational voice agents trained on business context to answer inbound calls, qualify leads, dynamically check calendar availability, and book appointments 24/7."
   },
   {
-    icon: <Settings className="h-8 w-8" />,
-    title: "CRM Integration",
-    description: "Seamless integration between your CRM, email marketing, and communication tools for unified operations."
+    icon: <Settings className="h-6 w-6 stroke-[1.5]" />,
+    title: "n8n & Make.com Middleware Automation",
+    description: "Complex multi-branch webhook pipelines connecting CRMs, databases, AI models, payment processors, and messaging channels with error logging and auto-retry logic."
   },
   {
-    icon: <LineChart className="h-8 w-8" />,
-    title: "Lead Generation Systems",
-    description: "LinkedIn outreach campaigns, lead scoring, and automated follow-up sequences that convert."
+    icon: <LineChart className="h-6 w-6 stroke-[1.5]" />,
+    title: "Lead Qualification & Re-Engagement",
+    description: "Automated speed-to-lead systems that trigger SMS, WhatsApp, and email within seconds of inquiry, escalating qualified prospects directly into sales rep calendars."
   },
   {
-    icon: <Globe className="h-8 w-8" />,
-    title: "E-commerce Automation",
-    description: "Abandoned cart sequences, inventory management, and customer communication automation for online stores."
+    icon: <Globe className="h-6 w-6 stroke-[1.5]" />,
+    title: "E-commerce & Inventory Operations",
+    description: "Shopify and ERP workflow integrations, abandoned recovery funnels, reorder demand forecasting, and real-time fulfillment webhook synchronization."
   },
   {
-    icon: <Mail className="h-8 w-8" />,
-    title: "Email Marketing Campaigns",
-    description: "Strategic email sequences, newsletters, and automated campaigns that engage and convert your audience."
+    icon: <Mail className="h-6 w-6 stroke-[1.5]" />,
+    title: "Cold Email & Multi-Channel Outreach",
+    description: "Infrastructure setup with Instantly/Mailgun, deliverability warming, DNS verification (SPF/DKIM/DMARC), and automated response routing to CRM pipelines."
   }
 ];
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="section-heading mb-4">
-            What I Can Do
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive automation solutions to scale your business and streamline operations
-          </p>
+    <section id="services" className="py-24 px-6 sm:px-8 bg-white dark:bg-[#000d10] border-t border-[#d5d3d4] dark:border-white/10">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Section Header */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-16 items-end">
+          <div className="lg:col-span-7">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#bc7155] mb-2 block">
+              Core Competencies
+            </span>
+            <h2 className="section-headline">
+              Capabilities.
+            </h2>
+          </div>
+          <div className="lg:col-span-5">
+            <p className="text-lg sm:text-[19px] text-[#8e8e95] leading-[1.61]">
+              Architectural systems designed to eliminate manual bottlenecks, capture every qualified lead, and run unattended.
+            </p>
+          </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {/* 2-Column Editorial Grid with 1px Hairlines */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
           {services.map((service, index) => (
-            <Card key={index} className="glass hover:scale-105 smooth-animation group">
-              <CardHeader>
-                <div className="text-primary group-hover:scale-110 smooth-animation">
+            <div
+              key={index}
+              className="pt-6 hairline-top flex flex-col justify-between group"
+            >
+              <div>
+                <div className="w-10 h-10 rounded-full border border-[#d5d3d4] dark:border-white/20 flex items-center justify-center text-[#000d10] dark:text-white mb-6 group-hover:bg-[#000d10] group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-[#000d10] transition-colors">
                   {service.icon}
                 </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-muted-foreground leading-relaxed">
+
+                <h3 className="text-xl font-bold tracking-tight text-[#000d10] dark:text-white mb-3 leading-snug">
+                  {service.title}
+                </h3>
+
+                <p className="text-base text-[#8e8e95] leading-[1.61]">
                   {service.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+                </p>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-[#d5d3d4]/40 dark:border-white/5 flex items-center justify-between">
+                <span className="text-xs font-mono font-semibold text-[#8e8e95] uppercase">
+                  CAPABILITY // 0{index + 1}
+                </span>
+                <ArrowUpRight className="w-4 h-4 text-[#8e8e95] group-hover:text-[#bc7155] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              </div>
+            </div>
           ))}
         </div>
       </div>

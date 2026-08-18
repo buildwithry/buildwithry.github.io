@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Zap, Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const Navigation = () => {
@@ -15,22 +14,24 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 30);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { href: "#services", label: "Services" },
+    { href: "#projects", label: "Case Studies" },
+    { href: "#services", label: "Capabilities" },
+    { href: "#skills", label: "Ecosystem" },
     { href: "#experience", label: "Experience" },
-    { href: "#projects", label: "Case Studies" }
+    { href: "#contact", label: "Contact" },
   ];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
   };
@@ -41,104 +42,108 @@ const Navigation = () => {
 
   if (!mounted) {
     return null;
-  };
+  }
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'glass py-2' : 'py-4'
-    }`}>
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="relative">
-              <h1 className="font-anonymous text-xl font-bold text-foreground flex items-center gap-2 tracking-wider relative z-10 overflow-hidden whitespace-nowrap border-r-2 border-white/75 animate-typewriter">
-                BUILD WITH RY
-                <Zap className="h-6 w-6 text-primary animate-zap-glow cursor-pointer" />
-              </h1>
-              {/* Crack effects */}
-              <div className="absolute inset-0 pointer-events-none animate-crack-flash">
-                <div className="absolute top-1/2 left-1/4 w-px h-3 bg-primary/60 rotate-45 transform -translate-y-1/2"></div>
-                <div className="absolute top-1/3 right-1/4 w-px h-4 bg-primary/40 -rotate-12 transform"></div>
-                <div className="absolute bottom-1/3 left-1/3 w-px h-2 bg-primary/50 rotate-75 transform"></div>
-                <div className="absolute top-2/3 right-1/3 w-px h-3 bg-primary/30 -rotate-45 transform"></div>
-              </div>
-            </div>
-          </div>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/90 dark:bg-[#000d10]/90 backdrop-blur-md border-b border-[#d5d3d4]/60 dark:border-white/10 py-3.5"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 flex items-center justify-between">
+        {/* Brand Wordmark */}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="group flex items-baseline tracking-tight font-bold text-xl sm:text-2xl text-[#000d10] dark:text-white"
+        >
+          <span>BUILD WITH RY</span>
+          <span className="text-xs font-normal text-[#8e8e95] ml-1 group-hover:text-[#bc7155] transition-colors">®</span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="font-colfax text-muted-foreground hover:text-primary smooth-animation font-medium"
-              >
-                {item.label}
-              </button>
-            ))}
-            
-            {/* Dark Mode Toggle */}
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => (
             <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-muted transition-colors"
-              aria-label="Toggle theme"
+              key={item.href}
+              onClick={() => scrollToSection(item.href)}
+              className="text-[17px] font-medium text-[#8e8e95] hover:text-[#000d10] dark:hover:text-white transition-colors tracking-tight"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {item.label}
             </button>
-            
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 lightning-btn relative overflow-hidden group"
-              onClick={() => window.open('https://calendly.com/buildwithry/30min', '_blank')}
-            >
-              <span className="relative z-10">Book a Call</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Button>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
+        {/* Actions Zone */}
+        <div className="hidden sm:flex items-center gap-3">
+          {/* Dark Mode Toggle */}
           <button
-            className="md:hidden p-2"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleTheme}
+            className="w-10 h-10 rounded-full border border-[#d5d3d4] dark:border-white/20 flex items-center justify-center text-[#000d10] dark:text-white hover:bg-[#000d10] hover:text-white dark:hover:bg-white dark:hover:text-[#000d10] transition-all"
+            aria-label="Toggle theme"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+
+          {/* Primary Action Button */}
+          <button
+            onClick={() => window.open("https://calendly.com/buildwithry/30min", "_blank")}
+            className="btn-pill-dark group text-sm sm:text-[16px] py-2.5 px-5"
+          >
+            <span>Book a Strategy Call</span>
+            <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left font-colfax text-muted-foreground hover:text-primary smooth-animation font-medium py-2"
-              >
-                {item.label}
-              </button>
-            ))}
-            
-            {/* Mobile Dark Mode Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="flex items-center gap-2 w-full text-left font-colfax text-muted-foreground hover:text-primary smooth-animation font-medium py-2"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              {theme === "dark" ? 'Light Mode' : 'Dark Mode'}
-            </button>
-            
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold w-full mt-4 lightning-btn relative overflow-hidden group"
-              onClick={() => window.open('https://calendly.com/buildwithry/30min', '_blank')}
-            >
-              <span className="relative z-10">Book a Call</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </Button>
-          </div>
-        )}
+        {/* Mobile Menu Toggle */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            onClick={toggleTheme}
+            className="w-9 h-9 rounded-full border border-[#d5d3d4] dark:border-white/20 flex items-center justify-center text-[#000d10] dark:text-white"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-10 h-10 rounded-full bg-[#000d10] dark:bg-white text-white dark:text-[#000d10] flex items-center justify-center"
+            aria-label="Menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
-    </nav>
+
+      {/* Mobile Drawer */}
+      {isOpen && (
+        <div className="lg:hidden border-b border-[#d5d3d4] dark:border-white/10 bg-white dark:bg-[#000d10] px-6 py-6 space-y-4">
+          {navItems.map((item) => (
+            <button
+              key={item.href}
+              onClick={() => scrollToSection(item.href)}
+              className="block w-full text-left text-lg font-medium text-[#000d10] dark:text-white py-2 border-b border-[#d5d3d4]/30 dark:border-white/5"
+            >
+              {item.label}
+            </button>
+          ))}
+          <button
+            onClick={() => {
+              window.open("https://calendly.com/buildwithry/30min", "_blank");
+              setIsOpen(false);
+            }}
+            className="btn-pill-dark w-full py-3 mt-4 text-center justify-center"
+          >
+            <span>Book a Strategy Call</span>
+            <ArrowUpRight className="w-4 h-4 ml-1" />
+          </button>
+        </div>
+      )}
+    </header>
   );
 };
 

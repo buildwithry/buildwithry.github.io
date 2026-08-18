@@ -2,217 +2,259 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Professional automation business colors */
+    /* Hyer Aviation Tokens */
+    --color-deep-ink: #000d10;
+    --color-pure-white: #ffffff;
+    --color-cool-ash: #8e8e95;
+    --color-pebble: #d5d3d4;
+    --color-midnight-hull: #0f0f1c;
+    --color-charcoal-deck: #151623;
+    --color-clay-ember: #bc7155;
+
+    /* Theme Variables mapped to Hyer tokens */
     --background: 0 0% 100%;
-    --foreground: 220 13% 18%;
+    --foreground: 192 100% 3%; /* #000d10 */
     
     --card: 0 0% 100%;
-    --card-foreground: 220 13% 18%;
+    --card-foreground: 192 100% 3%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 18%;
+    --popover-foreground: 192 100% 3%;
     
-    /* Primary blue - professional and trustworthy */
-    --primary: 214 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 214 100% 45%;
+    --primary: 192 100% 3%; /* #000d10 */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
     
-    /* Secondary gray - clean and modern */
-    --secondary: 220 13% 95%;
-    --secondary-foreground: 220 13% 18%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 192 100% 3%;
     
-    /* Muted colors for supporting elements */
-    --muted: 220 13% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 240 3% 70%; /* #d5d3d4 */
+    --muted-foreground: 240 3% 57%; /* #8e8e95 */
     
-    /* Accent color for CTAs and highlights */
-    --accent: 214 100% 50%;
+    --accent: 16 43% 54%; /* #bc7155 Clay Ember */
     --accent-foreground: 0 0% 100%;
     
-    /* UI colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 214 100% 50%;
+    --border: 300 2% 83%; /* #d5d3d4 Pebble */
+    --input: 300 2% 83%;
+    --ring: 192 100% 3%;
     
-    /* Custom gradients for modern look */
-    --gradient-primary: linear-gradient(135deg, hsl(214 100% 50%), hsl(214 100% 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 13% 98%), hsl(220 13% 95%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 13% 98%));
-    
-    /* Shadows for depth */
-    --shadow-soft: 0 2px 8px hsl(220 13% 18% / 0.05);
-    --shadow-medium: 0 4px 16px hsl(220 13% 18% / 0.1);
-    --shadow-strong: 0 8px 32px hsl(220 13% 18% / 0.15);
-    
-    /* Animation variables */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    --radius: 0.75rem;
-    
-    /* Legacy glassmorphism for existing components */
-    --glass-bg: 255 255 255 / 0.1;
-    --glass-border: 255 255 255 / 0.2;
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --radius: 1000px; /* Full pill button default */
   }
 
   .dark {
-    /* Dark mode palette */
-    --background: 220 13% 9%;
-    --foreground: 220 13% 98%;
-    --card: 220 13% 11%;
-    --card-foreground: 220 13% 98%;
-    --popover: 220 13% 11%;
-    --popover-foreground: 220 13% 98%;
+    --background: 240 30% 8%; /* #0f0f1c Midnight Hull */
+    --foreground: 0 0% 100%;
+    --card: 236 26% 11%; /* #151623 Charcoal Deck */
+    --card-foreground: 0 0% 100%;
+    --popover: 236 26% 11%;
+    --popover-foreground: 0 0% 100%;
     
-    --primary: 214 100% 60%;
-    --primary-foreground: 220 13% 9%;
-    --primary-hover: 214 100% 65%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 192 100% 3%;
     
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 220 13% 98%;
+    --secondary: 236 26% 16%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 220 13% 15%;
-    --muted-foreground: 220 9% 65%;
+    --muted: 236 26% 16%;
+    --muted-foreground: 240 3% 65%;
     
-    --accent: 214 100% 60%;
-    --accent-foreground: 220 13% 9%;
+    --accent: 16 43% 54%; /* #bc7155 */
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
-    --destructive-foreground: 220 13% 98%;
-    --border: 220 13% 20%;
-    --input: 220 13% 20%;
-    --ring: 214 100% 60%;
-    
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(214 100% 60%), hsl(214 100% 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 13% 11%), hsl(220 13% 13%));
-    --gradient-card: linear-gradient(145deg, hsl(220 13% 11%), hsl(220 13% 13%));
-    
-    /* Dark mode shadows */
-    --shadow-soft: 0 2px 8px hsl(220 13% 3% / 0.3);
-    --shadow-medium: 0 4px 16px hsl(220 13% 3% / 0.4);
-    --shadow-strong: 0 8px 32px hsl(220 13% 3% / 0.5);
-    
-    /* Legacy glassmorphism for existing components */
-    --glass-bg: 0 0 0 / 0.1;
-    --glass-border: 255 255 255 / 0.1;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 10% 22%;
+    --input: 240 10% 22%;
+    --ring: 0 0% 100%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased selection:bg-[#000d10] selection:text-white dark:selection:bg-white dark:selection:text-[#000d10];
+    font-size: 18px;
+    line-height: 1.61;
   }
-  
-  /* Custom Scrollbar */
+
+  /* Editorial Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    @apply bg-muted/20;
+    background: #f4f4f4;
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/20 rounded-full;
+    background: #000d10;
+    border-radius: 9999px;
   }
   
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/40;
+  .dark ::-webkit-scrollbar-track {
+    background: #0f0f1c;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #8e8e95;
   }
 }
 
 @layer components {
-  /* Professional gradient text effect */
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.2;
-    padding-bottom: 0.1em;
+  /* Hyer Aviation Display Typography */
+  .display-hero {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    color: #000d10;
   }
-  
-  /* Modern section heading style */
-  .section-heading {
-    @apply text-3xl md:text-5xl font-black tracking-tight leading-tight text-gradient;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-variation-settings: 'wght' 900;
-    letter-spacing: -0.02em;
-    display: inline-block;
-    overflow: visible;
+
+  .display-wordmark {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
   }
-  
-  /* Glass morphism effect for modern cards */
-  .glass {
-    background: rgba(var(--glass-bg));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(var(--glass-border));
-    box-shadow: var(--glass-shadow);
+
+  .section-headline {
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #000d10;
   }
-  
-  .dark .glass {
-    @apply bg-gray-900/80 backdrop-blur-sm border border-gray-800/20;
+
+  .dark .display-hero,
+  .dark .section-headline {
+    color: #ffffff;
   }
-  
-  /* Smooth animations */
-  .smooth-animation {
-    transition: var(--transition-smooth);
+
+  /* Hyer Aviation Button Archetypes */
+  .btn-pill-dark {
+    background-color: #000d10;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 0.9rem 1.6rem;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
   }
-  
-  .bounce-animation {
-    transition: var(--transition-bounce);
+
+  .btn-pill-dark:hover {
+    background-color: #1a272a;
+    transform: translateY(-1px);
   }
-  
-  /* Professional button styles */
-  .btn-primary {
-    @apply bg-primary hover:bg-primary-hover text-primary-foreground;
+
+  .btn-pill-clay {
+    background-color: #bc7155;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 0.9rem 1.6rem;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
   }
-  
-  .btn-secondary {
-    @apply bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-border;
+
+  .btn-pill-clay:hover {
+    background-color: #a85f44;
+    transform: translateY(-1px);
   }
-  
-  /* Professional shadows */
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
+
+  .btn-pill-ghost {
+    background-color: transparent;
+    color: #000d10;
+    border: 1px solid #d5d3d4;
+    border-radius: 9999px;
+    padding: 0.9rem 1.6rem;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
   }
-  
-  .shadow-medium {
-    box-shadow: var(--shadow-medium);
+
+  .btn-pill-ghost:hover {
+    border-color: #000d10;
+    background-color: #000d10;
+    color: #ffffff;
+    transform: translateY(-1px);
   }
-  
-  .shadow-strong {
-    box-shadow: var(--shadow-strong);
+
+  .dark .btn-pill-ghost {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
   }
-  
-  /* Professional hover effects */
-  .hover-lift {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-medium;
+
+  .dark .btn-pill-ghost:hover {
+    border-color: #ffffff;
+    background-color: #ffffff;
+    color: #000d10;
   }
-  
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)];
+
+  .btn-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    background-color: #000d10;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .btn-icon-circle:hover {
+    background-color: #1a272a;
+    transform: scale(1.05);
+  }
+
+  .dark .btn-icon-circle {
+    background-color: #ffffff;
+    color: #000d10;
+  }
+
+  /* Featured Clay Card archetype */
+  .featured-clay-card {
+    background-color: #bc7155;
+    color: #ffffff;
+    border-radius: 0px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    position: relative;
+  }
+
+  /* Hairline borders */
+  .hairline-top {
+    border-top: 1px solid #d5d3d4;
+  }
+
+  .dark .hairline-top {
+    border-top-color: rgba(255, 255, 255, 0.15);
   }
 }
 
 @layer utilities {
-  /* Scroll animations */
-  @keyframes scroll-right {
+  @keyframes scroll-infinite {
     0% {
       transform: translateX(0);
     }
@@ -220,89 +262,12 @@ All colors MUST be HSL.
       transform: translateX(-50%);
     }
   }
-  
-  .animate-scroll-right {
-    animation: scroll-right 30s linear infinite;
-  }
-  
-  /* Floating animation for hero icon */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  /* Sparking Zap Icon Animation */
-  .zap-spark {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .animate-tools-scroll {
+    animation: scroll-infinite 35s linear infinite;
   }
 
-  .zap-spark:hover {
-    color: #fbbf24; /* yellow-400 */
-    filter: drop-shadow(0 0 8px #fbbf24) drop-shadow(0 0 16px #f59e0b);
-    transform: scale(1.1);
-    animation: spark 0.6s ease-in-out;
+  .animate-tools-scroll:hover {
+    animation-play-state: paused;
   }
-
-  @keyframes spark {
-    0%, 100% { 
-      filter: drop-shadow(0 0 8px #fbbf24) drop-shadow(0 0 16px #f59e0b); 
-    }
-    50% { 
-      filter: drop-shadow(0 0 12px #fbbf24) drop-shadow(0 0 24px #f59e0b) drop-shadow(0 0 32px #fbbf24); 
-      transform: scale(1.15);
-  }
-  
-  /* Lightning Button Animation */
-  .lightning-btn {
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .lightning-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24);
-    opacity: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.4s ease;
-    z-index: 1;
-  }
-  
-  .lightning-btn:hover::before {
-    width: 120%;
-    height: 120%;
-    opacity: 0.3;
-  }
-  
-  .lightning-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4), 0 0 20px rgba(251, 191, 36, 0.3);
-  }
-  
-  @keyframes lightning-pulse {
-    0%, 100% {
-      box-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 30px rgba(251, 191, 36, 0.6);
-    }
-  }
-  
-  .lightning-btn:hover {
-    animation: lightning-pulse 0.6s ease-in-out;
-  }
-}
 }
