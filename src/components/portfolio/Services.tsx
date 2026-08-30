@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Workflow, Database, Globe, Mic, Code2, Check } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Service {
   icon: JSX.Element;
@@ -12,6 +16,18 @@ interface Service {
 }
 
 const services: Service[] = [
+  {
+    icon: <Mic className="h-8 w-8 stroke-[1.5]" />,
+    title: "AI Conversational Agents",
+    subhead: "Voice and chat agents that qualify and book.",
+    badge: "Answers every time",
+    bullets: [
+      "Voice agents that answer calls and book appointments 24/7",
+      "Chat agents across SMS, Instagram, Messenger, and web",
+      "Qualifies leads with real conversation, not a script",
+      "Syncs every conversation straight into your CRM",
+    ],
+  },
   {
     icon: <Workflow className="h-8 w-8 stroke-[1.5]" />,
     title: "GHL Automation",
@@ -49,18 +65,6 @@ const services: Service[] = [
     ],
   },
   {
-    icon: <Mic className="h-8 w-8 stroke-[1.5]" />,
-    title: "AI Conversational Agents",
-    subhead: "Voice and chat agents that qualify and book.",
-    badge: "Answers every time",
-    bullets: [
-      "Voice agents that answer calls and book appointments 24/7",
-      "Chat agents across SMS, Instagram, Messenger, and web",
-      "Qualifies leads with real conversation, not a script",
-      "Syncs every conversation straight into your CRM",
-    ],
-  },
-  {
     icon: <Code2 className="h-8 w-8 stroke-[1.5]" />,
     title: "Coded Funnels",
     subhead: "Custom-built pages that convert.",
@@ -77,11 +81,47 @@ const services: Service[] = [
 const Services = () => {
   const [active, setActive] = useState(0);
   const count = services.length;
+  const sectionRef = useRef<HTMLElement>(null);
+  const manualRef = useRef(false);
+  const activeRef = useRef(active);
+  activeRef.current = active;
 
-  const go = (delta: number) => setActive((a) => (a + delta + count) % count);
+  const goTo = (index: number) => {
+    manualRef.current = true;
+    setActive(index);
+  };
+  const go = (delta: number) => goTo((activeRef.current + delta + count) % count);
+
+  // Scroll-driven auto-advance: pin the section and step through cards as the
+  // user scrolls, so the carousel opens on "AI Conversational Agents" (index 0)
+  // and steps forward automatically instead of sitting static.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: () => `+=${(count - 1) * window.innerHeight * 0.6}`,
+      pin: true,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const index = Math.min(count - 1, Math.round(self.progress * (count - 1)));
+        if (manualRef.current) {
+          // Resume auto-advance once scroll progress catches up to wherever a
+          // manual click/dot selection left off, instead of locking forever.
+          if (index === activeRef.current) manualRef.current = false;
+          return;
+        }
+        setActive(index);
+      },
+    });
+
+    return () => trigger.kill();
+  }, [count]);
 
   return (
-    <section id="services" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
+    <section ref={sectionRef} id="services" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
       <div className="max-w-[1200px] mx-auto relative text-center">
         <Reveal>
           <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-3 block">
@@ -126,11 +166,11 @@ const Services = () => {
             return (
               <div
                 key={service.title}
-                onClick={() => !isActive && setActive(index)}
+                onClick={() => !isActive && goTo(index)}
                 onKeyDown={(event) => {
                   if (!isActive && (event.key === "Enter" || event.key === " ")) {
                     event.preventDefault();
-                    setActive(index);
+                    goTo(index);
                     window.requestAnimationFrame(() => {
                       document.getElementById(`service-title-${index}`)?.focus();
                     });
@@ -189,7 +229,7 @@ const Services = () => {
             <button
               key={service.title}
               type="button"
-              onClick={() => setActive(index)}
+              onClick={() => goTo(index)}
               aria-label={`Go to ${service.title}`}
               className={`h-2 rounded-full transition-all ${
                 index === active ? "w-6 bg-[#f1eadc]" : "w-2 bg-[#383b3f] hover:bg-[#62666d]"
