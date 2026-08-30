@@ -1,21 +1,32 @@
+import Preloader from "@/components/Preloader";
 import Navigation from "@/components/portfolio/Navigation";
-import Hero from "@/components/portfolio/Hero";
+import { ParallaxComponent } from "@/components/ui/parallax-scrolling";
 import Projects from "@/components/portfolio/Projects";
+import Funnels from "@/components/portfolio/Funnels";
 import Services from "@/components/portfolio/Services";
-import Skills from "@/components/portfolio/Skills";
-import Experience from "@/components/portfolio/Experience";
+import Events from "@/components/portfolio/Events";
+import Process from "@/components/portfolio/Process";
+import FAQ from "@/components/portfolio/FAQ";
+import Testimonials from "@/testimonials/Testimonials";
 import Contact from "@/components/portfolio/Contact";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-[#000d10] text-[#000d10] dark:text-white transition-colors duration-300">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <Preloader />
       <Navigation />
-      <main>
-        <Hero />
+      <main id="main-content" tabIndex={-1}>
+        <ParallaxComponent />
         <Projects />
         <Services />
-        <Skills />
-        <Experience />
+        <Process />
+        <Testimonials />
+        <Funnels />
+        <Events />
+        <FAQ />
       </main>
       <Contact />
     </div>

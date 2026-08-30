@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form PT - Nashville Physical Therapy | Cash-Pay Direct Access</title>
+  <meta name="description" content="One hour. One therapist. No exceptions. Cash-pay physical therapy in Nashville's Gulch with Dr. Casey Okafor DPT OCS. Transparent pricing, no referral needed." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       TOKENS
+    ============================================================ */
+    :root {
+      --void: #0A0B0D;
+      --void-2: #111316;
+      --warm-white: #F5F2EE;
+      --sand-e: #E8E0D4;
+      --rust: #C4521A;
+      --rust-2: #D9621F;
+      --gold-e: #B8913F;
+      --gold-2e: #CCA550;
+      --text-e: #EDE8E0;
+      --text-e-soft: rgba(237, 232, 224, 0.70);
+      --bark-e: #2A1F14;
+
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+      --nav-h: 56px;
+      --section-pad-v: 96px;
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--void);
+      color: var(--text-e);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--rust);
+    }
+
+    /* CTA base */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 40px;
+      padding: 13px 28px;
+      cursor: pointer;
+      border: none;
+      transition:
+        transform 160ms var(--ease-spring),
+        background-color 160ms var(--ease-spring),
+        color 160ms var(--ease-spring),
+        opacity 160ms var(--ease-spring);
+    }
+
+    .cta:active {
+      transform: scale(0.97);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cta:hover {
+        transform: translateY(-2px);
+      }
+    }
+
+    .cta-rust {
+      background: var(--rust);
+      color: var(--warm-white);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cta-rust:hover {
+        background: var(--rust-2);
+      }
+    }
+
+    .cta-outline {
+      background: transparent;
+      color: var(--warm-white);
+      border: 1px solid var(--warm-white);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cta-outline:hover {
+        background: rgba(245, 242, 238, 0.08);
+      }
+    }
+
+    .cta-void {
+      background: var(--void);
+      color: var(--warm-white);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cta-void:hover {
+        background: var(--void-2);
+      }
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--void);
+      border-bottom: 1px solid var(--rust);
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      gap: 40px;
+    }
+
+    .nav.is-scrolled {
+      background: rgba(10, 11, 13, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      flex-shrink: 0;
+    }
+
+    .nav-brand-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--warm-white);
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-brand-location {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-e-soft);
+      transition: color 200ms;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .nav-links a:hover {
+        color: var(--warm-white);
+      }
+    }
+
+    .nav-cta {
+      flex-shrink: 0;
+      font-size: 13px;
+      padding: 9px 22px;
+      border-radius: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .nav {
+        padding: 0 24px;
+      }
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100dvh;
+      background: var(--void);
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      align-items: center;
+      padding-top: var(--nav-h);
+    }
+
+    .hero-left {
+      padding: 80px 56px 80px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .hero-headline {
+      font-size: clamp(52px, 5.25vw, 84px);
+      font-weight: 800;
+      color: var(--warm-white);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      max-width: 580px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      max-width: 480px;
+      line-height: 1.55;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-differentiators {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-diff-item {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-e-soft);
+    }
+
+    .hero-diff-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--rust);
+      flex-shrink: 0;
+    }
+
+    /* RIGHT PANEL */
+    .hero-right {
+      background: var(--void-2);
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 56px 80px 40px;
+    }
+
+    /* PRICING CARD - hero entry animation */
+    .hero-pricing-card {
+      width: 100%;
+      max-width: 380px;
+      border: 1px solid var(--gold-e);
+      border-radius: 8px;
+      background: var(--void);
+      padding: 32px;
+      opacity: 0.1;
+      transform: translateY(16px);
+      animation: card-enter 500ms var(--ease-spring) 300ms forwards;
+    }
+
+    @keyframes card-enter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-e-soft);
+      margin-bottom: 28px;
+    }
+
+    .card-price-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(184, 145, 63, 0.18);
+    }
+
+    .card-price-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-tier-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-e-soft);
+    }
+
+    .card-tier-price {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--gold-e);
+      line-height: 1;
+    }
+
+    .card-note {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .card-book-btn {
+      width: 100%;
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-right {
+        min-height: auto;
+        padding: 60px 24px;
+      }
+      .hero-left {
+        padding: 60px 24px 40px;
+      }
+    }
+
+    /* ============================================================
+       WHY CASH-PAY
+    ============================================================ */
+    .why-section {
+      background: var(--warm-white);
+      padding: var(--section-pad-v) 80px;
+    }
+
+    .why-heading {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 700;
+      color: var(--bark-e);
+      max-width: 680px;
+      line-height: 1.1;
+      margin-bottom: 60px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .why-point {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .why-point-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--rust);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .why-point-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--bark-e);
+      line-height: 1.2;
+    }
+
+    .why-point-body {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--bark-e);
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    .why-quote-panel {
+      background: var(--void);
+      border-radius: 4px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .why-pull-quote {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .why-pull-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      bottom: 2px;
+      width: 4px;
+      background: var(--rust);
+    }
+
+    .why-pull-quote-text {
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--warm-white);
+      line-height: 1.5;
+    }
+
+    .why-pull-quote-attr {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-e-soft);
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      background: var(--sand-e);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-block {
+      padding: 48px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-right: 1px solid rgba(42, 31, 20, 0.12);
+    }
+
+    .stat-block:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--gold-e);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--bark-e);
+    }
+
+    @media (max-width: 768px) {
+      .why-section {
+        padding: 64px 24px;
+      }
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      .stat-block {
+        padding: 40px 24px;
+      }
+    }
+
+    /* ============================================================
+       PRICING TABLE
+    ============================================================ */
+    .pricing-section {
+      background: var(--void);
+      padding: var(--section-pad-v) 80px;
+    }
+
+    .pricing-heading {
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .pricing-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      max-width: 580px;
+      line-height: 1.55;
+      margin-bottom: 52px;
+    }
+
+    .pricing-table-wrap {
+      overflow-x: auto;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .pricing-table thead tr {
+      border-bottom: 1px solid rgba(196, 82, 26, 0.4);
+    }
+
+    .pricing-table th {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--rust);
+      padding: 0 32px 20px;
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+    .pricing-table th:first-child {
+      padding-left: 0;
+    }
+
+    /* pricing row animation */
+    .pricing-row {
+      opacity: 0;
+      transform: translateY(6px);
+      transition:
+        opacity 380ms var(--ease-out),
+        transform 380ms var(--ease-out);
+    }
+
+    .pricing-row.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .price-cell {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--gold-e);
+      padding: 28px 32px 16px;
+      vertical-align: bottom;
+      line-height: 1;
+    }
+
+    .price-cell:first-child {
+      padding-left: 0;
+    }
+
+    .detail-cell {
+      vertical-align: top;
+      padding: 0 32px;
+    }
+
+    .detail-cell:first-child {
+      padding-left: 0;
+    }
+
+    .detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-bottom: 24px;
+    }
+
+    .detail-list li {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      line-height: 1.4;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .detail-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-e);
+    }
+
+    .cta-cell {
+      padding: 0 32px 32px;
+      vertical-align: top;
+    }
+
+    .cta-cell:first-child {
+      padding-left: 0;
+    }
+
+    .pricing-table tfoot td {
+      font-size: 13px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-e-soft);
+      padding: 24px 0 0;
+      border-top: 1px solid rgba(237, 232, 224, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .pricing-section {
+        padding: 64px 24px;
+      }
+    }
+
+    /* ============================================================
+       MODEL STRIPS
+    ============================================================ */
+    .model-section {
+      background: var(--sand-e);
+    }
+
+    .model-strip {
+      min-height: 45vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .strip-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 56px 72px 80px;
+      gap: 16px;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition:
+        opacity 400ms var(--ease-out),
+        transform 400ms var(--ease-out);
+    }
+
+    .strip-text.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .strip-model-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--rust);
+    }
+
+    .strip-headline {
+      font-size: clamp(36px, 3.5vw, 52px);
+      font-weight: 800;
+      color: var(--bark-e);
+      line-height: 1;
+    }
+
+    .strip-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--bark-e);
+      max-width: 440px;
+      line-height: 1.6;
+      opacity: 0.75;
+    }
+
+    /* GEOMETRIC SHAPES */
+    .strip-shape {
+      opacity: 0;
+      transform: translateX(12px);
+      transition:
+        opacity 400ms var(--ease-out),
+        transform 400ms var(--ease-out);
+    }
+
+    .strip-shape.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .strip-shape-rust {
+      background: var(--rust);
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+      min-height: 45vh;
+    }
+
+    .strip-shape-void {
+      background: var(--void);
+      clip-path: polygon(0% 0%, 92% 0%, 100% 100%, 0% 100%);
+      min-height: 45vh;
+    }
+
+    /* Strip 2 reverses column order */
+    .model-strip--reverse .strip-text {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 72px 80px 72px 40px;
+      transform: translateX(12px);
+    }
+
+    .model-strip--reverse .strip-text.in-view {
+      transform: translateX(0);
+    }
+
+    .model-strip--reverse .strip-shape {
+      grid-column: 1;
+      grid-row: 1;
+      transform: translateX(-12px);
+    }
+
+    .model-strip--reverse .strip-shape.in-view {
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .model-strip,
+      .model-strip--reverse {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+      }
+      .model-strip--reverse .strip-text {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 48px 24px;
+      }
+      .model-strip--reverse .strip-shape {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: 120px;
+      }
+      .strip-text {
+        padding: 48px 24px;
+      }
+      .strip-shape-rust,
+      .strip-shape-void {
+        min-height: 120px;
+        clip-path: none;
+      }
+    }
+
+    /* ============================================================
+       DR. CASEY OKAFOR BIO
+    ============================================================ */
+    .bio-section {
+      background: var(--void);
+      padding: var(--section-pad-v) 80px;
+      display: grid;
+      grid-template-columns: 42fr 58fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .bio-portrait {
+      aspect-ratio: 2/3;
+      border-radius: 4px;
+      background: linear-gradient(160deg, var(--rust) 0%, var(--void) 65%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bio-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(10, 11, 13, 0.5) 100%
+      );
+    }
+
+    .bio-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 8px;
+    }
+
+    .bio-name {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 800;
+      color: var(--warm-white);
+      line-height: 1;
+    }
+
+    .bio-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .bio-chip {
+      background: var(--rust);
+      color: var(--warm-white);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .bio-paras {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .bio-para {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      line-height: 1.65;
+    }
+
+    .bio-pull-quote {
+      position: relative;
+      padding-left: 16px;
+      border-left: 1px solid var(--gold-e);
+      margin-top: 4px;
+    }
+
+    .bio-pull-quote-text {
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-e-soft);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .bio-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 64px 24px;
+      }
+      .bio-portrait {
+        aspect-ratio: 3/2;
+        max-height: 300px;
+      }
+    }
+
+    /* ============================================================
+       CONDITIONS
+    ============================================================ */
+    .conditions-section {
+      background: var(--warm-white);
+      padding: var(--section-pad-v) 80px;
+    }
+
+    .conditions-heading {
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 700;
+      color: var(--bark-e);
+      margin-bottom: 48px;
+    }
+
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .condition-card {
+      background: var(--void);
+      border-radius: 4px;
+      padding: 24px;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.98);
+      transition:
+        opacity 360ms var(--ease-out),
+        transform 360ms var(--ease-out);
+    }
+
+    .condition-card.in-view {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .condition-card:hover {
+        background: var(--void-2);
+      }
+    }
+
+    .condition-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--warm-white);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .condition-desc {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      line-height: 1.4;
+    }
+
+    .condition-arrow {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 18px;
+      height: 18px;
+      color: var(--rust);
+    }
+
+    .condition-arrow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 14px;
+      height: 1.5px;
+      background: var(--rust);
+      transform: translateY(-50%);
+    }
+
+    .condition-arrow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 6px;
+      height: 6px;
+      border-top: 1.5px solid var(--rust);
+      border-right: 1.5px solid var(--rust);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    @media (max-width: 768px) {
+      .conditions-section {
+        padding: 64px 24px;
+      }
+      .conditions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .conditions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       PATIENT STORIES
+    ============================================================ */
+    .stories-section {
+      background: var(--void);
+      padding: var(--section-pad-v) 80px;
+    }
+
+    .stories-label {
+      margin-bottom: 48px;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .story-card {
+      padding: 36px 32px 36px 0;
+      border-top: 1px solid var(--rust);
+      padding-top: 24px;
+    }
+
+    .story-card + .story-card {
+      padding-left: 32px;
+      border-left: 1px solid rgba(237, 232, 224, 0.08);
+    }
+
+    .story-quote {
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-e);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .story-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warm-white);
+      margin-bottom: 3px;
+    }
+
+    .story-meta {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+    }
+
+    @media (max-width: 768px) {
+      .stories-section {
+        padding: 64px 24px;
+      }
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+      .story-card + .story-card {
+        padding-left: 0;
+        border-left: none;
+        margin-top: 32px;
+      }
+    }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq-section {
+      background: var(--warm-white);
+      padding: var(--section-pad-v) 80px;
+    }
+
+    .faq-label {
+      margin-bottom: 40px;
+    }
+
+    .faq-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    details.faq-item {
+      border-bottom: 1px solid rgba(42, 31, 20, 0.15);
+    }
+
+    details.faq-item:first-of-type {
+      border-top: 1px solid rgba(42, 31, 20, 0.15);
+    }
+
+    summary.faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--bark-e);
+      cursor: pointer;
+      list-style: none;
+      gap: 16px;
+      user-select: none;
+    }
+
+    summary.faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.faq-question::after {
+      content: '+';
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--rust);
+      flex-shrink: 0;
+      transition: transform 300ms var(--ease-out);
+      line-height: 1;
+    }
+
+    details[open] summary.faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms ease-out;
+    }
+
+    details[open] .faq-answer-wrap {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer {
+      padding: 0 0 22px;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--bark-e);
+      line-height: 1.65;
+      opacity: 0.75;
+    }
+
+    @media (max-width: 768px) {
+      .faq-section {
+        padding: 64px 24px;
+      }
+    }
+
+    /* ============================================================
+       BOOKING CTA
+    ============================================================ */
+    .booking-section {
+      background: var(--rust);
+      padding: 112px 80px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .booking-headline {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--warm-white);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    .booking-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(245, 242, 238, 0.8);
+      max-width: 440px;
+      line-height: 1.5;
+    }
+
+    .booking-note {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(245, 242, 238, 0.6);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .booking-section {
+        padding: 80px 24px;
+      }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--void);
+      border-top: 1px solid rgba(237, 232, 224, 0.08);
+      padding: 40px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-e-soft);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-info {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-e-soft);
+      opacity: 0.6;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .footer {
+        padding: 32px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-info {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Site navigation">
+    <div class="nav-brand">
+      <span class="nav-brand-name">FORM PT</span>
+      <span class="nav-brand-location">Nashville</span>
+    </div>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#model">Our Model</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#conditions">Conditions</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <a href="#booking" class="cta cta-rust nav-cta" role="button">Book a Session</a>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-left">
+      <p class="eyebrow">Cash-Pay Physical Therapy - Nashville, TN</p>
+
+      <h1 class="hero-headline" id="hero-heading">
+        One hour.<br />One therapist.<br />No exceptions.
+      </h1>
+
+      <p class="hero-sub">
+        No insurance. No 15-minute sessions. No aides. Just a full hour with your DPT, every single visit.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#booking" class="cta cta-rust" role="button">Book Your First Session</a>
+        <a href="#pricing" class="cta cta-outline" role="button">See Pricing</a>
+      </div>
+
+      <div class="hero-differentiators" aria-label="Key differentiators">
+        <span class="hero-diff-item">60 Min Sessions</span>
+        <span class="hero-diff-dot" aria-hidden="true"></span>
+        <span class="hero-diff-item">Same Therapist Every Visit</span>
+        <span class="hero-diff-dot" aria-hidden="true"></span>
+        <span class="hero-diff-item">Transparent Pricing</span>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-label="Pricing overview">
+      <div class="hero-pricing-card" role="region" aria-label="Form PT pricing">
+        <p class="card-label">Form PT Pricing</p>
+
+        <div class="card-price-rows">
+          <div class="card-price-row">
+            <span class="card-tier-label">Initial Evaluation</span>
+            <span class="card-tier-price">$175</span>
+          </div>
+          <div class="card-price-row">
+            <span class="card-tier-label">Follow-Up Session</span>
+            <span class="card-tier-price">$140</span>
+          </div>
+          <div class="card-price-row">
+            <span class="card-tier-label">Package of 8</span>
+            <span class="card-tier-price">$1,040</span>
+          </div>
+        </div>
+
+        <p class="card-note">Save $80 on the package. HSA/FSA accepted.</p>
+        <a href="#booking" class="cta cta-rust card-book-btn" role="button">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHY CASH-PAY
+  ============================================================ -->
+  <section class="why-section" aria-labelledby="why-heading">
+    <h2 class="why-heading" id="why-heading">
+      The insurance model is broken. Here is why we opted out.
+    </h2>
+
+    <div class="why-grid">
+      <div class="why-points">
+        <article class="why-point">
+          <span class="why-point-num">01</span>
+          <h3 class="why-point-title">You get 15 minutes. We give you 60.</h3>
+          <p class="why-point-body">
+            Insurance PT reimburses roughly 23 minutes of billable time. Our sessions run the full hour - no timer, no tech swap, no rushing to the next bay.
+          </p>
+        </article>
+
+        <article class="why-point">
+          <span class="why-point-num">02</span>
+          <h3 class="why-point-title">You see a tech. You see a DPT.</h3>
+          <p class="why-point-body">
+            Most insurance practices use physical therapist assistants and rehab aides for 80% of the treatment. At Form, you work with Dr. Okafor - every visit, start to finish.
+          </p>
+        </article>
+
+        <article class="why-point">
+          <span class="why-point-num">03</span>
+          <h3 class="why-point-title">Your deductible costs more than our sessions.</h3>
+          <p class="why-point-body">
+            The average out-of-pocket for insured PT (deductible + copay) is $150-$200 per visit at high-volume clinics. Our follow-up rate is $140, and we give you twice the time.
+          </p>
+        </article>
+
+        <article class="why-point">
+          <span class="why-point-num">04</span>
+          <h3 class="why-point-title">We answer to you, not a billing code.</h3>
+          <p class="why-point-body">
+            Insurance companies decide how many sessions you get and what counts as progress. We decide based on your goals and your body.
+          </p>
+        </article>
+      </div>
+
+      <div class="why-quote-panel">
+        <div class="why-pull-quote">
+          <p class="why-pull-quote-text">
+            "Our patients spend less out-of-pocket than those who use their insurance."
+          </p>
+        </div>
+        <p class="why-pull-quote-attr">- Dr. Casey Okafor, DPT, OCS</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip" aria-label="Session time comparison">
+    <div class="stat-block">
+      <span class="stat-number">23 min</span>
+      <span class="stat-label">Average insurance PT session</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-number">60 min</span>
+      <span class="stat-label">Every Form PT session</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       PRICING TABLE
+  ============================================================ -->
+  <section class="pricing-section" id="pricing" aria-labelledby="pricing-heading">
+    <h2 class="pricing-heading" id="pricing-heading">Pricing. No Surprises.</h2>
+    <p class="pricing-sub">
+      Every session includes hands-on treatment with Dr. Okafor for the full duration. No aides. No split sessions.
+    </p>
+
+    <div class="pricing-table-wrap">
+      <table class="pricing-table" role="table" aria-label="Form PT pricing breakdown">
+        <thead>
+          <tr class="pricing-row" data-stagger="0">
+            <th scope="col">Initial Evaluation</th>
+            <th scope="col">Follow-Up Session</th>
+            <th scope="col">Package of 8</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="pricing-row" data-stagger="1">
+            <td class="price-cell">$175</td>
+            <td class="price-cell">$140</td>
+            <td class="price-cell">$1,040</td>
+          </tr>
+          <tr class="pricing-row" data-stagger="2">
+            <td class="detail-cell">
+              <ul class="detail-list">
+                <li>60-min comprehensive movement screen</li>
+                <li>Clinical diagnosis</li>
+                <li>Full treatment plan</li>
+                <li>Same-day treatment begins</li>
+              </ul>
+            </td>
+            <td class="detail-cell">
+              <ul class="detail-list">
+                <li>60-min hands-on treatment</li>
+                <li>Progress check-in</li>
+                <li>Home program update</li>
+              </ul>
+            </td>
+            <td class="detail-cell">
+              <ul class="detail-list">
+                <li>8 follow-up sessions ($1,040 vs $1,120 a la carte)</li>
+                <li>Schedule flexibility</li>
+                <li>Priority booking</li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="pricing-row" data-stagger="3">
+            <td class="cta-cell">
+              <a href="#booking" class="cta cta-rust" role="button">Book Now</a>
+            </td>
+            <td class="cta-cell">
+              <a href="#booking" class="cta cta-rust" role="button">Book Now</a>
+            </td>
+            <td class="cta-cell">
+              <a href="#booking" class="cta cta-rust" role="button">Book Now</a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="pricing-row" data-stagger="4">
+            <td colspan="3">
+              HSA/FSA accepted. Superbill provided for out-of-network insurance reimbursement claims.
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE MODEL
+  ============================================================ -->
+  <section class="model-section" id="model" aria-labelledby="model-heading">
+    <h2 class="sr-only" id="model-heading">The Form Model</h2>
+
+    <!-- Strip 1: One therapist -->
+    <div class="model-strip" aria-label="One therapist model">
+      <div class="strip-text">
+        <span class="strip-model-label">The Form Model</span>
+        <h3 class="strip-headline">One therapist.</h3>
+        <p class="strip-body">
+          You do not get reassigned. You do not explain your injury again. The DPT who did your evaluation is the same one doing your 8th session. That consistency is not a courtesy - it is the treatment.
+        </p>
+      </div>
+      <div class="strip-shape">
+        <div class="strip-shape-rust" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Strip 2: Sixty minutes (reversed) -->
+    <div class="model-strip model-strip--reverse" aria-label="Sixty minute sessions">
+      <div class="strip-text">
+        <span class="strip-model-label">The Form Model</span>
+        <h3 class="strip-headline">Sixty minutes.</h3>
+        <p class="strip-body">
+          A real evaluation, real hands-on treatment, a real conversation about what is happening in your body. Not a hot pack and five minutes of ultrasound while your DPT types notes in the next room.
+        </p>
+      </div>
+      <div class="strip-shape">
+        <div class="strip-shape-void" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Strip 3: Direct access -->
+    <div class="model-strip" aria-label="Direct access model">
+      <div class="strip-text">
+        <span class="strip-model-label">The Form Model</span>
+        <h3 class="strip-headline">Direct access.</h3>
+        <p class="strip-body">
+          No referral needed in Tennessee. You can book directly with a DPT for evaluation and treatment. Most conditions do not require a physician visit first - which means you start recovering weeks sooner.
+        </p>
+      </div>
+      <div class="strip-shape">
+        <div class="strip-shape-rust" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       DR. CASEY OKAFOR BIO
+  ============================================================ -->
+  <section class="bio-section" id="about" aria-labelledby="bio-heading">
+    <div class="bio-portrait" role="img" aria-label="Dr. Casey Okafor, DPT OCS - gradient portrait placeholder"></div>
+
+    <div class="bio-right">
+      <p class="eyebrow">Owner + Lead Physical Therapist</p>
+      <h2 class="bio-name" id="bio-heading">Dr. Casey Okafor</h2>
+
+      <div class="bio-chips" role="list" aria-label="Credentials">
+        <span class="bio-chip" role="listitem">DPT</span>
+        <span class="bio-chip" role="listitem">OCS</span>
+        <span class="bio-chip" role="listitem">Direct Access Certified</span>
+      </div>
+
+      <div class="bio-paras">
+        <p class="bio-para">
+          Dr. Okafor completed her Doctor of Physical Therapy at Belmont University and went on to earn her Orthopedic Clinical Specialist (OCS) certification - a credential held by fewer than 5% of licensed physical therapists in the US.
+        </p>
+        <p class="bio-para">
+          After five years in a traditional insurance-based clinic, she opened Form PT in 2021 with one goal: give patients the full session they deserve. Every patient she sees gets her - not a tech, not a shared slot, not a 20-minute timer.
+        </p>
+        <p class="bio-para">
+          She specializes in orthopedic and sports-related conditions: back and neck pain, shoulder injuries, post-surgical rehab, running mechanics, and chronic musculoskeletal pain.
+        </p>
+      </div>
+
+      <div class="bio-pull-quote">
+        <p class="bio-pull-quote-text">
+          "I got into this to help people move better. The 15-minute model does not allow that. Form does."
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONDITIONS
+  ============================================================ -->
+  <section class="conditions-section" id="conditions" aria-labelledby="conditions-heading">
+    <h2 class="conditions-heading" id="conditions-heading">What we treat.</h2>
+
+    <div class="conditions-grid" role="list">
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Low Back Pain</h3>
+        <p class="condition-desc">disc, nerve, muscle, movement-related</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Neck Pain + Headaches</h3>
+        <p class="condition-desc">cervicogenic, posture, tension origin</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Shoulder Injuries</h3>
+        <p class="condition-desc">rotator cuff, impingement, labral repair rehab</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Knee + ACL</h3>
+        <p class="condition-desc">pre- and post-surgical, runner's knee, patellar tendon</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Hip Pain</h3>
+        <p class="condition-desc">labral, FAI, bursitis, hip flexor</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Running Injuries</h3>
+        <p class="condition-desc">biomechanics assessment, return-to-run progression</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Post-Surgical Rehab</h3>
+        <p class="condition-desc">orthopedic recovery following any joint procedure</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Headache + TMJ</h3>
+        <p class="condition-desc">cervicogenic headache, jaw pain, manual therapy-based</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+
+      <article class="condition-card" role="listitem">
+        <h3 class="condition-name">Chronic Musculoskeletal Pain</h3>
+        <p class="condition-desc">persistent pain, movement retraining, pacing strategies</p>
+        <span class="condition-arrow" aria-hidden="true"></span>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PATIENT STORIES
+  ============================================================ -->
+  <section class="stories-section" aria-labelledby="stories-heading">
+    <div class="stories-label">
+      <p class="eyebrow" id="stories-heading">Patient Stories</p>
+    </div>
+
+    <div class="stories-grid" role="list">
+      <article class="story-card" role="listitem">
+        <blockquote class="story-quote">
+          "I had seen three other PTs over two years. Fifteen minutes, a TENS unit, and the same exercises. Casey spent the first hour actually figuring out what was wrong. Six sessions later I was back on my bike."
+        </blockquote>
+        <p class="story-name">Marcus T.</p>
+        <p class="story-meta">L4-L5 disc, runner - 6 sessions</p>
+      </article>
+
+      <article class="story-card" role="listitem">
+        <blockquote class="story-quote">
+          "My surgeon referred me to a volume clinic after my rotator cuff repair. I switched to Form after session two. The difference was immediate. I got my full overhead motion back three weeks ahead of schedule."
+        </blockquote>
+        <p class="story-name">Diana K.</p>
+        <p class="story-meta">Rotator cuff repair rehab - 9 sessions</p>
+      </article>
+
+      <article class="story-card" role="listitem">
+        <blockquote class="story-quote">
+          "I had tried everything - chiropractors, massage, two previous PTs. One hour with Casey and I had an actual diagnosis and a treatment that made sense. I have not had a migraine in four months."
+        </blockquote>
+        <p class="story-name">Alex R.</p>
+        <p class="story-meta">Cervicogenic headache - 5 sessions</p>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+    <div class="faq-label">
+      <p class="eyebrow" id="faq-heading">Common Questions</p>
+    </div>
+
+    <div class="faq-list" role="list">
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">Why don't you accept insurance?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              Insurance reimburses shorter, lower-quality sessions and drives up overhead that gets passed to patients. Our model produces better outcomes at comparable or lower true cost. We opted out so we could actually do our jobs.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">Can I use my HSA or FSA?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              Yes. Physical therapy is a qualified medical expense. We accept HSA/FSA payment directly.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">Do I need a physician referral?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              No. Tennessee is a direct-access state. You can book an evaluation without a referral. If we find something that needs a physician's attention, we will tell you.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">What if I want to use my insurance after all?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              We provide a detailed superbill after each visit. Many patients successfully submit for out-of-network reimbursement and recover 40-70% of costs depending on their plan.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">How many sessions will I need?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              We discuss this honestly in your first visit. Most orthopedic conditions resolve in 4-8 focused sessions. We do not recommend more treatment than you need.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="faq-item" role="listitem">
+        <summary class="faq-question">What is a superbill?</summary>
+        <div class="faq-answer-wrap">
+          <div class="faq-answer-inner">
+            <p class="faq-answer">
+              A superbill is a detailed receipt with the diagnosis codes, procedure codes, and provider credentials that your insurance company needs to process an out-of-network claim.
+            </p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BOOKING CTA
+  ============================================================ -->
+  <section class="booking-section" id="booking" aria-labelledby="booking-heading">
+    <h2 class="booking-headline" id="booking-heading">
+      Your full hour<br />starts here.
+    </h2>
+    <p class="booking-sub">
+      Dr. Okafor is accepting new patients in the Gulch. No referral needed.
+    </p>
+    <a href="#booking" class="cta cta-void" role="button">Book Your First Session</a>
+    <p class="booking-note">Initial evaluation $175. Same-week availability most weeks.</p>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <span class="footer-brand">FORM PT</span>
+    <p class="footer-info">
+      The Gulch, Nashville TN &nbsp;|&nbsp; Dr. Casey Okafor DPT OCS &nbsp;|&nbsp; Cash-pay only
+    </p>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ----- NAV SCROLL STATE -----
+    (function () {
+      var nav = document.getElementById('main-nav');
+      if (!nav) return;
+      function onScroll() {
+        nav.classList.toggle('is-scrolled', window.scrollY > 40);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+
+    // ----- INTERSECTION OBSERVER HELPER -----
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: show everything immediately
+        document.querySelectorAll(
+          '.pricing-row, .strip-text, .strip-shape, .condition-card'
+        ).forEach(function (el) {
+          el.classList.add('in-view');
+        });
+        return;
+      }
+
+      // --- PRICING TABLE ROWS (40ms stagger) ---
+      var pricingRows = document.querySelectorAll('.pricing-row');
+      if (pricingRows.length) {
+        var pricingObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            var stagger = parseInt(el.getAttribute('data-stagger') || '0', 10);
+            setTimeout(function () {
+              el.classList.add('in-view');
+            }, stagger * 40);
+            pricingObserver.unobserve(el);
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        pricingRows.forEach(function (row) {
+          pricingObserver.observe(row);
+        });
+      }
+
+
+      // --- MODEL STRIP TEXT + SHAPES ---
+      var stripEls = document.querySelectorAll('.strip-text, .strip-shape');
+      if (stripEls.length) {
+        var stripObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('in-view');
+            stripObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+        stripEls.forEach(function (el) {
+          stripObserver.observe(el);
+        });
+      }
+
+
+      // --- CONDITION CARDS (30ms stagger) ---
+      var condCards = document.querySelectorAll('.condition-card');
+      if (condCards.length) {
+        var condObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            var idx = parseInt(el.getAttribute('data-card-idx') || '0', 10);
+            setTimeout(function () {
+              el.classList.add('in-view');
+            }, idx * 30);
+            condObserver.unobserve(el);
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        condCards.forEach(function (card, i) {
+          card.setAttribute('data-card-idx', String(i));
+          condObserver.observe(card);
+        });
+      }
+    })();
+
+
+    // ----- SMOOTH SCROLL FOR ANCHOR LINKS -----
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var href = link.getAttribute('href');
+          if (!href || href === '#') return;
+          var target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+          var navH = 56;
+          var top = target.getBoundingClientRect().top + window.scrollY - navH;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

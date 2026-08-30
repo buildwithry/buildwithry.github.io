@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calvin J. Whitaker, Esq. - Athens GA Attorney at Law - Since 1995</title>
+<meta name="description" content="Calvin J. Whitaker, Esq. - 31-year solo attorney serving Northeast Georgia from Athens. Family law, estate planning, civil disputes, personal injury, mediation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold-mustard: #D5AF43;
+    --gold-deep: #A88829;
+    --gold-tint: #FBF4DF;
+    --navy-deep: #023F6B;
+    --navy-mid: #0B4670;
+    --navy-soft: #306185;
+    --navy-band: #1E537B;
+    --paper-grey: #EEEEEE;
+    --paper: #FFFFFF;
+    --paper-warm: #FAF6EE;
+    --paper-rule: #D5D5D5;
+    --ink-deep: #1A1A1A;
+    --ink-charcoal: #463939;
+    --ink-mid: #333333;
+    --ink-soft: #555555;
+    --ink-muted: #888888;
+    --signature-mahogany: #6B3E2E;
+
+    --font-display: 'Lora', Georgia, serif;
+    --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+
+    --radius-cta: 2px;
+    --radius-card: 4px;
+    --easing-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--ink-deep);
+    background: var(--paper-grey);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ========== 1. UTILITY BAR ========== */
+  .utility-bar {
+    background: var(--navy-deep);
+    color: var(--paper);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 0;
+  }
+  .utility-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .utility-bar .left {
+    letter-spacing: 0.01em;
+    opacity: 0.95;
+  }
+  .utility-bar .left .sep {
+    display: inline-block;
+    margin: 0 10px;
+    opacity: 0.4;
+  }
+  .utility-bar .phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .utility-bar .phone svg { stroke: var(--paper); }
+
+  /* ========== 2. STICKY HEADER ========== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper-grey);
+    border-bottom: 1px solid var(--navy-soft);
+  }
+  .site-header .container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    color: var(--ink-deep);
+  }
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .main-nav a {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--navy-soft);
+    transition: color 180ms var(--easing-soft);
+  }
+  .main-nav a:hover { color: var(--gold-deep); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
+    border-radius: var(--radius-cta);
+    padding: 14px 24px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform 200ms var(--easing-soft), background-color 200ms var(--easing-soft), color 200ms var(--easing-soft);
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--gold-mustard);
+    color: var(--ink-deep);
+    border-color: var(--gold-mustard);
+  }
+  .btn-primary:hover {
+    background: var(--gold-deep);
+    border-color: var(--gold-deep);
+    transform: translateY(-1px);
+  }
+  .btn-ghost-navy {
+    background: transparent;
+    color: var(--navy-deep);
+    border-color: var(--navy-deep);
+  }
+  .btn-ghost-navy:hover {
+    background: var(--navy-deep);
+    color: var(--paper);
+  }
+  .btn-ghost-white {
+    background: transparent;
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+  .btn-ghost-white:hover {
+    background: var(--paper);
+    color: var(--navy-deep);
+  }
+  .btn-header { padding: 11px 20px; font-size: 14.5px; }
+
+  /* ========== 3. HERO ========== */
+  .hero {
+    background: var(--paper-grey);
+    padding: 100px 0 90px;
+  }
+  .hero .grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--navy-soft);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow .ornament { color: var(--gold-deep); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 54px;
+    line-height: 1.12;
+    color: var(--ink-deep);
+    margin-bottom: 18px;
+    letter-spacing: -0.005em;
+  }
+  .hero .sub {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    color: var(--navy-soft);
+    margin-bottom: 28px;
+    max-width: 28ch;
+  }
+  .hero .lead {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-charcoal);
+    line-height: 1.7;
+    max-width: 60ch;
+    margin-bottom: 18px;
+  }
+  .hero .lead + .lead { margin-bottom: 36px; }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 42px;
+  }
+  .trust-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .trust-chip {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-charcoal);
+    background: var(--paper);
+    border: 1px solid var(--paper-rule);
+    padding: 7px 12px;
+    border-radius: var(--radius-cta);
+    letter-spacing: 0.01em;
+  }
+
+  .portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-card);
+    background:
+      linear-gradient(160deg, var(--paper-warm) 0%, var(--paper) 60%, var(--gold-tint) 100%);
+    border: 1px solid var(--paper-rule);
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--paper-rule), 0 18px 40px -28px rgba(2, 63, 107, 0.35);
+  }
+  .portrait svg { width: 100%; height: 100%; }
+  .portrait .stamp {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--signature-mahogany);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 6px 12px;
+    border: 1px solid var(--gold-deep);
+    letter-spacing: 0.04em;
+  }
+
+  /* ========== SECTION BASE ========== */
+  section { padding: 96px 0; }
+  .section-eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold-deep);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.25;
+    color: var(--navy-soft);
+    margin-bottom: 18px;
+    max-width: 28ch;
+  }
+  h2.section-title.italic { font-style: italic; }
+  .section-lead {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-charcoal);
+    max-width: 62ch;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .section-paper { background: var(--paper); }
+  .section-warm { background: var(--paper-warm); }
+  .section-tint { background: var(--gold-tint); }
+
+  /* ========== 4. PRACTICE GRID ========== */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .practice-tile {
+    position: relative;
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-rule);
+    border-radius: var(--radius-card);
+    padding: 28px 26px 28px;
+    transition: transform 220ms var(--easing-soft), background-color 220ms var(--easing-soft), border-color 220ms var(--easing-soft);
+  }
+  .practice-tile:hover {
+    background: var(--gold-tint);
+    border-color: var(--gold-deep);
+    transform: translateY(-2px);
+  }
+  .practice-tile .icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 18px;
+    color: var(--navy-soft);
+  }
+  .practice-tile h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--navy-soft);
+    margin-bottom: 8px;
+    letter-spacing: 0.005em;
+  }
+  .practice-tile p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-charcoal);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .practice-tile .read-more {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.02em;
+  }
+  .practice-tile .read-more .arrow {
+    transition: transform 180ms var(--easing-soft);
+  }
+  .practice-tile:hover .read-more .arrow {
+    transform: translateX(3px);
+  }
+  .mycase-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    background: var(--gold-tint);
+    border: 1px solid var(--gold-deep);
+    padding: 4px 9px;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-cta);
+    text-transform: uppercase;
+  }
+
+  /* ========== 5. ABOUT MR. WHITAKER ========== */
+  .about-band .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .about-portrait {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-card);
+    background:
+      radial-gradient(circle at 30% 25%, var(--paper-warm) 0%, var(--paper) 60%),
+      linear-gradient(180deg, var(--paper) 0%, var(--gold-tint) 100%);
+    border: 1px solid var(--paper-rule);
+    box-shadow: 0 24px 48px -32px rgba(2, 63, 107, 0.4);
+    overflow: hidden;
+  }
+  .about-portrait svg { width: 100%; height: 100%; }
+  .about-copy p {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--ink-charcoal);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .about-copy p strong {
+    color: var(--ink-deep);
+    font-weight: 600;
+  }
+  .signature-block {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--paper-rule);
+  }
+  .signature {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 36px;
+    color: var(--signature-mahogany);
+    line-height: 1.1;
+  }
+  .signature-subline {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  /* ========== 6. PROCESS BAND ========== */
+  .process-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: 24px;
+  }
+  .process-row::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--paper-rule);
+    z-index: 0;
+  }
+  .process-step {
+    position: relative;
+    text-align: center;
+    padding: 0 12px;
+  }
+  .process-step .num-circle {
+    position: relative;
+    z-index: 1;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--navy-soft);
+    color: var(--gold-mustard);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 0 6px var(--paper-warm);
+  }
+  .process-step h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--navy-soft);
+    margin-bottom: 6px;
+  }
+  .process-step p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-charcoal);
+    line-height: 1.55;
+  }
+  .process-note {
+    margin-top: 56px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-charcoal);
+    max-width: 56ch;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid var(--paper-rule);
+    padding-top: 24px;
+  }
+
+  /* ========== 7. MYCASE BAND ========== */
+  .mycase-band .grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .mycase-copy p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--ink-charcoal);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .mycase-list {
+    list-style: none;
+    margin: 24px 0 32px;
+  }
+  .mycase-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--paper-rule);
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--ink-charcoal);
+  }
+  .mycase-list li:last-child { border-bottom: none; }
+  .mycase-list .check {
+    color: var(--gold-deep);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .mycase-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .mycase-note {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .mycase-visual {
+    background: var(--paper);
+    border: 1px solid var(--paper-rule);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    box-shadow: 0 18px 40px -30px rgba(2, 63, 107, 0.3);
+  }
+  .mycase-visual svg { width: 100%; height: auto; }
+
+  /* ========== 8. TESTIMONIALS ========== */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .testimonial-card {
+    background: var(--paper);
+    border: 1px solid var(--navy-deep);
+    border-radius: var(--radius-card);
+    padding: 26px 24px 24px;
+  }
+  .star-bar {
+    display: inline-flex;
+    gap: 3px;
+    color: var(--gold-mustard);
+    margin-bottom: 18px;
+  }
+  .star-bar svg { width: 16px; height: 16px; fill: var(--gold-mustard); }
+  .testimonial-card .quote {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-charcoal);
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+  .testimonial-card .name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--navy-soft);
+    line-height: 1.4;
+  }
+  .testimonial-card .matter {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ========== 9. SERVICE AREA ========== */
+  .service-area-map {
+    background: var(--paper);
+    border: 1px solid var(--paper-rule);
+    border-radius: var(--radius-card);
+    padding: 36px 28px;
+    margin-bottom: 48px;
+  }
+  .service-area-map svg { width: 100%; height: auto; max-height: 460px; }
+  .counties-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 32px;
+  }
+  .counties-grid .col h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy-soft);
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .counties-grid .col ul {
+    list-style: none;
+  }
+  .counties-grid .col li {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-charcoal);
+    padding: 4px 0;
+  }
+
+  /* ========== 10. FINAL CTA BAND ========== */
+  .cta-band {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-band) 100%);
+    color: var(--paper);
+    padding: 110px 0;
+  }
+  .cta-band .container { text-align: center; }
+  .cta-band .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--gold-mustard);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+  }
+  .cta-band h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--paper);
+    margin-bottom: 40px;
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-band .ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .cta-band .subline {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--paper);
+    opacity: 0.78;
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+
+  /* ========== 11. FOOTER ========== */
+  .site-footer {
+    background: var(--paper-grey);
+    color: var(--navy-soft);
+    padding: 72px 0 32px;
+    border-top: 4px solid var(--gold-mustard);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr repeat(4, 1fr);
+    gap: 40px 28px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .wordmark {
+    color: var(--ink-deep);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .footer-brand .tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-charcoal);
+    line-height: 1.6;
+    max-width: 28ch;
+    margin-bottom: 18px;
+  }
+  .footer-brand .bar {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .footer-col h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-deep);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .footer-col ul {
+    list-style: none;
+  }
+  .footer-col li {
+    padding: 5px 0;
+  }
+  .footer-col a {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--ink-charcoal);
+    transition: color 180ms var(--easing-soft);
+  }
+  .footer-col a:hover { color: var(--gold-deep); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--paper-rule);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-bottom .copy {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .footer-disclaimer {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    line-height: 1.6;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1024px) {
+    .hero .grid { grid-template-columns: 1fr; gap: 48px; }
+    .practice-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-band .grid { grid-template-columns: 1fr; }
+    .process-row { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; }
+    .process-row::before { display: none; }
+    .mycase-band .grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .counties-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 40px; }
+    .hero .sub { font-size: 22px; }
+    .cta-band h2 { font-size: 34px; }
+    h2.section-title { font-size: 26px; }
+    section { padding: 64px 0; }
+    .hero { padding: 56px 0; }
+    .site-header .container { grid-template-columns: auto 1fr; }
+    .main-nav { display: none; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .process-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. UTILITY BAR -->
+<div class="utility-bar">
+  <div class="container">
+    <div class="left">
+      <span>Athens, GA</span>
+      <span class="sep">|</span>
+      <span>Serving Northeast Georgia since 1995</span>
+      <span class="sep">|</span>
+      <span>Mon-Fri 8:30-5:00</span>
+    </div>
+    <a class="phone" href="tel:+17065550190">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (706) 555-0190
+    </a>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="site-header">
+  <div class="container">
+    <a class="wordmark" href="#">WHITAKER LAW</a>
+    <nav class="main-nav">
+      <a href="#about">About</a>
+      <a href="#practice">Practice</a>
+      <a href="#whitaker">Mr. Whitaker</a>
+      <a href="#resources">Resources</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary btn-header" href="#contact">Schedule Consultation</a>
+  </div>
+</header>
+
+<!-- 3. HERO -->
+<section class="hero" id="about">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div class="hero-eyebrow">
+          <svg class="ornament" width="36" height="14" viewBox="0 0 60 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 7 H22" stroke="currentColor" stroke-width="1"/>
+            <path d="M30 2 C 33 5, 33 9, 30 12 C 27 9, 27 5, 30 2 Z" fill="currentColor"/>
+            <circle cx="30" cy="7" r="1.2" fill="#FBF4DF"/>
+            <path d="M38 7 H58" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          Athens, Georgia. Since 1995.
+        </div>
+        <h1>Calvin J. Whitaker, Esq.</h1>
+        <p class="sub">Honest counsel and steady representation, for the people of Northeast Georgia.</p>
+        <p class="lead">For thirty-one years, my practice has been one attorney, one phone line, and one promise: I'll tell you straight what your options are, and I'll see your matter through from the first conversation to the day it closes.</p>
+        <p class="lead">Family matters. Wills and estates. A neighbor dispute that needs resolving without a fight. Whatever brought you here, you'll work directly with me. No call centers. No handoffs to junior associates. Just steady, careful work from an attorney who has lived in this town as long as he has practiced in it.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contact">Schedule a consultation</a>
+          <a class="btn btn-ghost-navy" href="tel:+17065550190">Call (706) 555-0190</a>
+        </div>
+        <div class="trust-chips">
+          <span class="trust-chip">Georgia Bar</span>
+          <span class="trust-chip">31 Years</span>
+          <span class="trust-chip">AV Rated</span>
+          <span class="trust-chip">Bradley Co. Bar Association</span>
+        </div>
+      </div>
+      <div>
+        <div class="portrait" aria-label="Portrait of Calvin J. Whitaker, Esq.">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="portrait-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FAF6EE"/>
+                <stop offset="100%" stop-color="#FBF4DF"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#portrait-bg)"/>
+            <!-- Subtle ground line -->
+            <line x1="40" y1="430" x2="360" y2="430" stroke="#D5D5D5" stroke-width="1"/>
+            <!-- Half-profile silhouette of older southern gentleman -->
+            <g stroke="#306185" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Shoulders / jacket lapel -->
+              <path d="M90 460 L120 360 L160 340 L190 330 L225 332 L260 345 L295 365 L320 460" />
+              <!-- Lapel line -->
+              <path d="M190 330 L205 380 L195 460" />
+              <path d="M225 332 L218 380 L228 460" />
+              <!-- Tie -->
+              <path d="M205 380 L212 410 L220 410 L218 380" fill="#A88829" stroke="#A88829"/>
+              <!-- Collar shirt -->
+              <path d="M192 330 L208 360 L222 360 L228 332" />
+              <!-- Neck -->
+              <path d="M195 330 L195 305 L225 305 L225 332" />
+              <!-- Head outline (3/4 profile) -->
+              <path d="M170 250 C 170 200, 180 165, 215 162 C 250 162, 263 195, 265 235 C 265 270, 258 295, 240 305 C 220 312, 200 305, 188 295 C 175 282, 170 270, 170 250 Z" />
+              <!-- Hair (silvered) -->
+              <path d="M172 220 C 178 195, 195 175, 220 170 C 245 168, 260 185, 263 210" stroke="#888888"/>
+              <path d="M180 210 C 195 195, 215 188, 235 192" stroke="#888888"/>
+              <!-- Ear -->
+              <path d="M173 250 C 168 252, 167 262, 170 270" />
+              <!-- Glasses -->
+              <ellipse cx="200" cy="240" rx="13" ry="9" />
+              <ellipse cx="232" cy="238" rx="12" ry="9" />
+              <line x1="213" y1="240" x2="220" y2="239" />
+              <line x1="187" y1="240" x2="178" y2="244" />
+              <!-- Nose -->
+              <path d="M215 245 C 213 258, 211 268, 215 274 C 218 277, 222 275, 222 272" />
+              <!-- Mouth -->
+              <path d="M210 285 C 217 287, 225 286, 230 283" />
+              <!-- Brow -->
+              <path d="M188 226 C 195 222, 208 222, 214 226" />
+              <path d="M222 226 C 232 222, 244 224, 248 228" />
+              <!-- Jaw shadow line -->
+              <path d="M180 280 C 195 300, 215 308, 240 300" />
+            </g>
+          </svg>
+          <span class="stamp">Est. 1995 - Athens GA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PRACTICE GRID -->
+<section class="section-paper" id="practice">
+  <div class="container">
+    <div class="section-eyebrow">A general practice, at your service.</div>
+    <h2 class="section-title">What I can help you with.</h2>
+    <p class="section-lead">Thirty-one years in one town has a way of teaching you that most legal matters are not the kind that make headlines. They're the kind that quietly need a careful hand. Here are the matters I take.</p>
+
+    <div class="practice-grid">
+      <article class="practice-tile">
+        <span class="mycase-badge">MyCase Portal</span>
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L4 10 L4 22 L16 28 L28 22 L28 10 Z"/><path d="M4 10 L16 16 L28 10"/><path d="M16 16 L16 28"/></svg>
+        <h3>Family Law &amp; Divorce</h3>
+        <p>Divorce, custody, child support modifications, and the related agreements. Handled with discretion.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+
+      <article class="practice-tile">
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="24" rx="1"/><line x1="10" y1="11" x2="22" y2="11"/><line x1="10" y1="15" x2="22" y2="15"/><line x1="10" y1="19" x2="18" y2="19"/></svg>
+        <h3>Estate Planning &amp; Wills</h3>
+        <p>Simple wills, living wills, durable powers of attorney, and small-estate trusts for Georgia families.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+
+      <article class="practice-tile">
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L4 12 L4 28 L28 28 L28 12 Z"/><line x1="12" y1="20" x2="20" y2="20"/><line x1="16" y1="16" x2="16" y2="24"/></svg>
+        <h3>Civil Disputes</h3>
+        <p>Neighbor disputes, contract matters, landlord-tenant questions, and the small claims you'd rather settle quietly.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+
+      <article class="practice-tile">
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 8 L16 16 L21 19"/></svg>
+        <h3>Personal Injury</h3>
+        <p>Auto accidents, slip-and-fall, dog bites. No fee unless we recover for you. Initial review is at no charge.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+
+      <article class="practice-tile">
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 L16 29"/><path d="M6 9 L16 6 L26 9"/><path d="M6 9 L4 18 L8 19 L10 18 Z"/><path d="M26 9 L24 18 L28 19 L30 18 Z" transform="translate(-4 0)"/><path d="M11 29 L21 29"/></svg>
+        <h3>Misdemeanor Defense</h3>
+        <p>Traffic, DUI first-offenses, possession matters, and other misdemeanor charges in Bradley County and surrounding circuits.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+
+      <article class="practice-tile">
+        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="13" r="4"/><circle cx="21" cy="13" r="4"/><path d="M5 26 C 5 22, 8 19, 11 19 C 14 19, 17 22, 17 26"/><path d="M15 26 C 15 22, 18 19, 21 19 C 24 19, 27 22, 27 26"/></svg>
+        <h3>Mediation</h3>
+        <p>Trained mediator for civil, family, and small business matters when a courtroom is the wrong room.</p>
+        <a class="read-more" href="#">Read more <span class="arrow">-&gt;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ABOUT MR. WHITAKER -->
+<section class="section-paper about-band" id="whitaker">
+  <div class="container">
+    <div class="section-eyebrow">A word from the attorney.</div>
+    <h2 class="section-title italic">Meet Mr. Whitaker.</h2>
+
+    <div class="grid">
+      <div>
+        <div class="about-portrait" aria-label="Calvin J. Whitaker at his desk">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="about-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FAF6EE"/>
+                <stop offset="100%" stop-color="#EEEEEE"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#about-bg)"/>
+            <!-- Desk -->
+            <rect x="60" y="380" width="280" height="6" fill="#6B3E2E" opacity="0.6"/>
+            <rect x="80" y="386" width="240" height="60" fill="#6B3E2E" opacity="0.25"/>
+            <!-- Books on desk -->
+            <g stroke="#306185" stroke-width="1.2" fill="none">
+              <rect x="90" y="356" width="14" height="24"/>
+              <rect x="106" y="350" width="14" height="30"/>
+              <rect x="122" y="358" width="14" height="22"/>
+              <line x1="97" y1="365" x2="97" y2="375"/>
+            </g>
+            <!-- Gavel hint -->
+            <g stroke="#A88829" stroke-width="1.5" fill="none">
+              <rect x="300" y="372" width="36" height="8"/>
+              <line x1="280" y1="376" x2="300" y2="376"/>
+              <line x1="285" y1="372" x2="295" y2="380"/>
+            </g>
+            <!-- Figure -->
+            <g stroke="#306185" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Jacket shoulders -->
+              <path d="M110 380 L130 290 L170 270 L210 262 L250 270 L285 290 L300 380" />
+              <!-- Lapel -->
+              <path d="M210 262 L222 320 L208 380" />
+              <path d="M210 262 L195 320 L210 380" />
+              <!-- Tie -->
+              <path d="M203 305 L210 345 L218 345 L215 305" fill="#A88829" stroke="#A88829"/>
+              <!-- Collar -->
+              <path d="M198 268 L210 295 L222 268" />
+              <!-- Neck -->
+              <path d="M198 268 L198 245 L222 245 L222 268" />
+              <!-- Head -->
+              <path d="M175 195 C 175 155, 188 130, 215 128 C 245 128, 258 155, 260 195 C 260 232, 250 250, 232 260 C 215 268, 195 262, 183 252 C 175 240, 173 218, 175 195 Z" />
+              <!-- Hair silver -->
+              <path d="M178 175 C 188 152, 210 138, 235 140 C 252 145, 258 165, 260 180" stroke="#888888"/>
+              <path d="M186 168 C 200 158, 218 155, 232 158" stroke="#888888"/>
+              <!-- Glasses -->
+              <ellipse cx="200" cy="200" rx="12" ry="8"/>
+              <ellipse cx="232" cy="198" rx="11" ry="8"/>
+              <line x1="212" y1="200" x2="221" y2="199"/>
+              <!-- Nose -->
+              <path d="M215 205 C 213 220, 211 230, 215 235 C 219 238, 222 236, 222 233"/>
+              <!-- Mouth -->
+              <path d="M208 248 C 218 250, 228 248, 232 245"/>
+              <!-- Brow lines -->
+              <path d="M190 188 C 198 184, 210 184, 215 188"/>
+              <path d="M225 188 C 234 184, 243 184, 248 188"/>
+              <!-- Arms forward to desk -->
+              <path d="M130 320 L120 365 L170 370" />
+              <path d="M285 320 L300 365 L260 372" />
+              <!-- Hands resting on book -->
+              <path d="M170 370 L180 366 L195 365 L200 372" />
+              <path d="M260 372 L255 366 L240 366 L235 372" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <p><strong>I grew up two blocks from where I practice today.</strong> The Hancock Avenue office sits across from the courthouse where my father served as a clerk for twenty-two years. He's the reason I went to law school - he saw plenty of folks come through those doors who needed counsel and couldn't find it.</p>
+        <p>I earned my JD at the University of Georgia in 1994 and opened these doors a year later. In the time since, I've raised three children with my wife Eleanor, served as president of the Bradley County Bar Association from 2018 through 2020, and built a practice on a single principle - if a matter walks into this office, it leaves with a clear answer about what to do next.</p>
+        <p>My firm is intentionally small. There is one attorney, one paralegal, and one office line. When you call, either Margaret answers or I do. When you have a question about your case, you don't go through a triage queue. You ask the attorney handling it.</p>
+        <p>I'm a member of First Presbyterian Athens, the Northeast Georgia Lions Club, and the bar associations of three surrounding counties. I treat every client like my neighbor because most of them are.</p>
+
+        <div class="signature-block">
+          <div class="signature">Calvin J. Whitaker, Esq.</div>
+          <div class="signature-subline">Attorney at Law</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PROCESS BAND -->
+<section class="section-warm">
+  <div class="container">
+    <div class="section-eyebrow">How we work together.</div>
+    <h2 class="section-title">From consultation to resolution.</h2>
+    <p class="section-lead">Every matter follows the same five steps. Plain language, clear expectations, no surprises in the billing.</p>
+
+    <div class="process-row">
+      <div class="process-step">
+        <div class="num-circle">1</div>
+        <h4>Schedule</h4>
+        <p>Call or email. We'll set a one-hour consultation, in person or by phone.</p>
+      </div>
+      <div class="process-step">
+        <div class="num-circle">2</div>
+        <h4>Listen</h4>
+        <p>You tell me what happened. I take notes. No legal jargon, no rushed clock.</p>
+      </div>
+      <div class="process-step">
+        <div class="num-circle">3</div>
+        <h4>Plan</h4>
+        <p>Within a week, I'll give you a written outline of options, costs, and timing.</p>
+      </div>
+      <div class="process-step">
+        <div class="num-circle">4</div>
+        <h4>Represent</h4>
+        <p>We move forward. You hear from me at every meaningful step, never just at billing time.</p>
+      </div>
+      <div class="process-step">
+        <div class="num-circle">5</div>
+        <h4>Close-out</h4>
+        <p>Final paperwork, a closing letter, and a phone call to make sure nothing is loose.</p>
+      </div>
+    </div>
+
+    <p class="process-note">You'll have direct access to my office line throughout your case. The number you call to schedule the consultation is the same number you call when something changes.</p>
+  </div>
+</section>
+
+<!-- 7. MYCASE BAND -->
+<section class="section-tint mycase-band">
+  <div class="container">
+    <div class="grid">
+      <div class="mycase-copy">
+        <div class="section-eyebrow">A small office with modern tools.</div>
+        <h2 class="section-title">Modern tools, hometown service.</h2>
+        <p>Every client of Whitaker Law gets access to MyCase, the secure client portal we use to share documents, track milestones, and message the office without losing anything in an email thread.</p>
+        <p>You sign in from anywhere. Your file is right there. So is your invoice, your appointment calendar, and a complete record of every conversation we've had about your case.</p>
+
+        <ul class="mycase-list">
+          <li><svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Secure document sharing, signed in seconds</li>
+          <li><svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 24/7 access to your case file from any device</li>
+          <li><svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Calendar sync for hearings, mediations, and signings</li>
+          <li><svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Transparent, itemized invoicing</li>
+        </ul>
+
+        <div class="mycase-cta-row">
+          <a class="btn btn-primary" href="#contact">See how MyCase works</a>
+          <span class="mycase-note">HIPAA-class encryption. Your information stays your information.</span>
+        </div>
+      </div>
+
+      <div class="mycase-visual" aria-label="Illustration of the MyCase client portal on a phone">
+        <svg viewBox="0 0 320 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Phone bezel -->
+          <rect x="20" y="10" width="280" height="440" rx="32" fill="#FFFFFF" stroke="#306185" stroke-width="1.5"/>
+          <rect x="32" y="40" width="256" height="380" rx="14" fill="#FAF6EE" stroke="#D5D5D5" stroke-width="1"/>
+          <!-- Speaker -->
+          <rect x="138" y="22" width="44" height="6" rx="3" fill="#306185"/>
+          <!-- Header bar -->
+          <rect x="40" y="56" width="240" height="40" fill="#023F6B"/>
+          <text x="56" y="82" font-family="Lora, serif" font-weight="700" font-size="13" fill="#D5AF43">WHITAKER LAW</text>
+          <circle cx="260" cy="76" r="6" fill="#D5AF43"/>
+          <!-- Greeting -->
+          <text x="48" y="124" font-family="Geist, sans-serif" font-size="11" fill="#888888">Welcome back,</text>
+          <text x="48" y="140" font-family="Lora, serif" font-weight="700" font-size="14" fill="#1A1A1A">Eleanor Higginbotham</text>
+          <!-- Case tile 1 -->
+          <rect x="48" y="158" width="220" height="56" fill="#FFFFFF" stroke="#D5D5D5" stroke-width="1"/>
+          <text x="58" y="178" font-family="Lora, serif" font-weight="700" font-size="11" fill="#306185">CASE - ESTATE PLAN</text>
+          <text x="58" y="194" font-family="Geist, sans-serif" font-size="10" fill="#555555">Last update: 3 days ago</text>
+          <rect x="58" y="200" width="120" height="3" fill="#D5AF43"/>
+          <rect x="178" y="200" width="80" height="3" fill="#EEEEEE"/>
+          <!-- Case tile 2 -->
+          <rect x="48" y="224" width="220" height="56" fill="#FFFFFF" stroke="#D5D5D5" stroke-width="1"/>
+          <text x="58" y="244" font-family="Lora, serif" font-weight="700" font-size="11" fill="#306185">DOCS - 4 NEW</text>
+          <text x="58" y="260" font-family="Geist, sans-serif" font-size="10" fill="#555555">Will draft, DPOA, advance directive</text>
+          <circle cx="252" cy="252" r="9" fill="#D5AF43"/>
+          <text x="248" y="256" font-family="Geist, sans-serif" font-weight="700" font-size="10" fill="#1A1A1A">4</text>
+          <!-- Case tile 3 -->
+          <rect x="48" y="290" width="220" height="56" fill="#FFFFFF" stroke="#D5D5D5" stroke-width="1"/>
+          <text x="58" y="310" font-family="Lora, serif" font-weight="700" font-size="11" fill="#306185">NEXT APPOINTMENT</text>
+          <text x="58" y="326" font-family="Geist, sans-serif" font-size="10" fill="#555555">Thu, May 22 - 2:00 PM - Athens office</text>
+          <rect x="58" y="332" width="60" height="8" fill="#FBF4DF" stroke="#A88829" stroke-width="0.5"/>
+          <text x="64" y="339" font-family="Geist, sans-serif" font-weight="600" font-size="7" fill="#A88829">CONFIRMED</text>
+          <!-- Footer nav -->
+          <rect x="40" y="380" width="240" height="32" fill="#FFFFFF" stroke="#D5D5D5" stroke-width="1"/>
+          <circle cx="80" cy="396" r="5" fill="#306185"/>
+          <circle cx="140" cy="396" r="5" fill="#EEEEEE" stroke="#D5D5D5"/>
+          <circle cx="200" cy="396" r="5" fill="#EEEEEE" stroke="#D5D5D5"/>
+          <circle cx="260" cy="396" r="5" fill="#EEEEEE" stroke="#D5D5D5"/>
+          <!-- Home indicator -->
+          <rect x="130" y="432" width="60" height="3" rx="1.5" fill="#306185"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. TESTIMONIALS -->
+<section class="section-paper">
+  <div class="container">
+    <div class="section-eyebrow">In the words of people I've worked with.</div>
+    <h2 class="section-title">A few neighbors who trusted me with theirs.</h2>
+
+    <div class="testimonials-grid">
+      <article class="testimonial-card">
+        <div class="star-bar" aria-label="5 stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+        </div>
+        <p class="quote">When my mother passed, the will was twenty years old and the bank was being difficult. Mr. Whitaker sat at our kitchen table and walked my brother and me through every step. Eight weeks later, everything was settled and clean.</p>
+        <div class="name">Pastor Eleanor Mae Higginbotham</div>
+        <div class="matter">First Presbyterian Athens - Estate</div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="star-bar" aria-label="5 stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+        </div>
+        <p class="quote">We had a property line problem with a neighbor that was getting ugly. Mr. Whitaker spent thirty minutes on the phone, sent two letters, and the matter was over without a courtroom. Honest counsel, no fight where none was needed.</p>
+        <div class="name">Jim &amp; Connie Castellano</div>
+        <div class="matter">Watkinsville - Civil</div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="star-bar" aria-label="5 stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+        </div>
+        <p class="quote">My divorce was the hardest year of my life, and I needed someone who would tell me the truth even when I didn't want to hear it. He represented me with steady hands and a gentle voice. Custody is settled, and my children are safe.</p>
+        <div class="name">Brenda Q.</div>
+        <div class="matter">Winterville - Family Law</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 9. SERVICE AREA -->
+<section class="section-paper">
+  <div class="container">
+    <div class="section-eyebrow">Where you'll find me.</div>
+    <h2 class="section-title">Where I practice.</h2>
+    <p class="section-lead">The office is at 142 W Hancock Avenue in Athens, across from the Clarke County courthouse. From there, I serve clients in ten Northeast Georgia counties.</p>
+
+    <div class="service-area-map" aria-label="Map of Northeast Georgia counties served">
+      <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Outer county outline -->
+        <g stroke="#306185" stroke-width="1.5" fill="none" stroke-linejoin="round">
+          <path d="M60 280 L120 220 L180 200 L260 180 L320 160 L400 130 L490 130 L580 150 L660 190 L720 250 L740 320 L700 380 L600 410 L500 415 L400 410 L300 400 L220 380 L150 360 L90 330 Z"/>
+          <!-- Inner county divider lines (illustrative) -->
+          <path d="M180 200 L210 320 L300 400" stroke-width="1" opacity="0.55"/>
+          <path d="M260 180 L290 280 L380 360" stroke-width="1" opacity="0.55"/>
+          <path d="M320 160 L360 250 L450 360" stroke-width="1" opacity="0.55"/>
+          <path d="M400 130 L430 240 L520 380" stroke-width="1" opacity="0.55"/>
+          <path d="M490 130 L510 250 L600 380" stroke-width="1" opacity="0.55"/>
+          <path d="M580 150 L580 270 L660 350" stroke-width="1" opacity="0.55"/>
+          <path d="M120 220 L160 320 L220 380" stroke-width="1" opacity="0.55"/>
+        </g>
+
+        <!-- Towns - dots -->
+        <g fill="#D5AF43" stroke="#A88829" stroke-width="1">
+          <circle cx="280" cy="300" r="6"/>     <!-- Athens (anchor) -->
+          <circle cx="220" cy="340" r="4"/>     <!-- Watkinsville -->
+          <circle cx="330" cy="310" r="4"/>     <!-- Winterville -->
+          <circle cx="270" cy="220" r="4"/>     <!-- Jefferson -->
+          <circle cx="340" cy="200" r="4"/>     <!-- Commerce -->
+          <circle cx="150" cy="330" r="4"/>     <!-- Madison -->
+          <circle cx="130" cy="380" r="4"/>     <!-- Greensboro -->
+          <circle cx="550" cy="200" r="4"/>     <!-- Hartwell -->
+          <circle cx="600" cy="170" r="4"/>     <!-- Lavonia -->
+          <circle cx="680" cy="220" r="4"/>     <!-- Toccoa -->
+          <circle cx="500" cy="180" r="4"/>     <!-- Royston -->
+          <circle cx="430" cy="270" r="4"/>     <!-- Elberton -->
+        </g>
+
+        <!-- Town labels -->
+        <g font-family="Lora, serif" font-style="italic" font-size="13" fill="#306185">
+          <text x="290" y="296">Athens</text>
+          <text x="148" y="344">Watkinsville</text>
+          <text x="340" y="314">Winterville</text>
+          <text x="218" y="224">Jefferson</text>
+          <text x="350" y="196">Commerce</text>
+          <text x="100" y="334">Madison</text>
+          <text x="78" y="384">Greensboro</text>
+          <text x="500" y="204">Hartwell</text>
+          <text x="610" y="166">Lavonia</text>
+          <text x="690" y="224">Toccoa</text>
+          <text x="448" y="184">Royston</text>
+          <text x="385" y="274">Elberton</text>
+        </g>
+
+        <!-- Athens anchor label - bolder -->
+        <text x="290" y="282" font-family="Lora, serif" font-weight="700" font-size="14" fill="#1A1A1A">Athens, GA</text>
+
+        <!-- Compass rose -->
+        <g transform="translate(710, 410)" stroke="#306185" fill="none">
+          <circle cx="0" cy="0" r="14"/>
+          <line x1="0" y1="-12" x2="0" y2="12"/>
+          <line x1="-12" y1="0" x2="12" y2="0"/>
+          <text x="-3" y="-16" font-family="Lora, serif" font-size="9" fill="#306185">N</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="counties-grid">
+      <div class="col">
+        <h4>Anchor County</h4>
+        <ul>
+          <li>Clarke County</li>
+          <li>Oconee County</li>
+          <li>Madison County</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>North Reach</h4>
+        <ul>
+          <li>Jackson County</li>
+          <li>Banks County</li>
+          <li>Franklin County</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>East Reach</h4>
+        <ul>
+          <li>Hart County</li>
+          <li>Elbert County</li>
+          <li>Hartwell Lake area</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>By Referral</h4>
+        <ul>
+          <li>Stephens County</li>
+          <li>Greene County</li>
+          <li>Surrounding circuits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FINAL CTA BAND -->
+<section class="cta-band" id="contact">
+  <div class="container">
+    <div class="eyebrow">Plain talk, straight answers.</div>
+    <h2>Schedule your free consultation.</h2>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#contact">Schedule a consultation</a>
+      <a class="btn btn-ghost-white" href="tel:+17065550190">Call (706) 555-0190 weekdays</a>
+    </div>
+    <p class="subline">Initial consult is always free and confidential. After consult, you'll receive my direct line.</p>
+  </div>
+</section>
+
+<!-- 11. FOOTER -->
+<footer class="site-footer" id="resources">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="wordmark">WHITAKER LAW</span>
+        <p class="tagline">Athens, GA. Hometown counsel since 1995.</p>
+        <p class="bar">Georgia Bar #194207<br/>Bradley County Bar Association<br/>© 2026 Whitaker Law, PC</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="#">Family Law &amp; Divorce</a></li>
+          <li><a href="#">Estate Planning</a></li>
+          <li><a href="#">Civil Disputes</a></li>
+          <li><a href="#">Personal Injury</a></li>
+          <li><a href="#">Misdemeanor Defense</a></li>
+          <li><a href="#">Mediation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>About</h5>
+        <ul>
+          <li><a href="#">Mr. Whitaker</a></li>
+          <li><a href="#">Office &amp; Hours</a></li>
+          <li><a href="#">Community Work</a></li>
+          <li><a href="#">Bar Memberships</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#">MyCase Client Portal</a></li>
+          <li><a href="#">Forms &amp; Intake</a></li>
+          <li><a href="#">Fees &amp; Billing</a></li>
+          <li><a href="#">Frequently Asked</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Service Area</h5>
+        <ul>
+          <li><a href="#">Athens &amp; Clarke County</a></li>
+          <li><a href="#">Oconee &amp; Madison</a></li>
+          <li><a href="#">Jackson &amp; Banks</a></li>
+          <li><a href="#">Hart &amp; Elbert</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copy">142 W Hancock Avenue, Athens, GA 30601 - (706) 555-0190</p>
+      <p class="footer-disclaimer">Use of this site does not establish an attorney-client relationship. Confidential information should not be sent through this site. Each matter is unique; prior results do not guarantee a similar outcome.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

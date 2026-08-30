@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 .portfolio-publish/
 .workspace/
+
+# Debug/scratch artifacts
+.playwright-mcp/
+.codex-backups/
+teardowns/
+src/demos/
+/*.png

@@ -1,3 +1,11 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Reveal from "@/components/Reveal";
+import SplitHeading from "@/components/SplitHeading";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const skillCategories = [
   {
     category: "Voice & Conversational AI",
@@ -43,60 +51,94 @@ const toolLogos = [
 ];
 
 const Skills = () => {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Scrub-linked reveal, ported from teardowns/2026-08-30-xenith-design-webflow-io
+  // build-analysis.md — same scrub pattern as effects #3/#5/#6 (scrub: 0.8, tied directly to scroll)
+  useEffect(() => {
+    const cards = gridRef.current?.querySelectorAll<HTMLElement>("[data-skill-card]");
+    if (!cards || cards.length === 0) return;
+
+    gsap.set(cards, { opacity: 0.35, y: 60 });
+
+    const tween = gsap.to(cards, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.08,
+      ease: "none",
+      scrollTrigger: {
+        trigger: gridRef.current,
+        start: "top 100%",
+        end: "bottom top",
+        scrub: 0.8,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, []);
+
   return (
-    <section id="skills" className="py-24 px-6 sm:px-8 bg-white dark:bg-[#000d10] border-t border-[#d5d3d4] dark:border-white/10">
+    <section id="skills" className="py-32 px-6 sm:px-8 bg-[#08090a] hairline-top">
       <div className="max-w-[1200px] mx-auto">
-        {/* Section Header */}
-        <div className="mb-14">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#bc7155] mb-2 block">
-            Tools &amp; Technologies
-          </span>
-          <h2 className="section-headline mb-4">
-            Ecosystem &amp; Stack.
-          </h2>
-          <p className="text-lg sm:text-[19px] text-[#8e8e95] max-w-2xl leading-[1.61]">
-            Verified tools and production environments deployed across enterprise CRM automation, voice systems, and backend pipelines.
-          </p>
-        </div>
+        {/* Section Header — wider vertical rhythm ported from Xenith's Team section
+            (layout-manifest.json: y:11269, h:1099) */}
+        <Reveal>
+          <div className="mb-20">
+            <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-2 block">
+              Tools &amp; Technologies
+            </span>
+            <SplitHeading className="text-heading mb-4">
+              Ecosystem &amp; Stack.
+            </SplitHeading>
+            <p className="text-lg sm:text-[19px] text-[#8a8f98] max-w-2xl leading-[1.61]">
+              Verified tools and production environments deployed across enterprise CRM automation, voice systems, and backend pipelines.
+            </p>
+          </div>
+        </Reveal>
 
         {/* Endless Scroll Tools Logo Bar */}
-        <div className="mb-20 py-8 border-y border-[#d5d3d4] dark:border-white/10 overflow-hidden relative">
-          <div className="flex animate-tools-scroll space-x-12 w-max items-center">
-            {[...toolLogos, ...toolLogos, ...toolLogos].map((tool, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 px-5 py-3 rounded-full border border-[#d5d3d4] dark:border-white/10 bg-white dark:bg-[#151623] hover:border-[#000d10] dark:hover:border-white transition-colors cursor-default select-none shadow-sm"
-              >
-                <img
-                  src={tool.logo}
-                  alt={`${tool.name} logo`}
-                  className="h-6 w-6 object-contain transition-all"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = "none";
-                  }}
-                />
-                <span className="text-sm font-bold text-[#000d10] dark:text-white tracking-tight">
-                  {tool.name}
-                </span>
-              </div>
-            ))}
+        <Reveal delay={0.1}>
+          <div className="mb-24 py-8 border-y border-[#23252a] overflow-hidden relative">
+            <div className="flex animate-tools-scroll space-x-12 w-max items-center">
+              {[...toolLogos, ...toolLogos, ...toolLogos].map((tool, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 px-5 py-3 rounded-full border border-[#23252a] bg-[#0f1011] hover:border-[#383b3f] transition-colors cursor-default select-none"
+                >
+                  <img
+                    src={tool.logo}
+                    alt={`${tool.name} logo`}
+                    className="h-6 w-6 object-contain transition-all"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = "none";
+                    }}
+                  />
+                  <span className="text-sm font-medium text-white tracking-tight">
+                    {tool.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Categorized Skills 2-Column Architectural Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           {skillCategories.map((group, index) => (
-            <div key={index} className="pt-6 hairline-top space-y-4">
-              <h3 className="text-lg font-bold tracking-tight text-[#000d10] dark:text-white flex items-center justify-between">
+            <div key={index} data-skill-card className="pt-8 hairline-top space-y-4">
+              <h3 className="text-lg font-medium tracking-tight text-white flex items-center justify-between">
                 <span>{group.category}</span>
-                <span className="text-xs font-mono text-[#8e8e95]">0{index + 1}</span>
+                <span className="text-xs font-mono text-[#62666d]">0{index + 1}</span>
               </h3>
 
               <div className="flex flex-wrap gap-2 pt-1">
                 {group.skills.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-[#d5d3d4] dark:border-white/15 text-[#000d10] dark:text-white bg-transparent hover:border-[#000d10] dark:hover:border-white transition-colors cursor-default"
+                    className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-[#23252a] text-[#d0d6e0] bg-transparent hover:border-[#383b3f] transition-colors cursor-default"
                   >
                     {skill}
                   </span>

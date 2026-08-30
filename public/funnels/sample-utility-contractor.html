@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clearpath Utility Group — Underground Utility Specialists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <style>
+    /* =========================================================
+       TOKENS
+    ========================================================= */
+    :root {
+      --bg:           #0B1017;
+      --surface:      #111820;
+      --surface-2:    #18222D;
+      --border:       #1E2D3A;
+      --accent:       #F0A020;
+      --accent-dim:   rgba(240,160,32,.10);
+      --accent-glow:  rgba(240,160,32,.22);
+      --text:         #E6E1D8;
+      --text-muted:   #7B8899;
+      --text-faint:   #2E3D4D;
+      --ink:          #0B1017;
+      --display:      'Barlow Condensed', sans-serif;
+      --body:         'DM Sans', sans-serif;
+      --section-v:    clamp(80px, 10vw, 130px);
+      --ease-spring:  cubic-bezier(.34,1.56,.64,1);
+      --ease-out:     cubic-bezier(.16,1,.3,1);
+      --ease-in-out:  cubic-bezier(.65,0,.35,1);
+    }
+
+    /* =========================================================
+       RESET + BASE
+    ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    .container { width: min(1200px, 92vw); margin-inline: auto; }
+    .container--narrow { width: min(860px, 92vw); margin-inline: auto; }
+
+    /* =========================================================
+       TYPOGRAPHY
+    ========================================================= */
+    .eyebrow {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .section-heading {
+      font-family: var(--display);
+      font-size: clamp(44px, 6vw, 76px);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .section-heading em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* =========================================================
+       SCROLL REVEAL UTILITY
+    ========================================================= */
+    .reveal { opacity: 0; transform: translateY(28px); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 clamp(24px, 4vw, 60px);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .4s, backdrop-filter .4s, border-color .4s;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(11,16,23,.92);
+      backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+
+    .header-logo {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-logo .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+    }
+    .header-logo .logo-mark svg { width: 16px; height: 16px; fill: var(--ink); }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .header-nav a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: var(--text-muted);
+      transition: color .2s;
+    }
+    .header-nav a:hover { color: var(--text); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: var(--accent);
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 94% 100%, 0 100%);
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: #FFB73A; transform: translateY(-1px); }
+    .btn-primary svg { width: 14px; height: 14px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--text-muted); color: var(--text); }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(60px, 8vw, 100px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(11,16,23,.55) 0%, rgba(11,16,23,.85) 60%, var(--bg) 100%),
+        linear-gradient(135deg, #1A3040 0%, #0B1017 100%);
+      background-size: cover;
+      background-position: center;
+    }
+    /* Real photo overlay: client replaces gradient with actual image */
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80&fit=crop') center/cover no-repeat;
+      mix-blend-mode: multiply;
+      opacity: .6;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding-inline: clamp(24px, 6vw, 80px);
+    }
+    .hero-eyebrow {
+      margin-bottom: 20px;
+    }
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(64px, 11vw, 148px);
+      font-weight: 900;
+      line-height: .88;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 28px;
+      max-width: 14ch;
+    }
+    .hero-headline em {
+      font-style: normal;
+      -webkit-text-stroke: 2px var(--text);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--text-muted);
+      max-width: 44ch;
+      margin-bottom: 44px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero-trust-item svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      right: clamp(24px, 6vw, 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll-cue::after {
+      content: '';
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(var(--border), transparent);
+    }
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+    .s-services {
+      padding-block: var(--section-v);
+      background: var(--surface);
+    }
+    .s-services-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+    .s-services-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 40ch;
+      margin-top: 16px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .services-grid > :last-child:nth-child(3n+1) {
+      grid-column: 1 / -1;
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 40px 36px 36px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s var(--ease-out);
+    }
+    .service-card:hover { border-color: var(--text-faint); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-num {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--text-faint);
+      margin-bottom: 28px;
+    }
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    .service-title {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+    .service-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .service-link {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap .2s;
+    }
+    .service-link:hover { gap: 14px; }
+    .service-link svg { width: 14px; height: 14px; }
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+    .s-stats {
+      background: var(--accent);
+      padding-block: clamp(60px, 8vw, 90px);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .stat-item {
+      padding: 40px 48px;
+      background: var(--accent);
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(11,16,23,.15);
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: clamp(64px, 7vw, 100px);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(11,16,23,.6);
+    }
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+    .s-about {
+      padding-block: var(--section-v);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 100px);
+      align-items: center;
+    }
+    .about-eyebrow { margin-bottom: 20px; }
+    .about-heading { margin-bottom: 28px; }
+    .about-body {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .about-body strong { color: var(--text); font-weight: 600; }
+    .about-certs {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .cert-badge {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      font-family: var(--display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .about-visual {
+      position: relative;
+    }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background:
+        linear-gradient(to bottom right, #1A2D3D, #0B1017),
+        url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80&fit=crop') center/cover no-repeat;
+      background-blend-mode: multiply;
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 88% 100%, 0 100%);
+    }
+    .about-est {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 120px;
+      height: 120px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .about-est span:first-child {
+      display: block;
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(11,16,23,.55);
+    }
+    .about-est span:last-child {
+      display: block;
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    /* =========================================================
+       TESTIMONIALS
+    ========================================================= */
+    .s-testimonials {
+      padding-block: var(--section-v);
+      background: var(--surface);
+    }
+    .testimonials-header { margin-bottom: 56px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .testimonial-card {
+      background: var(--bg);
+      padding: 40px 36px;
+      border: 1px solid var(--border);
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+    .testimonial-stars svg { width: 14px; height: 14px; fill: var(--accent); }
+    .testimonial-quote {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .testimonial-attribution {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* =========================================================
+       PORTFOLIO
+    ========================================================= */
+    .s-portfolio {
+      padding-block: var(--section-v);
+    }
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      gap: 24px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 260px);
+      gap: 6px;
+    }
+    .portfolio-item { overflow: hidden; position: relative; }
+    .portfolio-item:nth-child(1) { grid-column: 1 / 8; grid-row: 1 / 3; }
+    .portfolio-item:nth-child(2) { grid-column: 8 / 13; grid-row: 1 / 2; }
+    .portfolio-item:nth-child(3) { grid-column: 8 / 11; grid-row: 2 / 3; }
+    .portfolio-item:nth-child(4) { grid-column: 11 / 13; grid-row: 2 / 3; }
+
+    .portfolio-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s var(--ease-out);
+    }
+    .portfolio-item:hover .portfolio-thumb { transform: scale(1.04); }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11,16,23,.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-label {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    /* =========================================================
+       PROCESS
+    ========================================================= */
+    .s-process {
+      padding-block: var(--section-v);
+      background: var(--surface);
+    }
+    .process-header { margin-bottom: 60px; }
+    .process-track {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-track::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(10% + 14px);
+      right: calc(10% + 14px);
+      height: 1px;
+      background: var(--border);
+    }
+    .process-step { padding: 0 16px; }
+    .process-node {
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      transition: background .3s, border-color .3s;
+    }
+    .process-step:hover .process-node {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+    .process-node-num {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-muted);
+      transition: color .3s;
+    }
+    .process-step:hover .process-node-num { color: var(--accent); }
+    .process-step-title {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .process-step-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       PARTNERS
+    ========================================================= */
+    .s-partners {
+      padding-block: clamp(48px, 6vw, 72px);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .partners-label {
+      text-align: center;
+      font-family: var(--display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 36px;
+    }
+    .partners-track-wrap { overflow: hidden; }
+    .partners-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marquee-scroll 32s linear infinite;
+    }
+    .partners-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .partner-logo {
+      padding: 0 44px;
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+      transition: color .3s;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+    .partner-logo:hover { color: var(--text-muted); }
+
+    /* =========================================================
+       CTA SECTION
+    ========================================================= */
+    .s-cta {
+      padding-block: var(--section-v);
+      background: var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+    .s-cta::before {
+      content: 'RFQ';
+      position: absolute;
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: clamp(160px, 22vw, 280px);
+      font-weight: 900;
+      color: rgba(11,16,23,.07);
+      line-height: 1;
+      pointer-events: none;
+      letter-spacing: -.04em;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .cta-heading {
+      font-family: var(--display);
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 900;
+      line-height: .92;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(11,16,23,.65);
+      margin-top: 16px;
+      max-width: 46ch;
+    }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 32px;
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      clip-path: polygon(0 0, 100% 0, 100% 82%, 95% 100%, 0 100%);
+      transition: background .2s;
+    }
+    .btn-dark:hover { background: #1A2430; }
+    .btn-dark svg { width: 16px; height: 16px; }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding-top: clamp(60px, 8vw, 96px);
+      padding-bottom: 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+    .footer-brand .logo-mark-sm {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);
+      margin-bottom: 16px;
+    }
+    .footer-brand .logo-mark-sm svg { width: 18px; height: 18px; fill: var(--ink); }
+    .footer-brand-name {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 28ch;
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .footer-contact-item svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+
+    .footer-col-title {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li + li { margin-top: 10px; }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: border-color .2s, color .2s;
+    }
+    .footer-social a:hover { border-color: var(--text-muted); color: var(--text); }
+    .footer-social svg { width: 15px; height: 15px; }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid > :last-child:nth-child(3n+1) { grid-column: auto; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .process-track { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-track::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .site-header .header-nav { display: none; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item + .stat-item::before { left: 20%; right: 20%; top: 0; bottom: auto; width: auto; height: 1px; }
+      .s-services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .portfolio-item:nth-child(1) { grid-column: 1 / -1; grid-row: auto; height: 260px; }
+      .portfolio-item:nth-child(2),
+      .portfolio-item:nth-child(3),
+      .portfolio-item:nth-child(4) { grid-column: auto; grid-row: auto; height: 160px; }
+      .process-track { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="site-header" id="siteHeader">
+  <a href="#" class="header-logo">
+    <span class="logo-mark">
+      <svg viewBox="0 0 16 16"><path d="M2 12L8 2l6 10H2z"/></svg>
+    </span>
+    Clearpath Utility
+  </a>
+  <nav>
+    <ul class="header-nav">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="btn-primary">
+    Get a Quote
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow eyebrow reveal">Underground Utility Specialists</div>
+    <h1 class="hero-headline reveal">
+      Built<br>
+      Below<br>
+      <em>Ground.</em>
+    </h1>
+    <p class="hero-sub reveal">
+      Directional boring, hydrovac excavation, and utility locating — delivered safely, on schedule, across the Mid-South Region.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#contact" class="btn-primary">
+        Request a Quote
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+    <div class="hero-trust reveal">
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Licensed &amp; Fully Insured
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Free Project Estimates
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        OSHA Safety Certified
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        40+ Years of Experience
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue">Scroll</div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section class="s-services" id="services">
+  <div class="container">
+    <div class="s-services-header">
+      <div>
+        <div class="eyebrow reveal">What We Do</div>
+        <h2 class="section-heading reveal" style="margin-top:16px">What We<br><em>Specialize In</em></h2>
+        <p class="s-services-intro reveal">Five core capabilities. One crew you can count on from first locate to final backfill.</p>
+      </div>
+      <a href="#contact" class="btn-primary reveal">All Services</a>
+    </div>
+
+    <div class="services-grid">
+      <!-- 1 -->
+      <article class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 6v8M22 30v8M6 22h8M30 22h8"/>
+            <circle cx="22" cy="22" r="8"/>
+            <path d="M16 22s0-6 6-6 6 6 6 6" stroke-dasharray="3 2"/>
+            <line x1="22" y1="30" x2="22" y2="40"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Directional Boring</h3>
+        <p class="service-body">Trenchless HDD installation under roads, rivers, and structures with zero surface disruption. Water, sewer, gas, fiber, electrical — any utility, any depth.</p>
+        <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <!-- 2 -->
+      <article class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="8" y="10" width="28" height="18" rx="2"/>
+            <path d="M16 28v6M28 28v6M8 20h28"/>
+            <path d="M20 24c0 0 2-4 4 0"/>
+            <line x1="14" y1="34" x2="30" y2="34"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Hydrovac Excavation</h3>
+        <p class="service-body">High-pressure water and vacuum extraction for precise, non-destructive digging around live utilities, foundations, and tight access points.</p>
+        <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <!-- 3 -->
+      <article class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="22" cy="22" r="4"/>
+            <path d="M22 22v14"/>
+            <path d="M14 14a11 11 0 0 1 16 0" stroke-dasharray="3 2"/>
+            <path d="M10 10a17 17 0 0 1 24 0" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Utility Locating</h3>
+        <p class="service-body">Electromagnetic and GPR scanning to map all buried utilities — both public and private — before any ground is broken. We find what 811 misses.</p>
+        <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <!-- 4 -->
+      <article class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 36l8-14 6 8 5-10 7 16"/>
+            <path d="M6 28V14a2 2 0 0 1 2-2h8"/>
+            <line x1="22" y1="12" x2="38" y2="12"/>
+            <line x1="38" y1="12" x2="38" y2="28"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Utility Excavating</h3>
+        <p class="service-body">Full-depth trenching and open-cut excavation for utility repair, replacement, and new installation. OSHA-compliant shoring on every job.</p>
+        <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <!-- 5 -->
+      <article class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="8" y="14" width="28" height="20" rx="1"/>
+            <path d="M14 14V10M30 14V10M14 10h16"/>
+            <path d="M16 22h12M16 28h8"/>
+            <path d="M32 28l4 4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Concrete Scanning</h3>
+        <p class="service-body">Ground-penetrating radar scanning for rebar, post-tension cables, conduits, and voids within concrete slabs — before you cut or core.</p>
+        <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+============================================================ -->
+<section class="s-stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" data-count="40" data-suffix="+">40+</div>
+        <div class="stat-label">Years of Industry Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="18" data-suffix="+">18+</div>
+        <div class="stat-label">Years Avg. Employee Tenure</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Countless</div>
+        <div class="stat-label">Utility Projects Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section class="s-about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="about-eyebrow eyebrow reveal">Our Story</div>
+        <h2 class="section-heading about-heading reveal">Built on<br><em>Decades</em><br>of Trust.</h2>
+        <p class="about-body reveal">
+          Founded in 1982, Clearpath started as a two-man crew with a single boring machine in a rented yard. Today we operate a fleet of 14 specialized units — but the approach hasn't changed. <strong>We only take on projects we can complete on time and on budget.</strong>
+        </p>
+        <p class="about-body reveal">
+          Our crews average 18 years with the company. That institutional knowledge shows on every jobsite — in how we read soil conditions, how we stage equipment, and how we talk to property owners before we ever break ground.
+        </p>
+        <p class="about-body reveal">
+          We work with homeowners, municipalities, contractors, and Fortune 500 utilities. Every client gets the same attention to detail.
+        </p>
+        <div class="about-certs reveal">
+          <span class="cert-badge">Avetta Member</span>
+          <span class="cert-badge">ISN Registered</span>
+          <span class="cert-badge">OSHA 10 Certified</span>
+          <span class="cert-badge">APWA Member</span>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-photo"></div>
+        <div class="about-est">
+          <span>Est.</span>
+          <span>1982</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="s-testimonials" id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="eyebrow reveal">Client Feedback</div>
+      <h2 class="section-heading reveal" style="margin-top:16px">What Clients<br><em>Say.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Clearpath located all our existing utilities before we broke ground. Found two unmarked gas laterals that 811 had missed completely. That call saved us a six-figure repair bill."</p>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">JH</div>
+          <div>
+            <div class="testimonial-name">James H.</div>
+            <div class="testimonial-role">General Contractor, Memphis TN</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Their hydrovac crew was on-site within 24 hours of my call. Worked clean around the irrigation system - you'd never know they were there. Professional from start to finish."</p>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">ST</div>
+          <div>
+            <div class="testimonial-name">Sandra T.</div>
+            <div class="testimonial-role">Commercial Property Manager</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="testimonial-quote">"We've cycled through three different boring companies in four years. Clearpath is the only one we call now. They show up, they communicate, and they get out of the way when the job's done."</p>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">MD</div>
+          <div>
+            <div class="testimonial-name">Mike D.</div>
+            <div class="testimonial-role">Facilities Director, Utility Company</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PORTFOLIO
+============================================================ -->
+<section class="s-portfolio" id="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <div>
+        <div class="eyebrow reveal">Recent Work</div>
+        <h2 class="section-heading reveal" style="margin-top:16px">Projects<br><em>in the Field.</em></h2>
+      </div>
+      <a href="#" class="btn-ghost reveal">View All Projects</a>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-item">
+        <img class="portfolio-thumb"
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80&fit=crop"
+          alt="HDD bore installation across highway corridor"
+          loading="lazy"
+          onerror="this.style.background='#1A2D3D';this.removeAttribute('src')">
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Highway 67 Fiber Bore</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-thumb"
+          src="https://images.unsplash.com/photo-1587293852726-f33426cbf8d6?w=700&q=80&fit=crop"
+          alt="Pipeline utility excavation"
+          loading="lazy"
+          onerror="this.style.background='#182535';this.removeAttribute('src')">
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Municipal Water Main Replacement</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-thumb"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80&fit=crop"
+          alt="GPR concrete scanning"
+          loading="lazy"
+          onerror="this.style.background='#1E2A38';this.removeAttribute('src')">
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">GPR Slab Scan - Distribution Warehouse</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-thumb"
+          src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&q=80&fit=crop"
+          alt="Hydrovac excavation"
+          loading="lazy"
+          onerror="this.style.background='#161E28';this.removeAttribute('src')">
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Hydrovac Potholing - Downtown Core</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+============================================================ -->
+<section class="s-process" id="process">
+  <div class="container">
+    <div class="process-header">
+      <div class="eyebrow reveal">How We Work</div>
+      <h2 class="section-heading reveal" style="margin-top:16px">Ready to<br><em>Break Ground?</em></h2>
+    </div>
+    <div class="process-track">
+      <div class="process-step reveal">
+        <div class="process-node"><span class="process-node-num">01</span></div>
+        <h3 class="process-step-title">Site Assessment</h3>
+        <p class="process-step-body">We visit before quoting. Soil type, access constraints, and utility density all affect the approach and timeline.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-node"><span class="process-node-num">02</span></div>
+        <h3 class="process-step-title">Utility Locating</h3>
+        <p class="process-step-body">Private and public utilities marked before any equipment moves. We work with 811 and add our own private-line scan on top.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-node"><span class="process-node-num">03</span></div>
+        <h3 class="process-step-title">Planning &amp; Permits</h3>
+        <p class="process-step-body">We pull all required permits and coordinate with local authorities so you don't have to track that yourself.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-node"><span class="process-node-num">04</span></div>
+        <h3 class="process-step-title">Installation</h3>
+        <p class="process-step-body">Crews on-site on schedule. Real-time communication with your project manager or GC throughout the work window.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-node"><span class="process-node-num">05</span></div>
+        <h3 class="process-step-title">Site Restoration</h3>
+        <p class="process-step-body">Backfill, compact, grade, and clean. We leave the site closer to how we found it than most crews you'll encounter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARTNERS
+============================================================ -->
+<section class="s-partners">
+  <div class="partners-label">Trusted by leading contractors and utilities</div>
+  <div class="partners-track-wrap">
+    <div class="partners-track">
+      <span class="partner-logo">Entergy Corp.</span>
+      <span class="partner-logo">Nabholz Construction</span>
+      <span class="partner-logo">Walmart Stores</span>
+      <span class="partner-logo">AT&amp;T Infrastructure</span>
+      <span class="partner-logo">Arkansas DOT</span>
+      <span class="partner-logo">Southern Company</span>
+      <span class="partner-logo">MidAmerica Industrial</span>
+      <span class="partner-logo">City of Little Rock</span>
+      <span class="partner-logo">Conway Corp.</span>
+      <span class="partner-logo">Dillard's Inc.</span>
+      <span class="partner-logo">Entergy Corp.</span>
+      <span class="partner-logo">Nabholz Construction</span>
+      <span class="partner-logo">Walmart Stores</span>
+      <span class="partner-logo">AT&amp;T Infrastructure</span>
+      <span class="partner-logo">Arkansas DOT</span>
+      <span class="partner-logo">Southern Company</span>
+      <span class="partner-logo">MidAmerica Industrial</span>
+      <span class="partner-logo">City of Little Rock</span>
+      <span class="partner-logo">Conway Corp.</span>
+      <span class="partner-logo">Dillard's Inc.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="s-cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-heading">Let's Talk<br>About Your<br>Project.</h2>
+        <p class="cta-sub">Free estimates for all project types. We'll respond within one business day.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <a href="tel:5554007200" class="btn-dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.47-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (555) 400-7200
+        </a>
+        <a href="mailto:info@clearpath-utility.com" class="btn-dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send a Message
+        </a>
+        <div style="font-size:12px;color:rgba(11,16,23,.5);font-family:var(--display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding-top:4px">
+          Utility Locating: (555) 400-7204
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand col -->
+      <div class="footer-brand">
+        <div class="logo-mark-sm">
+          <svg viewBox="0 0 16 16"><path d="M2 12L8 2l6 10H2z"/></svg>
+        </div>
+        <div class="footer-brand-name">Clearpath Utility Group</div>
+        <p class="footer-tagline">Underground utility specialists serving the Mid-South Region since 1982.</p>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          467 Commerce Park Drive, Suite B<br>Benton, AR 72019
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.47-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (555) 400-7200
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@clearpath-utility.com
+        </div>
+      </div>
+      <!-- Services col -->
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Directional Boring</a></li>
+          <li><a href="#">Hydrovac Excavation</a></li>
+          <li><a href="#">Utility Locating</a></li>
+          <li><a href="#">Utility Excavating</a></li>
+          <li><a href="#">Concrete Scanning</a></li>
+          <li><a href="#">Emergency Response</a></li>
+        </ul>
+      </div>
+      <!-- Company col -->
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <!-- Legal col -->
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Safety Policy</a></li>
+        </ul>
+        <div style="margin-top:32px">
+          <div class="footer-col-title">Follow</div>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">Copyright 2026 - All Rights Reserved. Clearpath Utility Group.</span>
+      <span class="footer-copy">Serving Arkansas, Tennessee, Mississippi &amp; Missouri</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Lenis smooth scroll ---------- */
+  const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+  function rafLoop(time) { lenis.raf(time); requestAnimationFrame(rafLoop); }
+  requestAnimationFrame(rafLoop);
+
+  /* ---------- GSAP + ScrollTrigger ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  /* ---------- Sticky header ---------- */
+  const header = document.getElementById('siteHeader');
+  ScrollTrigger.create({
+    start: 80,
+    onEnter: () => header.classList.add('scrolled'),
+    onLeaveBack: () => header.classList.remove('scrolled'),
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  gsap.utils.toArray('.reveal').forEach((el) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  });
+
+  /* ---------- Stagger children in grids ---------- */
+  ['.services-grid', '.testimonials-grid', '.process-track', '.footer-grid'].forEach((sel) => {
+    const parent = document.querySelector(sel);
+    if (!parent) return;
+    const children = parent.querySelectorAll(':scope > *');
+    gsap.fromTo(children,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: parent,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  });
+
+  /* ---------- Stat counter ---------- */
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.8,
+      ease: 'power2.out',
+      snap: { val: 1 },
+      onUpdate: () => { el.textContent = Math.round(obj.val) + suffix; },
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      }
+    });
+  });
+
+  /* ---------- Portfolio grid reveal ---------- */
+  gsap.fromTo('.portfolio-grid',
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 0.5,
+      scrollTrigger: { trigger: '.portfolio-grid', start: 'top 85%' }
+    }
+  );
+  gsap.utils.toArray('.portfolio-item').forEach((item, i) => {
+    gsap.fromTo(item,
+      { opacity: 0, scale: 0.96 },
+      {
+        opacity: 1, scale: 1,
+        duration: 0.7,
+        ease: 'power2.out',
+        delay: i * 0.08,
+        scrollTrigger: {
+          trigger: '.portfolio-grid',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  });
+
+  /* ---------- Hero entrance ---------- */
+  const heroTl = gsap.timeline({ delay: 0.2 });
+  heroTl
+    .fromTo('.hero-headline', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+    .fromTo('.hero-eyebrow', { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' }, '-=0.7')
+    .fromTo('.hero-sub', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .fromTo('.hero-actions', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+    .fromTo('.hero-trust', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.35');
+
+  /* ---------- About photo parallax ---------- */
+  gsap.to('.about-photo', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.s-about',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true,
+    }
+  });
+
+}());
+</script>
+</body>
+</html>

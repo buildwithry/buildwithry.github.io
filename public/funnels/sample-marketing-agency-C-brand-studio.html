@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame & Co - Brand Identity & Digital Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --bg:         #0A0A08;
+      --bg-card:    #111110;
+      --bg-light:   #F2F0EB;
+      --ink:        #F5F3EE;
+      --text:       #C8C4BC;
+      --text-dim:   #5E5C57;
+      --accent:     #E84B3A;
+      --border:     rgba(255, 255, 255, 0.07);
+
+      --font:       'Plus Jakarta Sans', sans-serif;
+
+      --space-xs:   0.5rem;
+      --space-sm:   1rem;
+      --space-md:   2rem;
+      --space-lg:   4rem;
+      --space-xl:   7rem;
+      --space-xxl:  10rem;
+
+      --radius-sm:  4px;
+      --radius-md:  8px;
+
+      --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* =============================================
+       RESET
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      background-color: var(--bg);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =============================================
+       REVEAL ANIMATION
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* =============================================
+       TYPOGRAPHY HELPERS
+    ============================================= */
+    .h1 {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1.05;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .h2 {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+
+    .h3 {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    .meta {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* =============================================
+       NAV
+    ============================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.75rem 3rem;
+      background: var(--bg);
+      transition: backdrop-filter 0.4s var(--ease-out), background 0.4s var(--ease-out);
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 8, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-wordmark {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 18px;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--text);
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10rem 3rem 6rem;
+      background: var(--bg);
+    }
+
+    .hero__headline {
+      max-width: 820px;
+    }
+
+    .hero__headline em {
+      font-style: italic;
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 6px;
+      text-decoration-thickness: 2px;
+      font-weight: 300;
+    }
+
+    .hero__sub {
+      margin-top: 2rem;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      max-width: 480px;
+      line-height: 1.65;
+    }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text);
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .hero__cta .arrow {
+      display: inline-block;
+      color: var(--text-dim);
+      transition: color 0.25s var(--ease-out), transform 0.3s var(--ease-spring);
+    }
+
+    .hero__cta:hover {
+      color: var(--ink);
+    }
+
+    .hero__cta:hover .arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* =============================================
+       SECTION WRAPPER
+    ============================================= */
+    .section {
+      padding: var(--space-xl) 3rem;
+    }
+
+    .section--light {
+      background: var(--bg-light);
+      color: var(--bg);
+    }
+
+    /* =============================================
+       SELECTED WORK
+    ============================================= */
+    .work {
+      background: var(--bg);
+    }
+
+    .work__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .work__header .h2 { color: var(--ink); }
+
+    .work__count {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .work__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .work-card {
+      background: var(--bg-card);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .work-card__img {
+      aspect-ratio: 4/3;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .work-card__img-fill {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .work-card:hover .work-card__img-fill {
+      transform: scale(1.04);
+    }
+
+    .work-card__caption {
+      padding: 1rem 1.25rem 1.25rem;
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    .work-card:hover .work-card__caption {
+      transform: translateY(-4px);
+    }
+
+    .work-card__title {
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .work-card__meta {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* Gradient fills for cards */
+    .grad-a { background: linear-gradient(135deg, #1a1612, #2e241d); }
+    .grad-b { background: linear-gradient(135deg, #101418, #1c2430); }
+    .grad-c { background: linear-gradient(135deg, #120e18, #201830); }
+    .grad-d { background: linear-gradient(135deg, #0e1614, #162420); }
+    .grad-e { background: linear-gradient(135deg, #181210, #2e1e18); }
+    .grad-f { background: linear-gradient(135deg, #141414, #222222); }
+
+    /* =============================================
+       STUDIO PHILOSOPHY
+    ============================================= */
+    .philosophy {
+      background: var(--bg-light);
+    }
+
+    .philosophy__quote {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(26px, 3.5vw, 38px);
+      line-height: 1.25;
+      color: var(--bg);
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .philosophy__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .philosophy__bio p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    .philosophy__bio p:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy__services-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.75rem;
+    }
+
+    .philosophy__services-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .philosophy__services-list li {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--bg);
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(10, 10, 8, 0.12);
+      letter-spacing: -0.01em;
+      transition: padding-left 0.25s var(--ease-out);
+    }
+
+    .philosophy__services-list li:first-child {
+      border-top: 1px solid rgba(10, 10, 8, 0.12);
+    }
+
+    .philosophy__services-list li:hover {
+      padding-left: 6px;
+    }
+
+    /* =============================================
+       PROCESS
+    ============================================= */
+    .process {
+      background: var(--bg);
+    }
+
+    .process__header {
+      margin-bottom: 4rem;
+    }
+
+    .process__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .process-step {
+      padding: 2rem 2rem 0 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .process-step:last-child {
+      padding-right: 0;
+    }
+
+    .process-step__phase {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .process-step__name {
+      font-family: var(--font);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+
+    .process-step__desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       SELECTED CLIENTS
+    ============================================= */
+    .clients {
+      background: var(--bg);
+    }
+
+    .clients__intro {
+      max-width: 520px;
+      margin-bottom: 3rem;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .clients__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .client-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+    }
+
+    .client-tag:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--ink);
+    }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    .testimonials {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .testimonial__quote {
+      font-family: var(--font);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+    }
+
+    .testimonial__attribution {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* =============================================
+       POINTS OF VIEW
+    ============================================= */
+    .pov {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .pov__header {
+      margin-bottom: 3.5rem;
+    }
+
+    .pov__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .pov-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.25s var(--ease-out);
+    }
+
+    .pov-card:hover {
+      background: var(--bg-card);
+    }
+
+    .pov-card__date {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .pov-card__title {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 20px;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.01em;
+    }
+
+    .pov-card__excerpt {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .pov-card__read {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .pov-card:hover .pov-card__read {
+      color: var(--accent);
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    .contact {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .contact__h2 {
+      margin-bottom: 2.5rem;
+    }
+
+    .contact__email {
+      display: block;
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: var(--text);
+      letter-spacing: -0.01em;
+      transition: color 0.25s var(--ease-out);
+      margin-bottom: 1.25rem;
+    }
+
+    .contact__email:hover {
+      color: var(--accent);
+    }
+
+    .contact__secondary {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-dim);
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .contact__secondary:hover {
+      color: var(--ink);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .footer__brand {
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .footer__tagline {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-dim);
+    }
+
+    .footer__right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer__year {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-dim);
+    }
+
+    .footer__links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-dim);
+      transition: color 0.25s var(--ease-out);
+    }
+
+    .footer__links a:hover {
+      color: var(--accent);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .nav { padding: 1.5rem 1.75rem; }
+
+      .section { padding: 5rem 1.75rem; }
+
+      .work__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .philosophy__body {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .process__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+
+      .pov__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        padding: 2rem 1.75rem;
+      }
+
+      .footer__right {
+        flex-direction: column-reverse;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1.5rem; }
+
+      .hero { padding: 8rem 1.75rem 5rem; }
+
+      .process__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-step {
+        padding: 1.5rem 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAV
+  ============================================= -->
+  <nav class="nav" id="site-nav">
+    <a href="#" class="nav-wordmark">Frame &amp; Co</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================
+       HERO
+  ============================================= -->
+  <section class="hero">
+    <h1 class="h1 hero__headline">
+      We shape brands that <em>mean</em> something.
+    </h1>
+    <p class="hero__sub">
+      Frame &amp; Co is a brand identity and digital strategy studio for founders and operators who build with purpose. Brooklyn, NY.
+    </p>
+    <a href="#work" class="hero__cta">
+      See our work <span class="arrow">&rarr;</span>
+    </a>
+  </section>
+
+  <!-- ============================================
+       SELECTED WORK
+  ============================================= -->
+  <section class="section work" id="work">
+    <div class="work__header reveal">
+      <h2 class="h2">Selected work</h2>
+      <span class="work__count">2020 - 2025</span>
+    </div>
+
+    <div class="work__grid">
+
+      <div class="work-card reveal reveal-delay-1">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-a"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Meridian Rebrand</p>
+          <p class="work-card__meta">Brand identity / Fintech startup / 2025</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal reveal-delay-2">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-b"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Tidal Campaign</p>
+          <p class="work-card__meta">Digital strategy / Mission-driven nonprofit / 2025</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal reveal-delay-3">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-c"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Ouvrard Brand System</p>
+          <p class="work-card__meta">Brand identity / Heritage lifestyle brand / 2024</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal reveal-delay-4">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-d"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Vela Launch</p>
+          <p class="work-card__meta">Launch playbook / Emerging CPG / 2024</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal reveal-delay-5">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-e"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Calloway Positioning</p>
+          <p class="work-card__meta">Campaign development / Series A SaaS / 2023</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal reveal-delay-6">
+        <div class="work-card__img">
+          <div class="work-card__img-fill grad-f"></div>
+        </div>
+        <div class="work-card__caption">
+          <p class="work-card__title">Olivo Identity</p>
+          <p class="work-card__meta">Brand identity / Consumer health / 2023</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       STUDIO PHILOSOPHY
+  ============================================= -->
+  <section class="section philosophy" id="studio">
+
+    <p class="philosophy__quote reveal">
+      We don't make things pretty. We make things persuasive.
+    </p>
+
+    <div class="philosophy__body">
+
+      <div class="philosophy__bio reveal reveal-delay-1">
+        <p>
+          Frame &amp; Co was founded in 2018 by Simone Varga and Leo Osei. We started with a simple conviction: most brands fail not because the product is weak, but because the story is wrong. We build the story first.
+        </p>
+        <p>
+          Our studio works with a small number of clients at any given time. Every engagement is run by Simone and Leo directly - no juniors on the front line, no account managers between us and the work. This is intentional.
+        </p>
+        <p>
+          We are headquartered in Brooklyn, NY. We work across North America and Western Europe. We don't pitch - we take on work when we believe in what the client is building.
+        </p>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <p class="philosophy__services-label">What we do</p>
+        <ul class="philosophy__services-list">
+          <li>Brand Identity</li>
+          <li>Digital Strategy</li>
+          <li>Campaign Development</li>
+          <li>Launch Playbook</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROCESS
+  ============================================= -->
+  <section class="section process">
+
+    <div class="process__header reveal">
+      <h2 class="h2">How we work</h2>
+    </div>
+
+    <div class="process__grid">
+
+      <div class="process-step reveal reveal-delay-1">
+        <p class="process-step__phase">Phase 01</p>
+        <h3 class="process-step__name">Discovery</h3>
+        <p class="process-step__desc">We spend the first two weeks listening. Founders, customers, competitors. We map the actual landscape, not the one in the deck.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-2">
+        <p class="process-step__phase">Phase 02</p>
+        <h3 class="process-step__name">Positioning</h3>
+        <p class="process-step__desc">We define the one thing you should own. Not three things, not a platform - one clear, defensible position the market will remember.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-3">
+        <p class="process-step__phase">Phase 03</p>
+        <h3 class="process-step__name">Expression</h3>
+        <p class="process-step__desc">Identity, language, and digital system. Everything that carries the position into the world, built to scale without losing its edge.</p>
+      </div>
+
+      <div class="process-step reveal reveal-delay-4">
+        <p class="process-step__phase">Phase 04</p>
+        <h3 class="process-step__name">Activation</h3>
+        <p class="process-step__desc">Launch strategy and the first 90-day playbook. We don't hand off and disappear - we stay through the moment that matters.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SELECTED CLIENTS
+  ============================================= -->
+  <section class="section clients">
+
+    <div class="reveal">
+      <p class="clients__intro">
+        We work with founders, operators, and teams building toward something.
+      </p>
+    </div>
+
+    <div class="clients__tags reveal reveal-delay-2">
+      <span class="client-tag">Series A SaaS</span>
+      <span class="client-tag">Mission-driven nonprofit</span>
+      <span class="client-tag">Heritage lifestyle brand</span>
+      <span class="client-tag">Emerging CPG</span>
+      <span class="client-tag">B2B Fintech</span>
+      <span class="client-tag">Consumer health</span>
+      <span class="client-tag">EdTech startup</span>
+      <span class="client-tag">Impact investing</span>
+      <span class="client-tag">Architecture firm</span>
+      <span class="client-tag">DTC wellness</span>
+      <span class="client-tag">Creative agency</span>
+      <span class="client-tag">Publishing house</span>
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       TESTIMONIALS
+  ============================================= -->
+  <section class="section testimonials">
+
+    <div class="testimonials__grid">
+
+      <div class="reveal reveal-delay-1">
+        <blockquote class="testimonial__quote">
+          "They pushed back on everything we thought we knew about our own brand. It was uncomfortable. Then the work shipped and revenue jumped. That's the Frame &amp; Co way."
+        </blockquote>
+        <p class="testimonial__attribution">Chief Marketing Officer, DTC Brand</p>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <blockquote class="testimonial__quote">
+          "Every studio says they're strategic. Frame &amp; Co is one of the two I've worked with that actually mean it. The positioning they built for us still holds two years and three product launches later."
+        </blockquote>
+        <p class="testimonial__attribution">Co-Founder &amp; CEO, B2B SaaS Platform</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       POINTS OF VIEW
+  ============================================= -->
+  <section class="section pov">
+
+    <div class="pov__header reveal">
+      <h2 class="h2">Points of view</h2>
+    </div>
+
+    <div class="pov__grid">
+
+      <div class="pov-card reveal reveal-delay-1">
+        <p class="pov-card__date">May 2025</p>
+        <h3 class="pov-card__title">Brand as filter: why clarity is a competitive advantage</h3>
+        <p class="pov-card__excerpt">The brands that win in crowded categories are rarely the loudest. They are the most legible - to the right people, at the right moment.</p>
+        <span class="pov-card__read">Read &rarr;</span>
+      </div>
+
+      <div class="pov-card reveal reveal-delay-2">
+        <p class="pov-card__date">March 2025</p>
+        <h3 class="pov-card__title">What founders get wrong about launch timing</h3>
+        <p class="pov-card__excerpt">Most founders wait until the product is ready to think about positioning. By then, the market has already made a decision without them.</p>
+        <span class="pov-card__read">Read &rarr;</span>
+      </div>
+
+      <div class="pov-card reveal reveal-delay-3">
+        <p class="pov-card__date">January 2025</p>
+        <h3 class="pov-card__title">The rebrand that almost wasn't - and why it had to be</h3>
+        <p class="pov-card__excerpt">A heritage brand with 40 years of equity asked us to make it younger. We told them that wasn't the problem. Here's what was.</p>
+        <span class="pov-card__read">Read &rarr;</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       CONTACT
+  ============================================= -->
+  <section class="section contact" id="contact">
+    <h2 class="h2 contact__h2 reveal">Let's make something.</h2>
+    <a href="mailto:hello@frameandco.co" class="contact__email reveal reveal-delay-1">
+      hello@frameandco.co
+    </a>
+    <a href="#" class="contact__secondary reveal reveal-delay-2">
+      or book an intro call
+    </a>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer">
+    <div class="footer__left">
+      <span class="footer__brand">Frame &amp; Co / Brooklyn, NY</span>
+      <span class="footer__tagline">Brand identity and digital strategy for purpose-driven companies.</span>
+    </div>
+    <div class="footer__right">
+      <span class="footer__year">&copy; 2025</span>
+      <ul class="footer__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    // Nav scroll state
+    (function () {
+      var nav = document.getElementById('site-nav');
+      var lastY = 0;
+
+      function onScroll() {
+        var y = window.scrollY;
+        if (y > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+        lastY = y;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }());
+
+    // IntersectionObserver reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      els.forEach(function (el) { observer.observe(el); });
+    }());
+
+    // Smooth anchor scroll
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            var offset = 80;
+            var top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+    }());
+  </script>
+
+</body>
+</html>

@@ -1,7 +1,12 @@
-import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ExternalLink, Eye, Play, ArrowRight, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Reveal from "@/components/Reveal";
+import SplitHeading from "@/components/SplitHeading";
+
+gsap.registerPlugin(ScrollTrigger);
 
 import zapierCaseStudy from "/lovable-uploads/2f07a1c7-8827-4169-9c4d-6353aa824503.png";
 import makeCaseStudy from "/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2.png";
@@ -185,227 +190,211 @@ const projects: ProjectItem[] = [
   }
 ];
 
-const categories = ["All", "Voice AI", "Social Media AI", "Conversational AI", "AI Content Automation", "Sales Automation"];
+const categories = [
+  "All",
+  "Voice AI",
+  "Social Media AI",
+  "Conversational AI",
+  "AI Content Automation",
+  "Sales Automation",
+  "Content Marketing",
+  "Client Management",
+  "Business Operations",
+];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
 
   const filteredProjects = activeCategory === "All"
     ? projects
     : projects.filter((p) => p.category === activeCategory);
 
+  // Horizontal scroll-jack rail, ported from the live xenith-design.webflow.io #work section.
+  // Confirmed via runtime probe: `.the-height-400vh-section` (tall pin host) + `.the-sticky-div`
+  // (position: sticky, top: 0) + `.the-width-400vh-scrollable-div` (a flex row of 6 `.work-card`s,
+  // 694px each, 4214px total) that translateX's left as the page scrolls down — e.g.
+  // translateX(-2333.05px) at 50% through the pinned section. Rebuilt here with GSAP ScrollTrigger's
+  // `pin: true` + a scrub tween on the rail's x, driving through the filtered project list instead of
+  // Xenith's fixed 6 items. Rebuilt on every filter/category change since the rail width changes.
+  //
+  // Bug fix: trigger was `section` with `start: "top top"`, which pins the ENTIRE section —
+  // including the header/heading/filter-pills block that sits above the rail. That meant a long
+  // dead-scroll (section pinned, header just sitting there, nothing visibly moving) before the
+  // rail's x actually started shifting — felt like "the page disappeared" while scrolling. Pinning
+  // on the rail wrapper itself instead starts the horizontal motion the instant the pin engages.
+  useEffect(() => {
+    const rail = railRef.current;
+    const railWrapper = rail?.parentElement; // the "overflow-hidden" div directly wrapping the rail
+    if (!rail || !railWrapper) return;
+    if (
+      window.matchMedia("(max-width: 767px)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      gsap.set(rail, { x: 0 });
+      return;
+    }
+
+    let scrollDistance = 0;
+    const measureScrollDistance = () => {
+      scrollDistance = Math.max(0, rail.scrollWidth - railWrapper.clientWidth);
+      return scrollDistance;
+    };
+
+    gsap.set(rail, { x: 0 });
+    if (measureScrollDistance() <= 0) return;
+
+    const trigger = ScrollTrigger.create({
+      trigger: railWrapper,
+      start: "top top",
+      end: () => `+=${measureScrollDistance()}`,
+      pin: true,
+      scrub: 0.8,
+      anticipatePin: 1,
+      onRefresh: () => {
+        measureScrollDistance();
+        gsap.set(rail, { x: 0 });
+      },
+      onUpdate: (self) => {
+        gsap.set(rail, { x: -scrollDistance * self.progress });
+      },
+    });
+
+    return () => {
+      trigger.kill();
+    };
+  }, [filteredProjects]);
+
   return (
-    <section id="projects" className="py-24 px-6 sm:px-8 bg-white dark:bg-[#000d10] border-t border-[#d5d3d4] dark:border-white/10">
-      <div className="max-w-[1200px] mx-auto">
-        {/* Section Header */}
-        <div className="mb-14">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#bc7155]">Selected Work</span>
-          </div>
-          <h2 className="section-headline mb-4">
-            Case Studies.
-          </h2>
-          <p className="text-lg sm:text-[19px] text-[#8e8e95] max-w-3xl leading-[1.61]">
-            Architected voice agents, CRM automation pipelines, and autonomous workflows designed for operational resilience and verifiable conversion.
-          </p>
+    <section id="projects" ref={sectionRef} className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
+      <div className="max-w-[1200px] mx-auto relative">
+        {/* Section Header — wider vertical rhythm ported from Xenith's Work section
+            (layout-manifest.json: y:6334, h:3800 — spacious grid, not dense) */}
+        <Reveal>
+          <div className="mb-20">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc]">Selected Work</span>
+            </div>
+            <SplitHeading className="text-heading mb-4">
+              Case Studies.
+            </SplitHeading>
+            <p className="text-lg sm:text-[19px] text-[#8a8f98] max-w-3xl leading-[1.61]">
+              Architected voice agents, CRM automation pipelines, and autonomous workflows designed for operational resilience and verifiable conversion.
+            </p>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2 pt-8">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`text-sm font-semibold px-4 py-2 rounded-full transition-all tracking-tight ${
-                  activeCategory === cat
-                    ? "bg-[#000d10] text-white dark:bg-white dark:text-[#000d10]"
-                    : "bg-transparent text-[#8e8e95] border border-[#d5d3d4] dark:border-white/15 hover:text-[#000d10] dark:hover:text-white hover:border-[#000d10] dark:hover:border-white"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2 pt-8">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`text-sm font-medium px-4 py-2 rounded-full transition-all tracking-tight ${
+                    activeCategory === cat
+                      ? "bg-[#f1eadc] text-[#08090a]"
+                      : "bg-transparent text-[#8a8f98] border border-[#23252a] hover:text-white hover:border-[#383b3f]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
+      </div>
 
-        {/* Projects List */}
-        <div className="space-y-16">
+      {/* Horizontal rail — full-bleed, not constrained to max-w-[1200px], matching Xenith's
+          full-viewport-width work-card row. Left padding aligns the first card near the
+          left edge (matching the max-w-[1200px] container's own left margin) at rest,
+          before the scroll-jack pin engages and starts sliding the rail left.
+          Bug fix: the wrapper had no explicit height/vertical-centering, so once GSAP
+          pinned it, the pinned scene sat flush at whatever position the card's natural
+          height landed on — large empty gaps top/bottom instead of the cards being
+          centered in the viewport. `min-h-screen flex items-center` centers the rail
+          vertically within the full pinned viewport height.
+          Wordmark moved from the outer section (where large section padding pushed it
+          far below the cards) to sit relative to this wrapper instead, so it stays tight
+          under the card row regardless of the section's own top/bottom padding — matching
+          the reference where "OUR WORK" sits directly beneath the image row. */}
+      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-x-auto md:overflow-hidden snap-x snap-mandatory">
+        <div
+          ref={railRef}
+          className="flex gap-6 w-max pl-[7.5vw] sm:pl-[max(24px,calc((100vw-1200px)/2))]"
+        >
           {filteredProjects.map((project, index) => {
-            // Check if this project is the featured Clay Card
+            // Check if this project is the featured card
             if (project.isFeatured && activeCategory === "All") {
               return (
-                <div key={project.id} className="featured-clay-card">
-                  <div className="grid lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-6 space-y-6">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold uppercase tracking-wider">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        Flagship Solution
-                      </div>
-
-                      <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
-                        {project.title}
-                      </h3>
-
-                      <p className="text-lg leading-[1.61] text-white/90">
-                        {project.description}
-                      </p>
-
-                      <div className="space-y-3 pt-2">
-                        <div className="text-xs uppercase tracking-widest text-white/80 font-bold">Key Capabilities</div>
-                        <ul className="space-y-2">
-                          {project.features.map((feat, fIndex) => (
-                            <li key={fIndex} className="flex items-start text-white text-sm sm:text-base">
-                              <span className="mr-2 text-white font-bold">•</span>
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="flex flex-wrap gap-3 pt-4">
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <button className="btn-pill-dark bg-white text-[#000d10] hover:bg-white/90">
-                              <Play className="w-4 h-4 fill-current mr-1" />
-                              <span>Watch Demo Video</span>
-                            </button>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl p-2 bg-[#000d10] text-white border border-white/20 rounded-none">
-                            <DialogHeader className="p-4">
-                              <DialogTitle className="text-xl text-white">{project.title}</DialogTitle>
-                              <DialogDescription className="text-[#8e8e95]">
-                                {project.client} • {project.platform}
-                              </DialogDescription>
-                            </DialogHeader>
-                            <div className="relative w-full border border-white/10 overflow-hidden" style={{ paddingBottom: "56.25%" }}>
-                              <iframe
-                                src={project.videoUrl}
-                                title={project.title}
-                                className="absolute inset-0 w-full h-full border-0 overflow-hidden"
-                                allow="autoplay; fullscreen"
-                                allowFullScreen
-                                scrolling="no"
-                              />
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <button className="btn-pill-ghost border-white/60 text-white hover:bg-white hover:text-[#bc7155]">
-                              <Eye className="w-4 h-4 mr-1" />
-                              <span>View Workflow Architecture</span>
-                            </button>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-white dark:bg-[#151623] p-6 rounded-none border border-[#d5d3d4] dark:border-white/15">
-                            <DialogHeader>
-                              <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-                              <DialogDescription className="text-base text-[#8e8e95]">
-                                {project.client} — {project.category}
-                              </DialogDescription>
-                            </DialogHeader>
-
-                            <div className="grid md:grid-cols-2 gap-6 mt-6">
-                              <div className="space-y-4">
-                                <div>
-                                  <h4 className="font-bold text-base mb-1">Challenge</h4>
-                                  <p className="text-sm text-[#8e8e95]">{project.problem}</p>
-                                </div>
-                                <div>
-                                  <h4 className="font-bold text-base mb-1">Solution</h4>
-                                  <p className="text-sm text-[#8e8e95]">{project.solution}</p>
-                                </div>
-                                <div>
-                                  <h4 className="font-bold text-base mb-1">Architecture Details</h4>
-                                  <ol className="space-y-1.5 text-xs text-[#8e8e95]">
-                                    {project.detailedWorkflow.map((step, sIdx) => (
-                                      <li key={sIdx} className="flex items-start">
-                                        <span className="font-bold mr-1.5 text-[#000d10] dark:text-white">{sIdx + 1}.</span>
-                                        <span>{step}</span>
-                                      </li>
-                                    ))}
-                                  </ol>
-                                </div>
-                              </div>
-                              <div>
-                                <img
-                                  src={project.automationImage}
-                                  alt={project.title}
-                                  className="w-full h-auto object-cover border border-[#d5d3d4] dark:border-white/10"
-                                />
-                              </div>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      </div>
-                    </div>
-
-                    <div className="lg:col-span-6">
-                      <div className="relative border border-white/30 p-2 bg-black/20">
-                        <img
-                          src={project.automationImage}
-                          alt={project.title}
-                          className="w-full h-72 lg:h-96 object-cover"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            return (
-              <div
-                key={project.id}
-                className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 hairline-top"
-              >
-                {/* Media Image / Video Preview (6 cols) */}
-                <div className={`lg:col-span-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
+                <div key={project.id} data-project-card className="w-[85vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start">
+                  {/* Same image-first hover pattern as the regular cards below, with a
+                      Flagship Solution tag kept as this project's distinguishing marker. */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <div className="relative group cursor-pointer border border-[#d5d3d4] dark:border-white/10 p-2 bg-[#f8fafc] dark:bg-[#151623] hover:border-[#000d10] dark:hover:border-white transition-colors">
-                        <div className="relative h-72 sm:h-80 overflow-hidden bg-black">
+                      <div
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            event.currentTarget.click();
+                          }
+                        }}
+                        className="relative group w-full cursor-pointer overflow-hidden rounded-lg bg-black text-left"
+                      >
+                        <div className="relative aspect-[3/2] overflow-hidden">
                           <img
                             src={project.automationImage}
-                            alt={`${project.title} diagram`}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            alt={project.title}
+                            fetchPriority="high"
+                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 bg-[#000d10]/20 group-hover:bg-[#000d10]/40 transition-colors flex items-center justify-center">
-                            {project.videoUrl ? (
-                              <div className="w-14 h-14 bg-white text-[#000d10] flex items-center justify-center shadow-lg border border-black/10 group-hover:scale-110 transition-transform">
-                                <Play className="w-6 h-6 ml-0.5 fill-current" />
-                              </div>
-                            ) : (
-                              <div className="w-14 h-14 bg-white text-[#000d10] flex items-center justify-center shadow-lg border border-black/10 group-hover:scale-110 transition-transform">
-                                <Eye className="w-6 h-6" />
-                              </div>
-                            )}
+
+                          <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#f1eadc] text-[#08090a]">
+                              <Sparkles className="w-3 h-3" />
+                              Flagship Solution
+                            </span>
+                          </div>
+
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                            <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
+                              <span>View Project</span>
+                              {project.videoUrl ? (
+                                <Play className="w-4 h-4 fill-current" />
+                              ) : (
+                                <Eye className="w-4 h-4" />
+                              )}
+                            </div>
                           </div>
                         </div>
 
-                        {/* Badges */}
-                        <div className="flex items-center justify-between pt-2 px-1 text-xs">
-                          <span className="font-semibold text-[#000d10] dark:text-white uppercase tracking-wider text-[11px]">
+                        <div className="flex items-center justify-between pt-4">
+                          <h3 className="text-2xl font-medium tracking-tight text-white">
+                            {project.title}
+                          </h3>
+                          <span className="text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
                             {project.platform}
-                          </span>
-                          <span className="text-[#8e8e95] font-medium">
-                            {project.category}
                           </span>
                         </div>
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-white dark:bg-[#151623] p-6 border border-[#d5d3d4] dark:border-white/15 rounded-none">
+                    <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-[#0f1011] p-6 border border-[#23252a] rounded-xl">
                       <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold tracking-tight text-[#000d10] dark:text-white">
+                        <DialogTitle className="text-2xl font-medium tracking-tight text-white">
                           {project.title}
                         </DialogTitle>
-                        <DialogDescription className="text-sm text-[#8e8e95]">
+                        <DialogDescription className="text-sm text-[#8a8f98]">
                           {project.client} • {project.category} • {project.platform}
                         </DialogDescription>
                       </DialogHeader>
 
+                      <p className="text-base text-[#d0d6e0] leading-[1.61]">
+                        {project.description}
+                      </p>
+
                       {project.videoUrl ? (
-                        <div className="relative w-full my-4 border border-[#d5d3d4] dark:border-white/10 overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+                        <div className="relative w-full my-2 border border-[#23252a] overflow-hidden rounded-md" style={{ paddingBottom: "56.25%" }}>
                           <iframe
                             src={project.videoUrl}
                             title={project.title}
@@ -416,54 +405,44 @@ const Projects = () => {
                           />
                         </div>
                       ) : (
-                        <div className="my-4">
+                        <div className="my-2">
                           <img
                             src={project.automationImage}
-                            alt={`${project.title} full diagram`}
-                            className="w-full max-h-[60vh] object-contain border border-[#d5d3d4] dark:border-white/10"
+                            alt={project.title}
+                            className="w-full max-h-[60vh] object-contain border border-[#23252a] rounded-md"
                           />
                         </div>
                       )}
 
-                      <div className="grid md:grid-cols-2 gap-6 mt-4 pt-4 border-t border-[#d5d3d4] dark:border-white/10">
+                      <div className="grid md:grid-cols-2 gap-6 mt-2 pt-4 hairline-top">
                         <div className="space-y-4">
                           <div>
-                            <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Challenge</h4>
-                            <p className="text-sm text-[#8e8e95] leading-relaxed">{project.problem}</p>
+                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Challenge</h4>
+                            <p className="text-sm text-[#8a8f98] leading-relaxed">{project.problem}</p>
                           </div>
                           <div>
-                            <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Solution</h4>
-                            <p className="text-sm text-[#8e8e95] leading-relaxed">{project.solution}</p>
+                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Solution</h4>
+                            <p className="text-sm text-[#8a8f98] leading-relaxed">{project.solution}</p>
                           </div>
-                          {project.sampleLinks && (
-                            <div>
-                              <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Live Samples</h4>
-                              <div className="space-y-1">
-                                {project.sampleLinks.map((link, lIndex) => (
-                                  <a
-                                    key={lIndex}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 text-xs text-[#bc7155] hover:underline"
-                                  >
-                                    <ExternalLink className="w-3.5 h-3.5" />
-                                    <span>{link.label}</span>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          )}
+                          <div>
+                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">What the system does</h4>
+                            <ul className="space-y-1.5">
+                              {project.features.map((feat, fIndex) => (
+                                <li key={fIndex} className="text-xs text-[#8a8f98] flex items-start">
+                                  <span className="text-[#f1eadc] mr-1.5">✓</span>
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
 
                         <div>
-                          <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-2">Workflow Execution</h4>
+                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-2">Architecture Details</h4>
                           <ol className="space-y-2">
-                            {project.detailedWorkflow.map((step, sIndex) => (
-                              <li key={sIndex} className="text-xs text-[#8e8e95] flex items-start">
-                                <span className="font-bold text-[#000d10] dark:text-white mr-2 flex-shrink-0">
-                                  {sIndex + 1}.
-                                </span>
+                            {project.detailedWorkflow.map((step, sIdx) => (
+                              <li key={sIdx} className="text-xs text-[#8a8f98] flex items-start">
+                                <span className="font-medium text-white mr-2 flex-shrink-0">{sIdx + 1}.</span>
                                 <span>{step}</span>
                               </li>
                             ))}
@@ -473,136 +452,192 @@ const Projects = () => {
                     </DialogContent>
                   </Dialog>
                 </div>
+              );
+            }
 
-                {/* Narrative & Details (6 cols) */}
-                <div className={`lg:col-span-6 space-y-6 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#000d10] dark:text-white leading-snug mb-3">
-                      {project.title}
-                    </h3>
-                    <p className="text-base sm:text-lg text-[#8e8e95] leading-[1.61]">
+            return (
+              <div
+                key={project.id}
+                data-project-card
+                className="w-[85vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start"
+              >
+                {/* Image-dominant card, ported from Xenith's work-card pattern (confirmed via
+                    live DOM read of xenith-design.webflow.io #work: <a> wrapping a full-bleed
+                    image + a small discipline-tag overlay, subtle scale(1.002) on hover — no
+                    body copy on the card itself; cards sit in a fixed-width horizontal rail,
+                    694px each in the original, scaled here to fit this repo's content). Full
+                    case-study text stays in the dialog below; "View Project" is revealed on
+                    hover instead of sitting on the page by default. */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          event.currentTarget.click();
+                        }
+                      }}
+                      className="relative group w-full cursor-pointer overflow-hidden rounded-lg bg-black text-left"
+                    >
+                      <div className="relative h-[320px] sm:h-[380px] overflow-hidden">
+                        <img
+                          src={project.automationImage}
+                          alt={`${project.title} diagram`}
+                          loading="lazy"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+
+                        {/* Discipline / platform tag overlay */}
+                        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                          <span className="text-[11px] font-medium uppercase tracking-wider px-2.5 py-1 rounded-full bg-black/50 backdrop-blur text-white">
+                            {project.category}
+                          </span>
+                        </div>
+
+                        {/* Hover overlay: View Project */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
+                            <span>View Project</span>
+                            {project.videoUrl ? (
+                              <Play className="w-4 h-4 fill-current" />
+                            ) : (
+                              <Eye className="w-4 h-4" />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Title beneath, no description/tags by default */}
+                      <div className="flex items-center justify-between pt-4">
+                        <h3 className="text-lg font-medium tracking-tight text-white">
+                          {project.title}
+                        </h3>
+                        <span className="text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
+                          {project.platform}
+                        </span>
+                      </div>
+                    </div>
+                  </DialogTrigger>
+
+                  <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-[#0f1011] p-6 border border-[#23252a] rounded-xl">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-medium tracking-tight text-white">
+                        {project.title}
+                      </DialogTitle>
+                      <DialogDescription className="text-sm text-[#8a8f98]">
+                        {project.client} • {project.category} • {project.platform}
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <p className="text-base text-[#d0d6e0] leading-[1.61]">
                       {project.description}
                     </p>
-                  </div>
 
-                  {/* Tech stack pill tags */}
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#8e8e95] mb-2.5">
-                      Integrated Stack
-                    </div>
+                    {project.videoUrl ? (
+                      <div className="relative w-full my-2 border border-[#23252a] overflow-hidden rounded-md" style={{ paddingBottom: "56.25%" }}>
+                        <iframe
+                          src={project.videoUrl}
+                          title={project.title}
+                          className="absolute inset-0 w-full h-full border-0 overflow-hidden"
+                          allow="autoplay; fullscreen"
+                          allowFullScreen
+                          scrolling="no"
+                        />
+                      </div>
+                    ) : (
+                      <div className="my-2">
+                        <img
+                          src={project.automationImage}
+                          alt={`${project.title} full diagram`}
+                          className="w-full max-h-[60vh] object-contain border border-[#23252a] rounded-md"
+                        />
+                      </div>
+                    )}
+
+                    {/* Tech stack pill tags */}
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, tIndex) => (
                         <span
                           key={tIndex}
-                          className="text-xs font-semibold px-3 py-1 rounded-full border border-[#d5d3d4] dark:border-white/15 text-[#000d10] dark:text-white bg-transparent"
+                          className="text-xs font-medium px-3 py-1 rounded-full border border-[#23252a] text-[#d0d6e0] bg-transparent"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                  </div>
 
-                  {/* Key Highlights */}
-                  <div className="pt-2">
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#8e8e95] mb-2.5">
-                      Key Results &amp; Features
-                    </div>
-                    <ul className="space-y-2">
-                      {project.features.slice(0, 3).map((feat, fIndex) => (
-                        <li key={fIndex} className="flex items-start text-sm text-[#000d10] dark:text-white">
-                          <span className="mr-2 text-[#bc7155] font-bold">•</span>
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="pt-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <button className="btn-pill-ghost group text-sm py-2.5 px-5">
-                          <span>View Full Architecture Case Study</span>
-                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-white dark:bg-[#151623] p-6 border border-[#d5d3d4] dark:border-white/15 rounded-none">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl font-bold tracking-tight text-[#000d10] dark:text-white">
-                            {project.title}
-                          </DialogTitle>
-                          <DialogDescription className="text-sm text-[#8e8e95]">
-                            {project.client} • {project.category}
-                          </DialogDescription>
-                        </DialogHeader>
-
-                        <div className="grid md:grid-cols-2 gap-6 mt-4">
-                          <div className="space-y-4">
-                            <div>
-                              <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Challenge</h4>
-                              <p className="text-sm text-[#8e8e95] leading-relaxed">{project.problem}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Solution</h4>
-                              <p className="text-sm text-[#8e8e95] leading-relaxed">{project.solution}</p>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Results Achieved</h4>
-                              <ul className="space-y-1.5">
-                                {project.features.map((feat, fIdx) => (
-                                  <li key={fIdx} className="text-xs text-[#8e8e95] flex items-start">
-                                    <span className="text-[#bc7155] mr-1.5 font-bold">✓</span>
-                                    <span>{feat}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            {project.sampleLinks && (
-                              <div>
-                                <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-1">Sample Links</h4>
-                                <div className="space-y-1">
-                                  {project.sampleLinks.map((link, lIndex) => (
-                                    <a
-                                      key={lIndex}
-                                      href={link.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="inline-flex items-center gap-1 text-xs text-[#bc7155] hover:underline"
-                                    >
-                                      <ExternalLink className="w-3.5 h-3.5" />
-                                      <span>{link.label}</span>
-                                    </a>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-
-                          <div>
-                            <h4 className="font-bold text-sm text-[#000d10] dark:text-white uppercase tracking-wider mb-2">Workflow Process</h4>
-                            <ol className="space-y-2 mb-4">
-                              {project.detailedWorkflow.map((step, sIndex) => (
-                                <li key={sIndex} className="text-xs text-[#8e8e95] flex items-start">
-                                  <span className="font-bold text-[#000d10] dark:text-white mr-2 flex-shrink-0">
-                                    {sIndex + 1}.
-                                  </span>
-                                  <span>{step}</span>
-                                </li>
-                              ))}
-                            </ol>
-                            <img
-                              src={project.automationImage}
-                              alt={project.title}
-                              className="w-full h-auto object-cover border border-[#d5d3d4] dark:border-white/10"
-                            />
-                          </div>
+                    <div className="grid md:grid-cols-2 gap-6 mt-2 pt-4 hairline-top">
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Challenge</h4>
+                          <p className="text-sm text-[#8a8f98] leading-relaxed">{project.problem}</p>
                         </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </div>
+                        <div>
+                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Solution</h4>
+                          <p className="text-sm text-[#8a8f98] leading-relaxed">{project.solution}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">What the system does</h4>
+                          <ul className="space-y-1.5">
+                            {project.features.map((feat, fIdx) => (
+                              <li key={fIdx} className="text-xs text-[#8a8f98] flex items-start">
+                                <span className="text-[#f1eadc] mr-1.5">✓</span>
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {project.sampleLinks && (
+                          <div>
+                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Live Samples</h4>
+                            <div className="space-y-1">
+                              {project.sampleLinks.map((link, lIndex) => (
+                                <a
+                                  key={lIndex}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs text-[#f1eadc] hover:underline"
+                                >
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                  <span>{link.label}</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div>
+                        <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-2">Workflow Execution</h4>
+                        <ol className="space-y-2">
+                          {project.detailedWorkflow.map((step, sIndex) => (
+                            <li key={sIndex} className="text-xs text-[#8a8f98] flex items-start">
+                              <span className="font-medium text-white mr-2 flex-shrink-0">
+                                {sIndex + 1}.
+                              </span>
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             );
           })}
+        </div>
+
+        {/* Ghosted wordmark, ported from Xenith's .text-block (confirmed: 320px,
+            rgba(255,255,255,0.08), sits directly beneath the work-card row) — moved
+            here so it stays tight under the cards, not far down the whole section. */}
+        <div aria-hidden className="pointer-events-none mt-6 select-none overflow-hidden w-full flex justify-center">
+          <span className="text-[clamp(4rem,18vw,20rem)] font-medium leading-none text-white/[0.08] whitespace-nowrap">
+            CASE STUDIES
+          </span>
         </div>
       </div>
     </section>

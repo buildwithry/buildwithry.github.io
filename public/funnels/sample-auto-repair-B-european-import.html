@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Continentale Motorworks - European Auto Specialists, Atlanta GA</title>
+  <meta name="description" content="Continentale Motorworks - Expert European vehicle service in Atlanta, GA. Specialists in BMW, Mercedes-Benz, Porsche, Audi, and Ferrari since 1996." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===========================
+       DESIGN TOKENS
+    =========================== */
+    :root {
+      --ink: #0F0F14;
+      --ink-2: #1A1A24;
+      --ink-3: #242432;
+      --parchment: #F0EAD9;
+      --parchment-dim: rgba(240,234,217,0.7);
+      --gold: #C9A84C;
+      --gold-soft: rgba(201,168,76,0.12);
+      --gold-line: rgba(201,168,76,0.35);
+      --muted: #7A7A8A;
+      --border: rgba(240,234,217,0.1);
+      --radius: 4px;
+      --radius-lg: 8px;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+      /* Spacing scale */
+      --space-xs:  8px;
+      --space-sm:  16px;
+      --space-md:  32px;
+      --space-lg:  64px;
+      --space-xl:  96px;
+      --space-2xl: 140px;
+
+      /* Type scale */
+      --text-xs:   0.75rem;
+      --text-sm:   0.875rem;
+      --text-base: 1rem;
+      --text-lg:   1.125rem;
+      --text-xl:   1.375rem;
+      --text-2xl:  1.75rem;
+      --text-3xl:  2.25rem;
+      --text-4xl:  3rem;
+      --text-5xl:  4rem;
+    }
+
+    /* ===========================
+       RESET
+    =========================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--ink);
+      color: var(--parchment);
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===========================
+       REVEAL ANIMATION
+    =========================== */
+    .reveal {
+      transform: translateY(24px);
+      opacity: 0.01;
+      transition: transform 0.7s var(--ease), opacity 0.7s var(--ease);
+    }
+
+    .reveal.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ===========================
+       MARQUEE KEYFRAMES
+    =========================== */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===========================
+       1. NAVBAR
+    =========================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(15,15,20,0.72) 0%, transparent 100%);
+      transition: background 0.4s var(--ease), padding 0.4s var(--ease);
+    }
+
+    .nav.scrolled {
+      background: rgba(15,15,20,0.96);
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-lg);
+      color: var(--parchment);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 400;
+      color: var(--parchment-dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--parchment);
+    }
+
+    .nav-cta {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-line);
+      padding: 8px 22px;
+      border-radius: var(--radius);
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
+    /* ===========================
+       2. HERO
+    =========================== */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65);
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(15,15,20,0.15) 0%,
+        rgba(15,15,20,0.05) 40%,
+        rgba(15,15,20,0.55) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .hero-monogram {
+      display: block;
+      opacity: 0.01;
+      animation: heroFadeIn 1.1s var(--ease) 0.3s forwards;
+    }
+
+    @keyframes heroFadeIn {
+      to { opacity: 1; }
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 1.3;
+      color: var(--parchment);
+      max-width: 520px;
+      letter-spacing: 0.01em;
+      opacity: 0.01;
+      animation: heroFadeIn 1.1s var(--ease) 0.55s forwards;
+    }
+
+    .hero-divider {
+      width: 100px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.01;
+      animation: heroFadeIn 1s var(--ease) 0.8s forwards;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      border: 1px solid var(--gold);
+      padding: 14px 36px;
+      border-radius: var(--radius);
+      transition: background 0.28s var(--ease), color 0.28s var(--ease);
+      opacity: 0.01;
+      animation: heroFadeIn 1s var(--ease) 1s forwards;
+    }
+
+    .hero-btn:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.01;
+      animation: heroFadeIn 1s var(--ease) 1.4s forwards;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: var(--gold-line);
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%   { transform: scaleY(1); opacity: 0.5; }
+      50%  { transform: scaleY(0.5); opacity: 1; }
+      100% { transform: scaleY(1); opacity: 0.5; }
+    }
+
+    .hero-scroll-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-line);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ===========================
+       3. HERITAGE STATEMENT
+    =========================== */
+    .heritage {
+      background: var(--ink);
+      padding: var(--space-2xl) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .heritage-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-md);
+    }
+
+    .heritage-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      line-height: 1.45;
+      color: var(--parchment);
+      max-width: 780px;
+      letter-spacing: 0.01em;
+    }
+
+    .heritage-quote::before {
+      content: '\201C';
+      color: var(--gold);
+      font-size: 1.4em;
+      line-height: 0;
+      vertical-align: -0.25em;
+      margin-right: 4px;
+    }
+
+    .heritage-quote::after {
+      content: '\201D';
+      color: var(--gold);
+      font-size: 1.4em;
+      line-height: 0;
+      vertical-align: -0.25em;
+      margin-left: 4px;
+    }
+
+    .heritage-attribution {
+      margin-top: var(--space-md);
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .heritage-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold-line);
+      margin-top: var(--space-md);
+    }
+
+    /* ===========================
+       4. MARQUEE
+    =========================== */
+    .makes {
+      background: var(--ink-2);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+      padding: 28px 0;
+      overflow: hidden;
+    }
+
+    .makes-track-wrapper {
+      overflow: hidden;
+    }
+
+    .makes-track {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      animation: marquee 25s linear infinite;
+    }
+
+    .makes-item {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-2xl);
+      color: var(--gold);
+      padding: 0 48px;
+      display: inline-block;
+    }
+
+    .makes-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold-line);
+      vertical-align: middle;
+    }
+
+    /* ===========================
+       5. SERVICES
+    =========================== */
+    .services {
+      background: var(--ink);
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--parchment);
+      letter-spacing: 0.01em;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--ink-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+
+    .service-card:hover {
+      border-color: var(--gold-line);
+      background: var(--ink-3);
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-xl);
+      color: var(--parchment);
+      line-height: 1.25;
+    }
+
+    .service-desc {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: var(--text-sm);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ===========================
+       6. PROCESS
+    =========================== */
+    .process {
+      background: var(--ink-2);
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .process-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      margin-top: var(--space-lg);
+    }
+
+    .process-step {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .process-step:not(:last-child) {
+      padding-bottom: 52px;
+    }
+
+    .step-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-line);
+      background: var(--gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-base);
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .step-connector {
+      width: 1px;
+      flex: 1;
+      min-height: 32px;
+      border-left: 1px dashed var(--gold-line);
+      margin-top: 8px;
+    }
+
+    .step-body {
+      padding-top: 10px;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-xl);
+      color: var(--parchment);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: var(--text-sm);
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ===========================
+       7. GALLERY
+    =========================== */
+    .gallery {
+      background: var(--ink);
+      padding: var(--space-2xl) 0;
+    }
+
+    .gallery-header {
+      padding: 0 var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 var(--space-md) var(--space-sm);
+      scrollbar-width: none;
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-photo {
+      flex-shrink: 0;
+      width: 380px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      scroll-snap-align: start;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .gallery-photo:hover {
+      transform: scale(1.02);
+    }
+
+    /* ===========================
+       8. TESTIMONIAL
+    =========================== */
+    .testimonial {
+      background: var(--ink);
+      padding: var(--space-2xl) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .testimonial-rule-top {
+      width: 60px;
+      height: 1px;
+      background: var(--gold-line);
+      margin-bottom: var(--space-md);
+    }
+
+    .testimonial-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      line-height: 1.4;
+      color: var(--parchment);
+      max-width: 820px;
+      letter-spacing: 0.01em;
+    }
+
+    .testimonial-attribution {
+      margin-top: var(--space-md);
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .testimonial-attribution strong {
+      display: block;
+      color: var(--parchment-dim);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: var(--text-xs);
+      margin-bottom: 4px;
+    }
+
+    /* ===========================
+       9. LOCATION
+    =========================== */
+    .location {
+      background: var(--ink-2);
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .location-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .location-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .location-detail-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .location-label {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .location-text {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: var(--text-base);
+      color: var(--parchment-dim);
+      line-height: 1.7;
+    }
+
+    .location-phone {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-xl);
+      color: var(--parchment);
+      letter-spacing: 0.02em;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 24px;
+    }
+
+    .hours-day {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      color: var(--muted);
+    }
+
+    .hours-time {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      color: var(--parchment-dim);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: var(--ink-3);
+      border: 1px solid var(--gold-line);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .map-icon {
+      opacity: 0.4;
+    }
+
+    .map-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: var(--text-lg);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .map-address {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      color: var(--muted);
+      text-align: center;
+      opacity: 0.7;
+    }
+
+    /* ===========================
+       10. CTA CLOSE
+    =========================== */
+    .cta-close {
+      background: var(--ink);
+      padding: var(--space-2xl) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-close::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 100%, var(--gold-soft) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-close-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .cta-close-headline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      color: var(--parchment);
+      line-height: 1.3;
+      max-width: 640px;
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-close-btn {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      padding: 16px 44px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gold);
+      margin-bottom: var(--space-md);
+      transition: background 0.28s var(--ease), color 0.28s var(--ease);
+    }
+
+    .cta-close-btn:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .cta-close-phone {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: var(--text-base);
+      color: var(--parchment-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    .footer {
+      background: var(--ink-2);
+      border-top: 1px solid var(--border);
+      padding: 32px var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: var(--text-base);
+      color: var(--parchment-dim);
+    }
+
+    .footer-copy {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-est {
+      font-family: 'Lato', sans-serif;
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-line);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 900px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav.scrolled {
+        padding: 12px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .location-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-headline {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================
+       1. NAVBAR
+  ========================= -->
+  <nav class="nav" id="site-nav" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Continentale Motorworks home">Continentale Motorworks</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#gallery">Workshop</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+    <a href="#schedule" class="nav-cta" aria-label="Schedule your service appointment">Schedule</a>
+  </nav>
+
+  <!-- ========================
+       2. HERO
+  ========================= -->
+  <section class="hero" aria-labelledby="hero-headline">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=80&fit=crop"
+      alt="Dramatic dark automotive photography - a high-performance European vehicle"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <!-- Gold SVG Monogram -->
+      <svg
+        class="hero-monogram"
+        width="80"
+        height="80"
+        viewBox="0 0 80 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Continentale Motorworks monogram"
+        role="img"
+      >
+        <circle cx="40" cy="40" r="36" stroke="#C9A84C" stroke-width="1" fill="none" />
+        <circle cx="40" cy="40" r="32" stroke="#C9A84C" stroke-width="0.4" stroke-dasharray="3 5" fill="none" opacity="0.5" />
+        <text
+          x="40"
+          y="47"
+          font-family="'Playfair Display', serif"
+          font-size="20"
+          font-weight="600"
+          fill="#C9A84C"
+          text-anchor="middle"
+          letter-spacing="3"
+        >CM</text>
+      </svg>
+
+      <h1 class="hero-headline" id="hero-headline">
+        Quality, Class, and Refinement
+      </h1>
+
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      <a href="#schedule" class="hero-btn" id="schedule" aria-label="Schedule your European vehicle service">
+        Schedule Your Service
+      </a>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="hero-scroll-label">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========================
+       3. HERITAGE STATEMENT
+  ========================= -->
+  <section class="heritage" aria-labelledby="heritage-title">
+    <p class="heritage-eyebrow reveal">European Heritage</p>
+    <blockquote
+      class="heritage-quote reveal reveal-delay-1"
+      id="heritage-title"
+    >
+      Every European machine carries a story written in precision engineering. Our responsibility is to honour that story - to listen to what the car is telling us, and to respond with the same care its creators intended.
+    </blockquote>
+    <p class="heritage-attribution reveal reveal-delay-2">
+      Marco Vitale - Founder &amp; Master Technician, Est. 1996
+    </p>
+    <div class="heritage-rule reveal reveal-delay-3" aria-hidden="true"></div>
+  </section>
+
+  <!-- ========================
+       4. MAKES MARQUEE
+  ========================= -->
+  <section class="makes" aria-label="European vehicle makes we service">
+    <div class="makes-track-wrapper" aria-hidden="true">
+      <div class="makes-track" role="list">
+        <!-- First set -->
+        <span class="makes-item" role="listitem">BMW</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Mercedes-Benz</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Porsche</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Audi</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Land Rover</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Ferrari</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Lamborghini</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Maserati</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <!-- Second set for seamless loop -->
+        <span class="makes-item" role="listitem">BMW</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Mercedes-Benz</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Porsche</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Audi</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Land Rover</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Ferrari</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Lamborghini</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+        <span class="makes-item" role="listitem">Maserati</span>
+        <span class="makes-dot" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       5. SERVICES
+  ========================= -->
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="section-header">
+      <p class="section-eyebrow reveal">What We Do</p>
+      <h2 class="section-title reveal reveal-delay-1" id="services-title">Expert Service, European Standard</h2>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Pre-Purchase Inspection -->
+      <article class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="10" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <line x1="25.5" y1="25.5" x2="34" y2="34" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="14" y1="18" x2="22" y2="18" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/>
+          <line x1="18" y1="14" x2="18" y2="22" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        <h3 class="service-name">Pre-Purchase Inspection</h3>
+        <p class="service-desc">Comprehensive 90-point evaluation before you commit to a European vehicle. We uncover hidden issues, verify service history, and provide an honest assessment - because informed buyers make confident decisions.</p>
+      </article>
+
+      <!-- Engine Rebuilds -->
+      <article class="service-card reveal reveal-delay-1">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="8" y="14" width="24" height="16" rx="2" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <rect x="14" y="8" width="12" height="8" rx="1" stroke="#C9A84C" stroke-width="1" fill="none"/>
+          <line x1="20" y1="14" x2="20" y2="8" stroke="#C9A84C" stroke-width="1"/>
+          <circle cx="16" cy="22" r="3" stroke="#C9A84C" stroke-width="1" fill="none"/>
+          <circle cx="24" cy="22" r="3" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        </svg>
+        <h3 class="service-name">Engine Rebuilds</h3>
+        <p class="service-desc">Full internals machined to factory specification. From M-series straight-sixes to flat-six Porsche powerplants, our technicians rebuild with OEM-grade components and obsessive attention to tolerances.</p>
+      </article>
+
+      <!-- Transmission Service -->
+      <article class="service-card reveal reveal-delay-2">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="20" r="5" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <circle cx="28" cy="20" r="5" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <line x1="17" y1="20" x2="23" y2="20" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="20" cy="12" r="3" stroke="#C9A84C" stroke-width="1" fill="none"/>
+          <line x1="20" y1="15" x2="20" y2="20" stroke="#C9A84C" stroke-width="1"/>
+        </svg>
+        <h3 class="service-name">Transmission Service</h3>
+        <p class="service-desc">Manual, automatic, DCT, and PDK - every transmission type handled with precision. Fluid flushes, clutch replacements, and full rebuilds backed by road testing to your exact driving standard.</p>
+      </article>
+
+      <!-- Electrical Diagnostics -->
+      <article class="service-card reveal reveal-delay-1">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polyline points="8,24 14,16 20,22 26,12 32,18" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="6" y="26" width="28" height="6" rx="1" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        </svg>
+        <h3 class="service-name">Electrical Diagnostics</h3>
+        <p class="service-desc">Dealer-level diagnostic software for every European manufacturer. ISTA, XENTRY, PIWIS, ODIS - we read what the car actually says, not what generic scanners guess.</p>
+      </article>
+
+      <!-- Suspension and Alignment -->
+      <article class="service-card reveal reveal-delay-2">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="30" r="5" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <circle cx="28" cy="30" r="5" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <line x1="12" y1="25" x2="16" y2="14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="28" y1="25" x2="24" y2="14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="16" y1="14" x2="24" y2="14" stroke="#C9A84C" stroke-width="1.5"/>
+        </svg>
+        <h3 class="service-name">Suspension &amp; Alignment</h3>
+        <p class="service-desc">Factory geometry restored with four-wheel alignment to manufacturer specifications. BILSTEIN, Eibach, and OEM components. Coilover setup and corner-balancing available for track preparation.</p>
+      </article>
+
+      <!-- AC Service -->
+      <article class="service-card reveal reveal-delay-3">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="8" y="12" width="24" height="16" rx="3" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <line x1="8" y1="20" x2="32" y2="20" stroke="#C9A84C" stroke-width="1" stroke-dasharray="2 3"/>
+          <line x1="16" y1="28" x2="14" y2="34" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/>
+          <line x1="24" y1="28" x2="26" y2="34" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="20" cy="16" r="2" fill="#C9A84C" fill-opacity="0.4"/>
+        </svg>
+        <h3 class="service-name">AC Service</h3>
+        <p class="service-desc">Refrigerant recovery, system leak testing, and full recharge. European climate systems are significantly more complex than domestic vehicles - our certified technicians handle every variant correctly.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========================
+       6. PROCESS
+  ========================= -->
+  <section class="process" id="process" aria-labelledby="process-title">
+    <div class="process-inner">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">How It Works</p>
+        <h2 class="section-title reveal reveal-delay-1" id="process-title">A Measured Approach</h2>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step reveal">
+          <div class="step-aside">
+            <div class="step-number" aria-hidden="true">I</div>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">Schedule Your Appointment</h3>
+            <p class="step-desc">Contact us by phone or through the form below. Describe what you are experiencing - we will confirm a date and time that respects your schedule. Loaner vehicles available for major services.</p>
+          </div>
+        </div>
+
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-aside">
+            <div class="step-number" aria-hidden="true">II</div>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">Comprehensive Assessment</h3>
+            <p class="step-desc">Your vehicle undergoes a full diagnostic review with manufacturer software. We document findings with photographs and present a transparent, itemized estimate before any work begins. No surprises.</p>
+          </div>
+        </div>
+
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-aside">
+            <div class="step-number" aria-hidden="true">III</div>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">Expert Service</h3>
+            <p class="step-desc">Work carried out by ASE-certified technicians who specialize exclusively in European vehicles. Upon completion, you receive a full service record and a test drive to confirm your satisfaction.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       7. GALLERY
+  ========================= -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <div class="gallery-header">
+      <p class="section-eyebrow reveal">The Workshop</p>
+      <h2 class="section-title reveal reveal-delay-1" id="gallery-title">Where Precision Lives</h2>
+    </div>
+
+    <div class="gallery-scroll" role="list" aria-label="Workshop photo gallery">
+      <img
+        class="gallery-photo"
+        src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=900&q=80&fit=crop"
+        alt="Clean professional auto workshop bay"
+        loading="lazy"
+        role="listitem"
+      />
+      <img
+        class="gallery-photo"
+        src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=900&q=80&fit=crop"
+        alt="European sports car engine bay detail"
+        loading="lazy"
+        role="listitem"
+      />
+      <img
+        class="gallery-photo"
+        src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=80&fit=crop"
+        alt="Technician performing diagnostic work"
+        loading="lazy"
+        role="listitem"
+      />
+      <img
+        class="gallery-photo"
+        src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=900&q=80&fit=crop"
+        alt="Luxury European sedan in service lift"
+        loading="lazy"
+        role="listitem"
+      />
+      <img
+        class="gallery-photo"
+        src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&q=80&fit=crop"
+        alt="Precision automotive tools laid out on workbench"
+        loading="lazy"
+        role="listitem"
+      />
+    </div>
+  </section>
+
+  <!-- ========================
+       8. TESTIMONIAL
+  ========================= -->
+  <section class="testimonial" aria-labelledby="testimonial-quote">
+    <div class="testimonial-rule-top reveal" aria-hidden="true"></div>
+    <blockquote class="testimonial-quote reveal reveal-delay-1" id="testimonial-quote">
+      They found a cracked subframe mount my dealer missed entirely. Three years of unexplained pulling on the highway, solved in an afternoon. Continentale has earned my complete trust.
+    </blockquote>
+    <p class="testimonial-attribution reveal reveal-delay-2">
+      <strong>David R.</strong>
+      Owner, 2019 BMW M3 - Atlanta, GA
+    </p>
+  </section>
+
+  <!-- ========================
+       9. LOCATION & CONTACT
+  ========================= -->
+  <section class="location" id="location" aria-labelledby="location-title">
+    <div class="location-inner">
+
+      <div class="location-info">
+        <div class="section-header" style="text-align: left; margin-bottom: 0;">
+          <p class="section-eyebrow reveal">Find Us</p>
+          <h2 class="section-title reveal reveal-delay-1" id="location-title">Atlanta, Georgia</h2>
+        </div>
+
+        <div class="location-detail-group reveal reveal-delay-1">
+          <p class="location-label">Address</p>
+          <address class="location-text" style="font-style: normal;">
+            412 Peachtree Industrial Blvd NE<br />
+            Atlanta, GA 30324
+          </address>
+        </div>
+
+        <div class="location-detail-group reveal reveal-delay-2">
+          <p class="location-label">Phone</p>
+          <a href="tel:+14045550192" class="location-phone">(404) 555-0192</a>
+        </div>
+
+        <div class="location-detail-group reveal reveal-delay-3">
+          <p class="location-label">Hours</p>
+          <div class="hours-grid">
+            <span class="hours-day">Monday - Friday</span>
+            <span class="hours-time">7:30 AM - 6:00 PM</span>
+            <span class="hours-day">Saturday</span>
+            <span class="hours-time">8:00 AM - 2:00 PM</span>
+            <span class="hours-day">Sunday</span>
+            <span class="hours-time">Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal reveal-delay-2" aria-label="Map placeholder - Continentale Motorworks location in Atlanta, GA">
+        <svg class="map-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="17" r="7" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+          <circle cx="20" cy="17" r="2" fill="#C9A84C"/>
+          <path d="M20 24 C20 24 10 32 10 36" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+          <path d="M20 24 C20 24 30 32 30 36" stroke="#C9A84C" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <p class="map-label">Atlanta, GA</p>
+        <p class="map-address">412 Peachtree Industrial Blvd NE<br />Atlanta, GA 30324</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================
+       10. CTA CLOSE
+  ========================= -->
+  <section class="cta-close" aria-labelledby="cta-headline">
+    <p class="cta-close-eyebrow reveal">Ready to Begin</p>
+    <h2 class="cta-close-headline reveal reveal-delay-1" id="cta-headline">
+      Your European Vehicle Deserves Specialist Care
+    </h2>
+    <a href="tel:+14045550192" class="cta-close-btn reveal reveal-delay-2" aria-label="Schedule your service at Continentale Motorworks">
+      Schedule Your Service
+    </a>
+    <p class="cta-close-phone reveal reveal-delay-3">(404) 555-0192</p>
+  </section>
+
+  <!-- ========================
+       FOOTER
+  ========================= -->
+  <footer class="footer">
+    <span class="footer-logo">Continentale Motorworks</span>
+    <span class="footer-copy">&copy; 2024 Continentale Motorworks. All rights reserved.</span>
+    <span class="footer-est">Est. 1996 - Atlanta, GA</span>
+  </footer>
+
+  <script>
+    // ========================
+    // NAV SCROLL BEHAVIOR
+    // ========================
+    (function () {
+      var nav = document.getElementById('site-nav');
+      if (!nav) return;
+
+      function onScroll() {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }());
+
+    // ========================
+    // INTERSECTION OBSERVER - REVEAL
+    // ========================
+    (function () {
+      var revealEls = document.querySelectorAll('.reveal');
+      if (!revealEls.length) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    }());
+  </script>
+</body>
+</html>

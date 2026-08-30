@@ -87,18 +87,36 @@ export default {
 			keyframes: {
 				'accordion-down': {
 					from: {
-						height: '0'
+						height: '0',
+						opacity: '0'
 					},
 					to: {
-						height: 'var(--radix-accordion-content-height)'
+						height: 'var(--radix-accordion-content-height)',
+						opacity: '1'
 					}
 				},
 				'accordion-up': {
 					from: {
-						height: 'var(--radix-accordion-content-height)'
+						height: 'var(--radix-accordion-content-height)',
+						opacity: '1'
 					},
 					to: {
-						height: '0'
+						height: '0',
+						opacity: '0'
+					}
+				},
+				'preloader-fade': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(6px)'
+					},
+					'20%, 80%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'translateY(-6px)'
 					}
 				},
 				'lightning-strike': {
@@ -170,8 +188,8 @@ export default {
 				}
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
+				'accordion-down': 'accordion-down 0.25s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-in',
 				'lightning-strike': 'lightning-strike 4s ease-in-out infinite',
 				'zap-glow': 'zap-glow 4s ease-in-out infinite',
 				'crack-flash': 'crack-flash 4s ease-in-out infinite',

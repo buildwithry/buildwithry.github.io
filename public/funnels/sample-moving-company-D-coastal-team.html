@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tideline Moving Co - Central Coast's Most Trusted Mover</title>
+<meta name="description" content="Tideline Moving Co - residential, commercial, long-distance and storage. Serving Paso Robles, Santa Maria, San Luis Obispo and the Central Coast since 2009.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Color tokens */
+  --navy:#1F2937;
+  --navy-deep:#141C26;
+  --navy-soft:#2C3A4B;
+  --white:#FFFFFF;
+  --paper:#F5F5F5;
+  --paper-2:#ECECEC;
+  --ink:#1F2937;
+  --ink-2:#3A4654;
+  --ink-3:#6B7280;
+  --rule:#E2E5EA;
+  --rule-dark:rgba(255,255,255,0.14);
+  --blue:#1E5FAE;
+  --blue-deep:#174B89;
+  --blue-soft:#E8F0FB;
+  --gold:#C9A96E;
+  --gold-soft:#F4ECD8;
+
+  /* Type scale */
+  --display: 'Sora', system-ui, -apple-system, sans-serif;
+  --body: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --gap-xs:8px;
+  --gap-sm:14px;
+  --gap-md:24px;
+  --gap-lg:48px;
+  --gap-xl:96px;
+  --maxw:1240px;
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:22px;
+
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  color:var(--ink);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+h1,h2,h3,h4,h5{font-family:var(--display);font-weight:700;letter-spacing:-0.01em;line-height:1.18;color:var(--ink)}
+h1{font-size:clamp(36px,5.4vw,62px);font-weight:700;letter-spacing:-0.02em;line-height:1.08}
+h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-0.015em}
+h3{font-size:clamp(20px,1.6vw,24px);font-weight:600}
+p{color:var(--ink-2)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+.eyebrow{
+  font-family:var(--display);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--blue);
+}
+.eyebrow.on-dark{color:var(--gold)}
+
+/* ===== Buttons ===== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 22px;
+  border-radius:999px;
+  font-family:var(--display);
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:-0.005em;
+  white-space:nowrap;
+  width:fit-content;
+  transition:transform .25s var(--ease-out), background .25s var(--ease-out), color .25s var(--ease-out);
+}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+.btn-primary{background:var(--blue);color:var(--white)}
+.btn-primary:hover{background:var(--blue-deep);transform:translateY(-1px)}
+.btn-outline{
+  background:transparent;
+  color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.55);
+}
+.btn-outline:hover{background:var(--white);color:var(--navy);border-color:var(--white)}
+.btn-ghost{
+  background:var(--white);
+  color:var(--navy);
+  border:1.5px solid var(--rule);
+}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ===== 1. Top utility bar ===== */
+.utility{
+  background:var(--navy-deep);
+  color:rgba(255,255,255,0.78);
+  font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.utility .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 0;
+  gap:24px;
+}
+.utility .left,.utility .right{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.utility a{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.78)}
+.utility a:hover{color:var(--white)}
+.utility svg{width:14px;height:14px}
+.utility .lic{color:var(--gold);font-weight:500;letter-spacing:0.02em}
+
+/* ===== 2. Sticky nav ===== */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:saturate(160%) blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.nav .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0;
+  gap:32px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--navy);
+  display:grid;place-items:center;
+  color:var(--white);
+}
+.brand-mark svg{width:22px;height:22px}
+.brand-text{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--ink)}
+.brand-text small{display:block;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+.menu{display:flex;align-items:center;gap:30px}
+.menu a{font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink-2);transition:color .2s}
+.menu a:hover{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-phone{font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
+.nav-phone svg{width:16px;height:16px;color:var(--blue)}
+
+/* ===== 3. Hero ===== */
+.hero{
+  position:relative;
+  background:var(--navy);
+  color:var(--white);
+  overflow:hidden;
+  min-height:680px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(20,28,38,0.82) 0%, rgba(20,28,38,0.55) 38%, rgba(20,28,38,0.86) 100%),
+    url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80') center/cover no-repeat;
+}
+.hero-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 38%, rgba(30,95,174,0.18), transparent 70%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:96px 0 120px;
+  text-align:center;
+  max-width:880px;
+  margin:0 auto;
+}
+.hero h1{color:var(--white);margin-bottom:20px}
+.hero h1 .accent{color:var(--gold);font-style:normal}
+.hero .tagline{
+  font-family:var(--display);
+  font-size:clamp(18px,1.8vw,22px);
+  font-weight:500;
+  color:rgba(255,255,255,0.86);
+  margin-bottom:38px;
+  letter-spacing:-0.005em;
+}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-meta{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  margin-top:44px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:rgba(255,255,255,0.78);
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta svg{width:14px;height:14px;color:var(--gold)}
+
+/* ===== 4. Inline estimate calculator ===== */
+.estimator-wrap{
+  position:relative;
+  margin-top:-56px;
+  z-index:5;
+}
+.estimator{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  box-shadow:0 30px 60px -20px rgba(20,28,38,0.30), 0 6px 14px rgba(20,28,38,0.10);
+  padding:32px 36px;
+  display:grid;
+  grid-template-columns:auto 1fr 1fr 1fr 1fr auto;
+  gap:18px;
+  align-items:end;
+}
+.estimator .lead{
+  align-self:center;
+  padding-right:14px;
+  border-right:1px solid var(--rule);
+}
+.estimator .lead .ttl{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:18px;
+  color:var(--ink);
+  line-height:1.2;
+  margin-bottom:4px;
+}
+.estimator .lead p{font-size:13px;color:var(--ink-3);margin:0}
+.field label{
+  display:block;
+  font-family:var(--display);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:8px;
+}
+.field select, .field input{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--rule);
+  border-radius:10px;
+  font-family:var(--body);
+  font-size:14px;
+  color:var(--ink);
+  background:var(--white);
+  transition:border-color .2s, box-shadow .2s;
+}
+.field select{
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='none' stroke='%231F2937' stroke-width='1.6' d='M1 1.5l5 5 5-5'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:12px 8px;
+  padding-right:38px;
+}
+.field input:focus, .field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,95,174,0.14)}
+.estimator .submit-cell{align-self:end}
+.estimator .submit-cell .btn{padding:14px 22px}
+
+/* ===== 5. Stats ===== */
+.stats{
+  padding:96px 0 88px;
+  background:var(--white);
+}
+.stats .head{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto 56px;
+}
+.stats .head .eyebrow{margin-bottom:14px;display:inline-block}
+.stats h2{margin-bottom:14px}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.stat{
+  padding:40px 28px;
+  text-align:center;
+  border-right:1px solid var(--rule);
+}
+.stat:last-child{border-right:none}
+.stat .num{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(36px,3.4vw,46px);
+  letter-spacing:-0.02em;
+  color:var(--navy);
+  line-height:1;
+  margin-bottom:8px;
+}
+.stat .num small{font-size:0.6em;color:var(--blue);font-weight:600;margin-left:2px}
+.stat .lbl{font-size:13px;color:var(--ink-3);font-family:var(--display);font-weight:500;letter-spacing:0.04em}
+.stars{
+  display:inline-flex;
+  gap:2px;
+  margin-top:6px;
+  color:var(--gold);
+}
+.stars svg{width:14px;height:14px;fill:currentColor}
+
+/* ===== 6. Who we are (team photo + content) ===== */
+.who{
+  padding:96px 0;
+  background:var(--paper);
+}
+.who-grid{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.who-photo{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  position:relative;
+  aspect-ratio: 5 / 4;
+  background:var(--navy);
+}
+.who-photo img{width:100%;height:100%;object-fit:cover}
+.who-photo .badge-pin{
+  position:absolute;
+  left:24px;bottom:24px;
+  background:var(--white);
+  border-radius:14px;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  box-shadow:0 12px 30px -10px rgba(0,0,0,0.30);
+}
+.who-photo .badge-pin .pp{
+  width:42px;height:42px;border-radius:10px;background:var(--gold-soft);display:grid;place-items:center;color:var(--gold)
+}
+.who-photo .badge-pin .pp svg{width:22px;height:22px}
+.who-photo .badge-pin .pt{font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);line-height:1.15}
+.who-photo .badge-pin .ps{font-size:12px;color:var(--ink-3)}
+.who h2{margin-bottom:18px}
+.who .lead-p{font-size:17px;color:var(--ink-2);margin-bottom:20px;line-height:1.65}
+.who p+p{margin-top:14px}
+.who .signature{
+  display:flex;align-items:center;gap:14px;
+  margin-top:28px;padding-top:22px;border-top:1px solid var(--rule);
+}
+.who .signature .av{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--navy);color:var(--white);
+  display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:15px;
+}
+.who .signature .nm{font-family:var(--display);font-weight:600;color:var(--ink);font-size:15px}
+.who .signature .rl{font-size:13px;color:var(--ink-3)}
+
+/* ===== 7. Values accordion ===== */
+.values{
+  padding:96px 0;
+  background:var(--white);
+}
+.values .head{max-width:720px;margin:0 auto 48px;text-align:center}
+.values .head h2{margin:14px 0 14px}
+.values .head p{font-size:16px;color:var(--ink-3)}
+.values-list{max-width:840px;margin:0 auto;border-top:1px solid var(--rule)}
+.value-item{border-bottom:1px solid var(--rule)}
+.value-item summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  padding:26px 8px;
+  cursor:pointer;
+  transition:padding .25s var(--ease-out);
+}
+.value-item summary::-webkit-details-marker{display:none}
+.value-item .v-num{
+  font-family:var(--display);
+  font-size:14px;
+  font-weight:600;
+  color:var(--blue);
+  letter-spacing:0.05em;
+  width:44px;flex-shrink:0;
+}
+.value-item .v-name{
+  font-family:var(--display);
+  font-size:clamp(20px,2vw,26px);
+  font-weight:600;
+  color:var(--ink);
+  flex:1;
+  letter-spacing:-0.01em;
+}
+.value-item .v-toggle{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--rule);
+  display:grid;place-items:center;
+  flex-shrink:0;
+  transition:background .25s, border-color .25s, transform .35s var(--ease-out);
+}
+.value-item .v-toggle svg{width:14px;height:14px;color:var(--ink);transition:transform .35s var(--ease-out)}
+.value-item[open] .v-toggle{background:var(--navy);border-color:var(--navy)}
+.value-item[open] .v-toggle svg{color:var(--white);transform:rotate(45deg)}
+.value-item .v-body{
+  padding:0 8px 28px 66px;
+  max-width:680px;
+  font-size:16px;
+  color:var(--ink-2);
+  line-height:1.7;
+}
+
+/* ===== 8. Trust strip ===== */
+.trust{
+  padding:64px 0;
+  background:var(--paper);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.trust .lab{
+  text-align:center;
+  font-family:var(--display);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:30px;
+}
+.trust-row{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:20px;
+  align-items:center;
+}
+.cert{
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:14px;
+  padding:22px 18px;
+  text-align:center;
+  transition:transform .25s var(--ease-out), box-shadow .25s;
+}
+.cert:hover{transform:translateY(-2px);box-shadow:0 12px 24px -10px rgba(20,28,38,0.10)}
+.cert svg{width:32px;height:32px;margin:0 auto 10px;color:var(--blue)}
+.cert .nm{font-family:var(--display);font-weight:700;font-size:14px;color:var(--ink);line-height:1.15}
+.cert .nm small{display:block;font-size:11px;font-weight:500;color:var(--ink-3);letter-spacing:0.05em;margin-top:4px}
+
+/* ===== 9. Services ===== */
+.services{padding:108px 0;background:var(--white)}
+.services .head{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;
+  margin-bottom:56px;
+}
+.services .head h2{max-width:520px}
+.services .head p{font-size:16px;color:var(--ink-3);max-width:460px;justify-self:end}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.svc{
+  position:relative;
+  background:var(--white);
+  border:1px solid var(--rule);
+  border-radius:18px;
+  padding:30px 26px 28px;
+  display:flex;flex-direction:column;
+  min-height:320px;
+  transition:transform .3s var(--ease-out), box-shadow .3s, border-color .3s;
+  overflow:hidden;
+}
+.svc::before{
+  content:"";
+  position:absolute;left:26px;right:26px;top:0;height:3px;
+  background:transparent;
+  border-radius:0 0 3px 3px;
+  transition:background .3s;
+}
+.svc.tone-a::before{background:var(--blue)}
+.svc.tone-b::before{background:var(--navy)}
+.svc.tone-c::before{background:var(--gold)}
+.svc.tone-d::before{background:var(--blue-deep)}
+.svc:hover{transform:translateY(-3px);box-shadow:0 24px 40px -18px rgba(20,28,38,0.18);border-color:transparent}
+.svc-icon{
+  width:56px;height:56px;border-radius:14px;
+  background:var(--blue-soft);
+  display:grid;place-items:center;
+  color:var(--blue);
+  margin-bottom:22px;
+}
+.svc.tone-b .svc-icon{background:#E8EAEE;color:var(--navy)}
+.svc.tone-c .svc-icon{background:var(--gold-soft);color:var(--gold)}
+.svc.tone-d .svc-icon{background:var(--blue-soft);color:var(--blue-deep)}
+.svc-icon svg{width:26px;height:26px}
+.svc h3{margin-bottom:10px}
+.svc p{font-size:14px;color:var(--ink-3);line-height:1.6;flex:1}
+.svc .more{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:600;font-size:14px;
+  color:var(--blue);
+  margin-top:18px;
+  transition:gap .25s;
+}
+.svc .more svg{width:14px;height:14px;transition:transform .25s var(--ease-out)}
+.svc:hover .more{gap:12px}
+.svc:hover .more svg{transform:translateX(3px)}
+
+/* ===== 10. Why choose us ===== */
+.why{
+  padding:108px 0;
+  background:var(--navy);
+  color:var(--white);
+  position:relative;
+  overflow:hidden;
+}
+.why::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 90% 10%, rgba(30,95,174,0.20), transparent 60%);
+  pointer-events:none;
+}
+.why .head{position:relative;z-index:2;text-align:center;max-width:740px;margin:0 auto 64px}
+.why .head h2{color:var(--white);margin:14px 0 14px}
+.why .head p{color:rgba(255,255,255,0.7);font-size:16px}
+.why-grid{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid var(--rule-dark);
+  border-left:1px solid var(--rule-dark);
+}
+.why-grid .feat{
+  padding:38px 32px;
+  border-right:1px solid var(--rule-dark);
+  border-bottom:1px solid var(--rule-dark);
+}
+.feat-ico{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(30,95,174,0.20);
+  display:grid;place-items:center;
+  color:var(--gold);
+  margin-bottom:20px;
+}
+.feat-ico svg{width:22px;height:22px}
+.feat h3{color:var(--white);margin-bottom:8px;font-size:19px}
+.feat p{color:rgba(255,255,255,0.66);font-size:14px;line-height:1.6}
+
+/* ===== 11. How it works ===== */
+.how{padding:108px 0;background:var(--paper)}
+.how .head{text-align:center;max-width:680px;margin:0 auto 72px}
+.how .head h2{margin:14px 0 14px}
+.how .head p{color:var(--ink-3);font-size:16px}
+.how-flow{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
+  gap:18px;
+  align-items:start;
+}
+.step{
+  background:var(--white);
+  border-radius:18px;
+  padding:32px 26px 28px;
+  text-align:center;
+  border:1px solid var(--rule);
+}
+.step .nm{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--navy);color:var(--white);
+  font-family:var(--display);font-weight:700;font-size:18px;
+  margin-bottom:18px;
+}
+.step h3{font-size:18px;margin-bottom:8px}
+.step p{font-size:14px;color:var(--ink-3);line-height:1.55}
+.step-arrow{
+  align-self:center;
+  display:grid;place-items:center;
+  width:42px;height:42px;color:var(--blue);
+}
+.step-arrow svg{width:24px;height:24px}
+
+/* ===== 12. Logistics callout ===== */
+.logistics{padding:108px 0;background:var(--white)}
+.logistics-grid{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:64px;
+  align-items:center;
+}
+.logistics-photo{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  aspect-ratio:5/4;
+}
+.logistics-photo img{width:100%;height:100%;object-fit:cover}
+.logistics h2{margin:14px 0 18px}
+.logistics p{font-size:16px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+.bullets{margin:24px 0;display:grid;gap:14px}
+.bullets li{
+  list-style:none;
+  display:flex;align-items:flex-start;gap:14px;
+  font-size:15px;color:var(--ink-2);
+}
+.bullets .tk{
+  width:22px;height:22px;border-radius:50%;background:var(--blue);color:var(--white);
+  display:grid;place-items:center;flex-shrink:0;margin-top:2px;
+}
+.bullets .tk svg{width:11px;height:11px}
+
+/* ===== 13. Locations ===== */
+.locations{padding:108px 0;background:var(--paper)}
+.locations .head{text-align:center;max-width:680px;margin:0 auto 56px}
+.locations .head h2{margin:14px 0 14px}
+.locations .head p{color:var(--ink-3);font-size:16px}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.loc-card{
+  background:var(--white);
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--rule);
+  display:flex;flex-direction:column;
+}
+.loc-photo{aspect-ratio:16/9;overflow:hidden;background:var(--navy)}
+.loc-photo img{width:100%;height:100%;object-fit:cover}
+.loc-body{padding:30px 32px 32px;display:flex;flex-direction:column;flex:1}
+.loc-body .reg{
+  font-family:var(--display);font-size:11px;font-weight:600;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:8px;
+}
+.loc-body h3{font-size:22px;margin-bottom:14px}
+.loc-meta{display:grid;gap:10px;margin-bottom:22px}
+.loc-meta div{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--ink-2)}
+.loc-meta svg{width:16px;height:16px;color:var(--ink-3);flex-shrink:0;margin-top:3px}
+.loc-actions{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.loc-actions .btn{padding:11px 18px;font-size:13px}
+
+/* ===== 14. Reviews ===== */
+.reviews{padding:108px 0;background:var(--white)}
+.reviews .head{text-align:center;max-width:680px;margin:0 auto 56px}
+.reviews .head h2{margin:14px 0 14px}
+.reviews .head p{color:var(--ink-3);font-size:16px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{
+  background:var(--paper);
+  border-radius:18px;
+  padding:30px 28px;
+  display:flex;flex-direction:column;
+  border:1px solid var(--rule);
+}
+.rev .stars{margin-bottom:14px}
+.rev p{font-size:15px;color:var(--ink-2);line-height:1.7;flex:1;margin-bottom:22px}
+.rev .who-r{display:flex;align-items:center;gap:14px;padding-top:18px;border-top:1px solid var(--rule)}
+.rev .av{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.rev .av img{width:100%;height:100%;object-fit:cover}
+.rev .nm{font-family:var(--display);font-weight:600;font-size:14px;color:var(--ink)}
+.rev .meta{font-size:12px;color:var(--ink-3)}
+
+/* ===== Footer ===== */
+.foot{
+  background:var(--navy-deep);
+  color:rgba(255,255,255,0.72);
+  padding:72px 0 32px;
+}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.foot .brand-text{color:var(--white)}
+.foot .brand-text small{color:rgba(255,255,255,0.52)}
+.foot .pitch{color:rgba(255,255,255,0.62);font-size:14px;line-height:1.65;margin-top:18px;max-width:340px}
+.foot h5{
+  color:var(--white);font-size:13px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px;
+  font-family:var(--display);
+}
+.foot ul{list-style:none;display:grid;gap:12px}
+.foot a{font-size:14px;color:rgba(255,255,255,0.66);transition:color .2s}
+.foot a:hover{color:var(--white)}
+.foot-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);
+  flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(255,255,255,0.52);
+}
+.foot-bottom .lic{color:var(--gold)}
+
+/* ===== Reveal ===== */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease-out), transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ===== Responsive ===== */
+@media (max-width:960px){
+  .estimator{grid-template-columns:1fr 1fr}
+  .estimator .lead{grid-column:1/-1;border-right:none;border-bottom:1px solid var(--rule);padding:0 0 18px}
+  .estimator .submit-cell{grid-column:1/-1}
+  .who-grid, .logistics-grid{grid-template-columns:1fr;gap:40px}
+  .services-grid, .why-grid, .rev-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--rule)}
+  .trust-row{grid-template-columns:repeat(3,1fr)}
+  .how-flow{grid-template-columns:1fr;gap:14px}
+  .step-arrow{transform:rotate(90deg);justify-self:center}
+  .loc-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+  .menu{display:none}
+  .services .head{grid-template-columns:1fr;gap:14px}
+  .services .head p{justify-self:start}
+}
+@media (max-width:820px){
+  .hero-content{padding:72px 0 100px}
+  .utility .row{flex-direction:column;align-items:flex-start;gap:8px}
+}
+@media (max-width:720px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .trust-row{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px}
+  .nav .row{padding:14px 0}
+  .nav-phone span:not(:first-child){display:none}
+  .estimator{padding:22px 20px}
+  .services-grid, .why-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--rule)}
+  .stat:last-child{border-bottom:none}
+  .hero{min-height:580px}
+  .hero-meta{gap:14px;flex-direction:column;align-items:flex-start;text-align:left;padding-left:8px}
+  .who-photo .badge-pin{left:14px;right:14px;bottom:14px}
+  .value-item .v-body{padding-left:8px}
+  .value-item .v-num{display:none}
+  .who .signature{flex-wrap:wrap}
+  .loc-actions{flex-direction:column;align-items:stretch}
+  .loc-actions .btn{justify-content:center;width:100%}
+  .estimator{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. Top utility bar -->
+<div class="utility">
+  <div class="wrap">
+    <div class="row">
+      <div class="left">
+        <a href="tel:+18055550732">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          (805) 555-0732
+        </a>
+        <a href="mailto:hello@tidelinemoving.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@tidelinemoving.com
+        </a>
+      </div>
+      <div class="right">
+        <span class="lic">CAL-T0192407 / USDOT 2104871</span>
+        <a href="#estimate">Free Estimate</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Sticky nav -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="row">
+      <a href="#" class="brand" aria-label="Tideline Moving Co">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>
+        </span>
+        <span class="brand-text">
+          Tideline Moving Co
+          <small>Central Coast since 2009</small>
+        </span>
+      </a>
+      <div class="menu">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#values">Values</a>
+        <a href="#locations">Locations</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+      <div class="nav-right">
+        <a href="tel:+18055550732" class="nav-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <span>(805) 555-0732</span>
+        </a>
+        <a href="#estimate" class="btn btn-primary" style="padding:11px 18px;font-size:14px">
+          Get a quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- 3. Hero -->
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow on-dark">Paso Robles - Santa Maria - SLO</span>
+      <h1 style="margin-top:18px">
+        Central Coast's Most<br>
+        <span class="accent">Trusted</span> Mover
+      </h1>
+      <p class="tagline">More than moving.</p>
+      <div class="hero-ctas">
+        <a href="#estimate" class="btn btn-primary">
+          Get a free quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+        <a href="#services" class="btn btn-outline">
+          Storage solutions
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          5.0 / 1,200+ reviews
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.61 0 4.96 1.11 6.6 2.88"/></svg>
+          ProMover + CMSA member
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+          BBB A+ rated
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 4. Inline estimate calculator -->
+<section id="estimate" class="estimator-wrap">
+  <div class="wrap">
+    <form class="estimator reveal" onsubmit="event.preventDefault(); alert('Thanks. A move coordinator will reach out within one business hour.');">
+      <div class="lead">
+        <div class="ttl">Quick estimate</div>
+        <p>15 seconds. No spam.</p>
+      </div>
+      <div class="field">
+        <label for="from">Moving from</label>
+        <select id="from" name="from">
+          <option>Paso Robles, CA</option>
+          <option>San Luis Obispo, CA</option>
+          <option>Santa Maria, CA</option>
+          <option>Pismo Beach, CA</option>
+          <option>Atascadero, CA</option>
+          <option>Templeton, CA</option>
+          <option>Cambria, CA</option>
+          <option>Morro Bay, CA</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="to">Moving to</label>
+        <input id="to" type="text" placeholder="ZIP or city">
+      </div>
+      <div class="field">
+        <label for="size">Home size</label>
+        <select id="size" name="size">
+          <option>Studio / 1 bedroom</option>
+          <option>2 bedrooms</option>
+          <option>3 bedrooms</option>
+          <option>4 bedrooms</option>
+          <option>5+ bedrooms</option>
+          <option>Office / commercial</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="when">When</label>
+        <select id="when" name="when">
+          <option>This week</option>
+          <option>Next 2 weeks</option>
+          <option>Next month</option>
+          <option>Just planning</option>
+        </select>
+      </div>
+      <div class="submit-cell">
+        <button class="btn btn-primary" type="submit">
+          Get estimate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- 5. Stats -->
+<section class="stats">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Five-star moves</span>
+      <h2>Built on the Central Coast, mile by mile.</h2>
+      <p>Seventeen years of running careful moves between Paso Robles, San Luis Obispo, and Santa Barbara.</p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat">
+        <div class="num">5.0<small>/5</small></div>
+        <div class="lbl">Across 1,200+ reviews</div>
+        <div class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="num">17<small>yrs</small></div>
+        <div class="lbl">On the Central Coast</div>
+      </div>
+      <div class="stat">
+        <div class="num">8,400<small>+</small></div>
+        <div class="lbl">Moves completed</div>
+      </div>
+      <div class="stat">
+        <div class="num">22</div>
+        <div class="lbl">Full-time crew, no day labor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Who we are -->
+<section class="who">
+  <div class="wrap">
+    <div class="who-grid">
+      <div class="who-photo reveal">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1100&q=80" alt="Tideline Moving Co crew at the Paso Robles yard" loading="lazy">
+        <div class="badge-pin">
+          <span class="pp" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V4l-8-2-8 2v6c0 8 8 12 8 12z"/></svg>
+          </span>
+          <div>
+            <div class="pt">Family owned</div>
+            <div class="ps">Three Marchetti brothers, est. 2009</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Who we are</span>
+        <h2 style="margin-top:14px">A family business with a fleet, not a fleet looking for families.</h2>
+        <p class="lead-p">Tideline started as one truck, three brothers, and a handshake promise that whoever picks up the phone owns the move from start to finish. We still pick up the phone.</p>
+        <p>Today we run two yards, twenty-two full-time crew, and a fleet of fifteen trucks across the Central Coast. Not so big that we forget the customer's name, not so small that we run out of trucks the week you need us.</p>
+        <p>If your last mover treated your boxes like cargo and your house like a job site, you'll notice the difference on day one.</p>
+        <div class="signature">
+          <div class="av">RV</div>
+          <div>
+            <div class="nm">Ramon Marchetti</div>
+            <div class="rl">Co-founder, Tideline Moving Co</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Values -->
+<section id="values" class="values">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Our values</span>
+      <h2>Four standards. No exceptions.</h2>
+      <p>Every crew member learns these on day one and gets reviewed against them every quarter.</p>
+    </div>
+    <div class="values-list reveal">
+      <details class="value-item" open>
+        <summary>
+          <span class="v-num">01</span>
+          <span class="v-name">Safety</span>
+          <span class="v-toggle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </summary>
+        <div class="v-body">Every truck inspected weekly. Every crew member trained every quarter on lifting, padding, and stair work. Insurance limits sit at three times the California minimum because the math should always favor the customer.</div>
+      </details>
+      <details class="value-item">
+        <summary>
+          <span class="v-num">02</span>
+          <span class="v-name">Honesty</span>
+          <span class="v-toggle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </summary>
+        <div class="v-body">The number on the quote is the number on the bill. We do a real walkthrough up front so nothing surprises anyone on move day. If we're going to take longer than expected, you hear about it from us, not from the invoice.</div>
+      </details>
+      <details class="value-item">
+        <summary>
+          <span class="v-num">03</span>
+          <span class="v-name">Collaboration</span>
+          <span class="v-toggle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </summary>
+        <div class="v-body">Crews stay together for years, not just jobs. The lead packing your kitchen has worked with the same loader for an average of four years. That's why your dishes get wrapped the same way every time, and why nothing gets dropped between hands.</div>
+      </details>
+      <details class="value-item">
+        <summary>
+          <span class="v-num">04</span>
+          <span class="v-name">Growth</span>
+          <span class="v-toggle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </summary>
+        <div class="v-body">Promoting from within since the day we opened. Every dispatcher started on a truck. Every truck lead started as a packer. People stay because they have somewhere to go, and customers benefit from crews that know the work because they did the work.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Trust strip -->
+<section class="trust">
+  <div class="wrap">
+    <div class="lab">Credentialed, certified, accountable</div>
+    <div class="trust-row reveal">
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V4l-8-2-8 2v6c0 8 8 12 8 12z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="nm">ProMover<small>AMSA Certified</small></div>
+      </div>
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div class="nm">BBB A+<small>Accredited business</small></div>
+      </div>
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div class="nm">CMSA<small>California Movers</small></div>
+      </div>
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        <div class="nm">USDOT<small>2104871</small></div>
+      </div>
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        <div class="nm">CAL-T<small>0192407</small></div>
+      </div>
+      <div class="cert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div class="nm">$3M Liability<small>Insured + bonded</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Services -->
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2 style="margin-top:14px">Four ways we move you, all on the same crew standard.</h2>
+      </div>
+      <p>Whether it's a one-bedroom in Pismo or a 30,000 sq ft warehouse in Santa Maria, the same trained crew handles it.</p>
+    </div>
+    <div class="services-grid reveal">
+      <article class="svc tone-a">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <h3>Local moves</h3>
+        <p>Anywhere across the Central Coast - Paso Robles, SLO, Santa Maria, and the towns in between. Same-day quotes, two-day lead time most weeks.</p>
+        <a href="#" class="more">Learn more
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </article>
+      <article class="svc tone-b">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Long distance</h3>
+        <p>Cross-state and out-of-state moves with a single crew door-to-door. No swap-outs, no third-party handoffs. Direct delivery within 48 hours of pickup on most lanes.</p>
+        <a href="#" class="more">Learn more
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </article>
+      <article class="svc tone-c">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+        </div>
+        <h3>Commercial</h3>
+        <p>Office, lab, retail, and warehouse relocations on nights and weekends so your team is back to work Monday morning. IT decommission and reassembly included.</p>
+        <a href="#" class="more">Learn more
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </article>
+      <article class="svc tone-d">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 11h20M7 6V4a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>
+        </div>
+        <h3>Storage solutions</h3>
+        <p>Climate-controlled vaults at both yards. Short-term in-transit storage between move-out and move-in, or long-term while you sort what stays. Same crew loads and retrieves.</p>
+        <a href="#" class="more">Learn more
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Why choose us -->
+<section class="why">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow on-dark">Why choose Tideline</span>
+      <h2>Six reasons our customers send us their friends.</h2>
+      <p>The features no marketing line can fake.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>On time, every time</h3>
+        <p>96% of moves arrive inside the booked window. The other 4% you hear from us first, with a discount applied automatically.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Full-time crew only</h3>
+        <p>22 trained employees. Background-checked, drug-tested, on payroll. Never day labor, never subcontractors.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        </div>
+        <h3>Locked-price quotes</h3>
+        <p>The estimate becomes the contract. We absorb overruns under 10%, you pay nothing extra unless scope changes.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+        </div>
+        <h3>Free packing supplies</h3>
+        <p>Boxes, paper, tape, blankets - included on every move over $1,200. We pick up unused materials at no charge.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-12V4l-8-2-8 2v6c0 8 8 12 8 12z"/></svg>
+        </div>
+        <h3>$3M liability cover</h3>
+        <p>Three times the California state minimum. Full-replacement valuation available for high-value items - art, instruments, antiques.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Local dispatchers</h3>
+        <p>Two regional yards mean a real human in your county, not a national call center routing tickets to the next available state.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. How it works -->
+<section id="process" class="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Four steps. No surprises.</h2>
+      <p>From the first call to the last box on the floor, here's exactly how a Tideline move runs.</p>
+    </div>
+    <div class="how-flow reveal">
+      <div class="step">
+        <div class="nm">1</div>
+        <h3>Quote</h3>
+        <p>Free walkthrough at your home or by video. You get the number that day.</p>
+      </div>
+      <div class="step-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </div>
+      <div class="step">
+        <div class="nm">2</div>
+        <h3>Plan</h3>
+        <p>Written, locked. Crew size, truck count, packing scope, and price - on paper, signed.</p>
+      </div>
+      <div class="step-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </div>
+      <div class="step">
+        <div class="nm">3</div>
+        <h3>Move</h3>
+        <p>On schedule. Crew arrives in branded shirts at the time we promised, not a 4-hour window.</p>
+      </div>
+      <div class="step-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </div>
+      <div class="step">
+        <div class="nm">4</div>
+        <h3>Settle</h3>
+        <p>Placed where you want. Boxes stacked by room, beds reassembled, debris hauled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Logistics callout -->
+<section class="logistics">
+  <div class="wrap">
+    <div class="logistics-grid">
+      <div class="logistics-photo reveal">
+        <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=900&q=80" alt="Inside the Tideline logistics warehouse" loading="lazy">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Logistics &amp; solutions</span>
+        <h2>When the move is bigger than a box truck.</h2>
+        <p>For relocations that involve multiple sites, complex inventory, climate storage, or staged delivery, our logistics team takes over from day one and runs the project end to end.</p>
+        <ul class="bullets">
+          <li>
+            <span class="tk" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            </span>
+            Multi-site office and lab moves with phased timelines
+          </li>
+          <li>
+            <span class="tk" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            </span>
+            Climate-controlled vaults for art, wine, and instruments
+          </li>
+          <li>
+            <span class="tk" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            </span>
+            Inventory tagging with photo manifests, accessible online
+          </li>
+          <li>
+            <span class="tk" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            </span>
+            White-glove install at the destination - art hung, electronics wired
+          </li>
+        </ul>
+        <a href="#estimate" class="btn btn-primary">
+          Talk to logistics
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Locations -->
+<section id="locations" class="locations">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Two regional headquarters</span>
+      <h2>Both yards are in your county.</h2>
+      <p>That's how a crew shows up at 8 AM instead of 11. Two staffed yards, two dispatch teams, full coverage of the Central Coast.</p>
+    </div>
+    <div class="loc-grid reveal">
+      <article class="loc-card">
+        <div class="loc-photo">
+          <img src="https://images.unsplash.com/photo-1605664041952-4a2855d8128d?w=900&q=80" alt="Tideline Moving Co Paso Robles yard" loading="lazy">
+        </div>
+        <div class="loc-body">
+          <div class="reg">North county HQ</div>
+          <h3>Paso Robles</h3>
+          <div class="loc-meta">
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>1240 Park St, Paso Robles, CA 93446</span>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              <span>(805) 555-0732</span>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <span>Mon-Sat, 7 AM to 6 PM</span>
+            </div>
+          </div>
+          <div class="loc-actions">
+            <a href="#" class="btn btn-primary">Get directions</a>
+            <a href="#estimate" class="btn btn-ghost">Request quote</a>
+          </div>
+        </div>
+      </article>
+      <article class="loc-card">
+        <div class="loc-photo">
+          <img src="https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=900&q=80" alt="Tideline Moving Co Santa Maria warehouse" loading="lazy">
+        </div>
+        <div class="loc-body">
+          <div class="reg">South county HQ</div>
+          <h3>Santa Maria</h3>
+          <div class="loc-meta">
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>718 W Main St, Santa Maria, CA 93458</span>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              <span>(805) 555-0732</span>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <span>Mon-Sat, 7 AM to 6 PM</span>
+            </div>
+          </div>
+          <div class="loc-actions">
+            <a href="#" class="btn btn-primary">Get directions</a>
+            <a href="#estimate" class="btn btn-ghost">Request quote</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Reviews -->
+<section id="reviews" class="reviews">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Client reviews</span>
+      <h2>What 1,200 Central Coast neighbors actually said.</h2>
+      <p>Verified Google and Yelp reviews from the last 18 months.</p>
+    </div>
+    <div class="rev-grid reveal">
+      <article class="rev">
+        <div class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p>"The estimate Marco wrote down at our walkthrough was the exact number on the bill. Crew showed up at 7:58 for an 8 AM start. They wrapped a 1920s upright piano in three layers of pad and slid it down the back stairs without a scratch on the wall."</p>
+        <div class="who-r">
+          <div class="av"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&fit=crop&crop=face" alt="Lena Ortiz" loading="lazy"></div>
+          <div>
+            <div class="nm">Lena Ortiz</div>
+            <div class="meta">Paso Robles to Templeton - August 2025</div>
+          </div>
+        </div>
+      </article>
+      <article class="rev">
+        <div class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p>"We moved a 12-person creative studio from SLO to Santa Maria over a single weekend. Tideline tagged every cable, every monitor, every plant. By 9 AM Monday we were back online with everyone at their new desks - keyboards plugged in the way they were Friday."</p>
+        <div class="who-r">
+          <div class="av"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&fit=crop&crop=face" alt="Daniel Kanagawa" loading="lazy"></div>
+          <div>
+            <div class="nm">Daniel Kanagawa</div>
+            <div class="meta">Studio Mara, commercial relocation - June 2025</div>
+          </div>
+        </div>
+      </article>
+      <article class="rev">
+        <div class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p>"Closed late on the new house in Cambria and our stuff sat in Tideline's vault for nine days. When we finally got the keys, the same crew that loaded us out delivered us in. Same faces, same care. They remembered which room the piano went."</p>
+        <div class="who-r">
+          <div class="av"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80&fit=crop&crop=face" alt="Priya Hassan" loading="lazy"></div>
+          <div>
+            <div class="nm">Priya Hassan</div>
+            <div class="meta">Morro Bay to Cambria, with storage - October 2025</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>
+          </span>
+          <span class="brand-text">
+            Tideline Moving Co
+            <small>Central Coast since 2009</small>
+          </span>
+        </div>
+        <p class="pitch">Family-owned full-service moving and storage across California's Central Coast - residential, commercial, long-distance, and climate-controlled storage.</p>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Local moves</a></li>
+          <li><a href="#services">Long distance</a></li>
+          <li><a href="#services">Commercial</a></li>
+          <li><a href="#services">Storage solutions</a></li>
+          <li><a href="#services">Logistics &amp; install</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Service area</h5>
+        <ul>
+          <li><a href="#">Paso Robles</a></li>
+          <li><a href="#">San Luis Obispo</a></li>
+          <li><a href="#">Santa Maria</a></li>
+          <li><a href="#">Pismo Beach</a></li>
+          <li><a href="#">Atascadero, Templeton</a></li>
+          <li><a href="#">Cambria, Morro Bay</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+18055550732">(805) 555-0732</a></li>
+          <li><a href="mailto:hello@tidelinemoving.com">hello@tidelinemoving.com</a></li>
+          <li><a href="#locations">Paso Robles yard</a></li>
+          <li><a href="#locations">Santa Maria yard</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>(c) 2026 Tideline Moving Co. All rights reserved.</span>
+      <span class="lic">CAL-T0192407 / USDOT 2104871 / ProMover / CMSA / BBB A+</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// IntersectionObserver reveal
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+
+// Single-open accordion (optional UX nicety - native <details> still works without JS)
+(function(){
+  var items = document.querySelectorAll('.value-item');
+  items.forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if(item.open){
+        items.forEach(function(other){
+          if(other !== item) other.removeAttribute('open');
+        });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
