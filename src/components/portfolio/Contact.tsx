@@ -20,10 +20,9 @@ const Contact = () => {
     const el = ctaRef.current;
     if (!el) return;
 
-    gsap.set(el, { opacity: 0.35, y: 60 });
+    gsap.set(el, { opacity: 1, y: 60 });
 
     const tween = gsap.to(el, {
-      opacity: 1,
       y: 0,
       ease: "none",
       scrollTrigger: {

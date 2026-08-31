@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ExternalLink, Eye, Play, ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "@/components/Reveal";
@@ -205,28 +205,18 @@ const categories = [
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const sectionRef = useRef<HTMLDivElement>(null);
+  const railWrapperRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
 
   const filteredProjects = activeCategory === "All"
     ? projects
     : projects.filter((p) => p.category === activeCategory);
 
-  // Horizontal scroll-jack rail, ported from the live xenith-design.webflow.io #work section.
-  // Confirmed via runtime probe: `.the-height-400vh-section` (tall pin host) + `.the-sticky-div`
-  // (position: sticky, top: 0) + `.the-width-400vh-scrollable-div` (a flex row of 6 `.work-card`s,
-  // 694px each, 4214px total) that translateX's left as the page scrolls down — e.g.
-  // translateX(-2333.05px) at 50% through the pinned section. Rebuilt here with GSAP ScrollTrigger's
-  // `pin: true` + a scrub tween on the rail's x, driving through the filtered project list instead of
-  // Xenith's fixed 6 items. Rebuilt on every filter/category change since the rail width changes.
-  //
-  // Bug fix: trigger was `section` with `start: "top top"`, which pins the ENTIRE section —
-  // including the header/heading/filter-pills block that sits above the rail. That meant a long
-  // dead-scroll (section pinned, header just sitting there, nothing visibly moving) before the
-  // rail's x actually started shifting — felt like "the page disappeared" while scrolling. Pinning
-  // on the rail wrapper itself instead starts the horizontal motion the instant the pin engages.
-  useEffect(() => {
+  // Lock the card rail to the viewport, then use normal vertical scrolling to scrub through the
+  // full horizontal distance. The section releases only after the final card is fully in view.
+  useLayoutEffect(() => {
     const rail = railRef.current;
-    const railWrapper = rail?.parentElement; // the "overflow-hidden" div directly wrapping the rail
+    const railWrapper = railWrapperRef.current;
     if (!rail || !railWrapper) return;
     if (
       window.matchMedia("(max-width: 767px)").matches ||
@@ -236,35 +226,32 @@ const Projects = () => {
       return;
     }
 
-    let scrollDistance = 0;
-    const measureScrollDistance = () => {
-      scrollDistance = Math.max(0, rail.scrollWidth - railWrapper.clientWidth);
-      return scrollDistance;
-    };
+    const getScrollDistance = () =>
+      Math.max(0, rail.scrollWidth - railWrapper.clientWidth);
 
     gsap.set(rail, { x: 0 });
-    if (measureScrollDistance() <= 0) return;
+    if (getScrollDistance() <= 0) return;
 
-    const trigger = ScrollTrigger.create({
-      trigger: railWrapper,
-      start: "top top",
-      end: () => `+=${measureScrollDistance()}`,
-      pin: true,
-      scrub: 0.8,
-      anticipatePin: 1,
-      onRefresh: () => {
-        measureScrollDistance();
-        gsap.set(rail, { x: 0 });
-      },
-      onUpdate: (self) => {
-        gsap.set(rail, { x: -scrollDistance * self.progress });
+    const tween = gsap.to(rail, {
+      x: () => -getScrollDistance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: railWrapper,
+        start: "top top",
+        end: () => `+=${getScrollDistance()}`,
+        pin: true,
+        scrub: 0.7,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     });
 
     return () => {
-      trigger.kill();
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(rail, { clearProps: "transform" });
     };
-  }, [filteredProjects]);
+  }, [activeCategory]);
 
   return (
     <section id="projects" ref={sectionRef} className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
@@ -316,10 +303,15 @@ const Projects = () => {
           far below the cards) to sit relative to this wrapper instead, so it stays tight
           under the card row regardless of the section's own top/bottom padding — matching
           the reference where "OUR WORK" sits directly beneath the image row. */}
-      <div className="relative min-h-screen flex flex-col items-center justify-center overflow-x-auto md:overflow-hidden snap-x snap-mandatory">
+      <div
+        ref={railWrapperRef}
+        aria-label="Case studies"
+        tabIndex={0}
+        className="case-study-scroller relative -mx-6 sm:-mx-8 h-screen flex flex-col items-start justify-center overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory md:overflow-x-hidden md:snap-none"
+      >
         <div
           ref={railRef}
-          className="flex gap-6 w-max pl-[7.5vw] sm:pl-[max(24px,calc((100vw-1200px)/2))]"
+          className="relative z-10 flex gap-6 w-max pl-[7.5vw] pr-[7.5vw] sm:pl-[max(24px,calc((100vw-1200px)/2))] sm:pr-[max(24px,calc((100vw-1200px)/2))]"
         >
           {filteredProjects.map((project, index) => {
             // Check if this project is the featured card
@@ -341,7 +333,7 @@ const Projects = () => {
                         }}
                         className="relative group w-full cursor-pointer overflow-hidden rounded-lg bg-black text-left"
                       >
-                        <div className="relative aspect-[3/2] overflow-hidden">
+                        <div className="relative h-[320px] sm:h-[380px] overflow-hidden">
                           <img
                             src={project.automationImage}
                             alt={project.title}
@@ -368,8 +360,8 @@ const Projects = () => {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between pt-4">
-                          <h3 className="text-2xl font-medium tracking-tight text-white">
+                        <div className="flex items-start justify-between pt-4 min-h-16">
+                          <h3 className="text-lg font-medium tracking-tight text-white">
                             {project.title}
                           </h3>
                           <span className="text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
@@ -510,7 +502,7 @@ const Projects = () => {
                       </div>
 
                       {/* Title beneath, no description/tags by default */}
-                      <div className="flex items-center justify-between pt-4">
+                      <div className="flex items-start justify-between pt-4 min-h-16">
                         <h3 className="text-lg font-medium tracking-tight text-white">
                           {project.title}
                         </h3>
@@ -634,8 +626,8 @@ const Projects = () => {
         {/* Ghosted wordmark, ported from Xenith's .text-block (confirmed: 320px,
             rgba(255,255,255,0.08), sits directly beneath the work-card row) — moved
             here so it stays tight under the cards, not far down the whole section. */}
-        <div aria-hidden className="pointer-events-none mt-6 select-none overflow-hidden w-full flex justify-center">
-          <span className="text-[clamp(4rem,18vw,20rem)] font-medium leading-none text-white/[0.08] whitespace-nowrap">
+        <div aria-hidden className="pointer-events-none absolute z-0 left-1/2 bottom-[8%] w-max -translate-x-1/2 select-none">
+          <span className="text-[clamp(3rem,14vw,15rem)] font-medium leading-none text-white/[0.08] whitespace-nowrap">
             CASE STUDIES
           </span>
         </div>

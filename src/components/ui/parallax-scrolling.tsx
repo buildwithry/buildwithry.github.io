@@ -12,36 +12,102 @@ interface TrailThumb {
   alt: string;
 }
 
-// Project and funnel imagery used for the Xenith-inspired pointer trail. The source
-// effect repeats its five-image set so enough cards can overlap during fast movement.
+// Every case study and funnel thumbnail is available to the hero trail. A fresh shuffled
+// selection is used each time the visitor enters the hero, so the floating cards feel alive
+// without introducing imagery that is unrelated to this portfolio.
 const heroThumbs: TrailThumb[] = [
   {
     src: '/lovable-uploads/vapi-ai-receptionist.jpg',
     alt: 'VAPI AI Voice Receptionist case study',
   },
   {
-    src: '/funnels/thumbs/sample-solar-helios.jpeg',
-    alt: 'Commercial Solar funnel sample',
+    src: '/lovable-uploads/ai-meta-receptionist-v3.png',
+    alt: 'AI Meta Receptionist case study',
+  },
+  {
+    src: '/lovable-uploads/ghl-conversation-ai-ava.jpg',
+    alt: 'GHL Conversation AI case study',
+  },
+  {
+    src: '/lovable-uploads/asmr-ai-video-creator-thumbnail.png',
+    alt: 'ASMR AI Video Creator case study',
+  },
+  {
+    src: '/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png',
+    alt: 'GHL re-engagement case study',
+  },
+  {
+    src: '/lovable-uploads/2f07a1c7-8827-4169-9c4d-6353aa824503.png',
+    alt: 'AI content repurposing case study',
+  },
+  {
+    src: '/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2.png',
+    alt: 'Client onboarding case study',
+  },
+  {
+    src: '/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.png',
+    alt: 'Expense reporting case study',
   },
   {
     src: '/funnels/thumbs/sample-real-estate-B-tech-luxury-scroll.jpeg',
     alt: 'Luxury Real Estate funnel sample',
   },
   {
-    src: '/lovable-uploads/ai-meta-receptionist-v3.png',
-    alt: 'AI Meta Receptionist case study',
+    src: '/funnels/thumbs/sample-moving-company-D-coastal-team.jpeg',
+    alt: 'Coastal Movers funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-lawfirm-D-lora-gold-small-town-solo.jpeg',
+    alt: 'Solo Law Firm funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-barbershop-E-brand-store.jpeg',
+    alt: 'Barbershop Brand funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-auto-repair-B-european-import.jpeg',
+    alt: 'European Auto Import funnel sample',
   },
   {
     src: '/funnels/thumbs/sample-auto-repair-E-performance-tuning.jpeg',
     alt: 'Performance Tuning funnel sample',
   },
+  {
+    src: '/funnels/thumbs/sample-marketing-agency-C-brand-studio.jpeg',
+    alt: 'Brand Studio funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-physical-therapy-E-cash-pay.jpeg',
+    alt: 'Cash-Pay Physical Therapy funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-solar-helios.jpeg',
+    alt: 'Commercial Solar funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-vacation-rental-management.jpeg',
+    alt: 'Vacation Rental Management funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-utility-contractor.jpeg',
+    alt: 'Utility Contractor funnel sample',
+  },
 ];
 
-const trailThumbs = [...heroThumbs, ...heroThumbs];
+const TRAIL_CARD_COUNT = 12;
+
+const pickTrailThumbs = () => {
+  const shuffled = [...heroThumbs].sort(() => Math.random() - 0.5);
+  return Array.from(
+    { length: TRAIL_CARD_COUNT },
+    (_, index) => shuffled[index % shuffled.length],
+  );
+};
 
 export function ParallaxComponent() {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [trailEnabled, setTrailEnabled] = useState(false);
+  const [trailThumbs, setTrailThumbs] = useState<TrailThumb[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -116,6 +182,7 @@ export function ParallaxComponent() {
     const THRESHOLD = 80;
     let imageIndex = 0;
     let zIndex = 1;
+    let previousThumbSrc = "";
     let hasPointer = false;
     let frameId: number | null = null;
     let isVisible = true;
@@ -136,6 +203,19 @@ export function ParallaxComponent() {
       zIndex += 1;
       imageIndex = (imageIndex + 1) % thumbEls.length;
       const el = thumbEls[imageIndex];
+      let nextThumb = heroThumbs[Math.floor(Math.random() * heroThumbs.length)];
+
+      while (heroThumbs.length > 1 && nextThumb.src === previousThumbSrc) {
+        nextThumb = heroThumbs[Math.floor(Math.random() * heroThumbs.length)];
+      }
+      previousThumbSrc = nextThumb.src;
+
+      const image = el.querySelector<HTMLImageElement>("img");
+      if (image) {
+        image.src = nextThumb.src;
+        image.alt = nextThumb.alt;
+      }
+
       const width = el.offsetWidth;
       const height = el.offsetHeight;
 
@@ -237,11 +317,16 @@ export function ParallaxComponent() {
       if (frameId !== null) cancelAnimationFrame(frameId);
       gsap.killTweensOf(thumbEls);
     };
-  }, [trailEnabled]);
+  }, [trailEnabled, trailThumbs]);
+
+  const enableTrail = () => {
+    setTrailThumbs(pickTrailThumbs());
+    setTrailEnabled(true);
+  };
 
   return (
     <div className="parallax" ref={parallaxRef}>
-      <section className="parallax__header" onMouseEnter={() => setTrailEnabled(true)}>
+      <section className="parallax__header" onMouseEnter={enableTrail}>
         <div className="parallax__visuals">
           <div className="parallax__black-line-overflow"></div>
 

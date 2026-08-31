@@ -104,6 +104,14 @@
     background: #383b3f;
     border-radius: 9999px;
   }
+
+  .case-study-scroller {
+    scrollbar-width: none;
+  }
+
+  .case-study-scroller::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer components {

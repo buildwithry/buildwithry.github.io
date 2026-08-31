@@ -9,13 +9,11 @@ import gsap from "gsap";
 // only the structure/timing (static name + fading secondary word).
 const TITLE = "Build with Ry";
 const CYCLE_WORDS = ["Automate", "Deploy", "Scale"];
-const WORD_DURATION = 300; // ms each cycling word is shown
+const WORD_DURATION = 700; // ms each cycling word is shown
+const FINAL_WORD_DELAY = 350; // aligns Scale's visible hold with the earlier words
 
 const Preloader = () => {
-  const [visible, setVisible] = useState(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return !reducedMotion && sessionStorage.getItem("build-with-ry-preloader-seen") !== "true";
-  });
+  const [visible, setVisible] = useState(true);
   const [wordIndex, setWordIndex] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
   const barTopRef = useRef<HTMLDivElement>(null);
@@ -33,7 +31,6 @@ const Preloader = () => {
     const exitDelay = setTimeout(() => {
       const tl = gsap.timeline({
         onComplete: () => {
-          sessionStorage.setItem("build-with-ry-preloader-seen", "true");
           setVisible(false);
         },
       });
@@ -51,7 +48,7 @@ const Preloader = () => {
         },
         "-=0.15"
       );
-    }, 250);
+    }, FINAL_WORD_DELAY);
 
     return () => clearTimeout(exitDelay);
   }, [visible, wordIndex]);
