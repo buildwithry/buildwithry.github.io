@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SplitType from 'split-type';
 import { PRELOADER_DONE_EVENT } from '@/components/Preloader';
 import adrianPhoto from '@/assets/HERO-red-optimized.jpg';
@@ -89,6 +90,10 @@ const heroThumbs: TrailThumb[] = [
   {
     src: '/funnels/thumbs/sample-vacation-rental-management.jpeg',
     alt: 'Vacation Rental Management funnel sample',
+  },
+  {
+    src: '/funnels/thumbs/sample-plastic-surgery-clinic.jpeg',
+    alt: 'Plastic surgery clinic funnel sample',
   },
   {
     src: '/funnels/thumbs/sample-utility-contractor.jpeg',
@@ -407,10 +412,10 @@ export function ParallaxComponent() {
                   that need every lead answered, routed, and followed up automatically.
                 </p>
                 <div className="parallax__hero-actions">
-                  <a href="#casestudies" className="btn-primary">
+                  <Link to="/case-studies" className="btn-primary">
                     View case studies
                     <ArrowUpRight className="w-4 h-4" aria-hidden />
-                  </a>
+                  </Link>
                   <a
                     href="https://calendly.com/buildwithry/30min"
                     target="_blank"

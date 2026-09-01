@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier Aesthetics — Personalized Plastic Surgery</title>
+  <meta name="description" content="A refined plastic surgery consultation experience built around thoughtful care and natural-looking results." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#24211f; --muted:#726d68; --paper:#f8f5f1; --blush:#e9d4d0; --rose:#a46f67; --line:#ded7d0; --white:#fffdfb; --serif:"Playfair Display",Georgia,serif; --sans:"DM Sans",Arial,sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.55 var(--sans); }
+    a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer; }
+    .shell { width:min(1180px,calc(100% - 40px)); margin:auto; }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:25px 0; }
+    .brand { font:600 23px var(--serif); letter-spacing:-.04em; } .brand b { color:var(--rose); font-style:italic; font-weight:500; }
+    .nav-links { display:flex; align-items:center; gap:28px; color:var(--muted); font-size:13px; }
+    .pill, .text-link { display:inline-flex; align-items:center; justify-content:center; gap:9px; }
+    .pill { border:1px solid var(--ink); border-radius:999px; padding:11px 17px; color:var(--ink); transition:.2s; }
+    .pill:hover { background:var(--ink); color:var(--white); }
+    .hero { display:grid; grid-template-columns:1fr .92fr; min-height:650px; overflow:hidden; border:1px solid var(--line); background:var(--white); }
+    .hero-copy { padding:clamp(48px,8vw,110px) clamp(30px,7vw,86px); display:flex; flex-direction:column; justify-content:center; }
+    .eyebrow { color:var(--rose); text-transform:uppercase; letter-spacing:.14em; font-size:10px; font-weight:600; }
+    h1,h2,h3,p { margin:0; } h1 { margin:15px 0 22px; max-width:10ch; font:500 clamp(43px,5.4vw,72px)/.98 var(--serif); letter-spacing:-.055em; }
+    h1 em,h2 em { color:var(--rose); font-style:italic; }
+    .lead { max-width:43ch; color:var(--muted); font-size:16px; }
+    .hero-actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:32px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:999px; padding:14px 21px; background:var(--ink); color:var(--white); font-weight:600; }
+    .btn:hover { background:var(--rose); } .btn-light { background:transparent; color:var(--ink); border:1px solid var(--line); }
+    .hero-image { position:relative; min-height:430px; background:var(--blush); overflow:hidden; }
+    .hero-image img { width:100%; height:100%; object-fit:cover; object-position:62% center; display:block; }
+    .hero-note { position:absolute; right:22px; bottom:22px; padding:13px 16px; background:rgba(255,253,251,.91); backdrop-filter:blur(9px); font-size:12px; border-radius:3px; }
+    .trust { display:grid; grid-template-columns:repeat(3,1fr); padding:28px 0; border-bottom:1px solid var(--line); }
+    .trust div { padding:0 25px; border-left:1px solid var(--line); } .trust div:first-child { padding-left:0; border-left:0; }
+    .trust strong { display:block; font:500 25px var(--serif); } .trust span { color:var(--muted); font-size:12px; }
+    .section { padding:110px 0; } .section-intro { display:flex; justify-content:space-between; align-items:end; gap:28px; margin-bottom:43px; }
+    h2 { max-width:15ch; font:500 clamp(35px,4vw,54px)/1.03 var(--serif); letter-spacing:-.05em; }
+    .section-intro p { max-width:42ch; color:var(--muted); }
+    .pathways { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .pathway { min-height:255px; padding:28px; background:var(--white); border:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; transition:transform .25s,box-shadow .25s; }
+    .pathway:hover { transform:translateY(-5px); box-shadow:0 18px 35px rgba(61,43,38,.08); }
+    .number { color:var(--rose); font:italic 20px var(--serif); } .pathway h3 { margin:44px 0 8px; font:500 25px var(--serif); } .pathway p { color:var(--muted); font-size:13px; }
+    .quote-wrap { background:var(--ink); color:var(--white); padding:clamp(50px,8vw,100px); text-align:center; }
+    blockquote { max-width:27ch; margin:auto; font:500 clamp(32px,4.4vw,57px)/1.08 var(--serif); letter-spacing:-.045em; } blockquote em { color:#e8bdb6; }
+    .quote-wrap p { margin-top:28px; color:#c8c1bd; font-size:12px; }
+    .consult { display:grid; grid-template-columns:1.05fr .95fr; margin:110px 0; background:var(--blush); }
+    .consult-image { min-height:440px; background:url("./thumbs/clinic-consultation.jpeg") center/cover; }
+    .consult-copy { padding:clamp(38px,7vw,80px); } .consult-copy h2 { margin:12px 0 19px; } .consult-copy p { max-width:38ch; color:#675e5b; }
+    .steps { display:grid; gap:15px; margin:29px 0 31px; } .step { display:grid; grid-template-columns:27px 1fr; gap:12px; padding-bottom:13px; border-bottom:1px solid rgba(36,33,31,.14); } .step span { color:var(--rose); font:italic 17px var(--serif); } .step b { font-size:13px; } .step small { display:block; color:#675e5b; font-size:12px; }
+    .footer { display:flex; justify-content:space-between; gap:25px; padding:28px 0 42px; color:var(--muted); border-top:1px solid var(--line); font-size:12px; }
+    .consent { color:var(--muted); font-size:11px; margin-top:15px; }
+    @media (max-width:760px) { .nav-links { display:none; } .hero,.consult { grid-template-columns:1fr; } .hero-image { min-height:440px; } .trust,.pathways { grid-template-columns:1fr; } .trust div { padding:16px 0; border:0; border-top:1px solid var(--line); } .trust div:first-child { border-top:0; } .section-intro { align-items:start; flex-direction:column; } .consult { margin:65px 0; } .consult-image { min-height:330px; } .section { padding:70px 0; } .footer { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header class="shell nav">
+    <a class="brand" href="#">Atelier <b>Aesthetics</b></a>
+    <nav class="nav-links"><a href="#care">Our approach</a><a href="#procedures">Procedures</a><a href="#consultation">Consultation</a></nav>
+    <a class="pill" href="#consultation">Request a consultation ↗</a>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Private plastic surgery practice · Los Angeles</span>
+        <h1>Refinement, <em>considered.</em></h1>
+        <p class="lead">Thoughtful aesthetic surgery for people who value a natural expression of themselves — with clarity, discretion, and care at every step.</p>
+        <div class="hero-actions"><a class="btn" href="#consultation">Begin your consultation <span>→</span></a><a class="btn btn-light" href="#procedures">Explore procedures</a></div>
+      </div>
+      <div class="hero-image">
+        <img src="./thumbs/clinic-consultation.jpeg" alt="A private consultation at Atelier Aesthetics" />
+        <div class="hero-note">Designed around your goals,<br />never a standard template.</div>
+      </div>
+    </section>
+
+    <section class="shell trust" aria-label="Practice highlights">
+      <div><strong>15+ years</strong><span>Focused surgical experience</span></div>
+      <div><strong>1:1 care</strong><span>Direct surgeon-led planning</span></div>
+      <div><strong>Private setting</strong><span>Discreet, unhurried appointments</span></div>
+    </section>
+
+    <section class="shell section" id="procedures">
+      <div class="section-intro"><div><span class="eyebrow">The Atelier approach</span><h2 id="care">A plan that feels <em>like you.</em></h2></div><p>Every decision begins with a conversation about what you see, what you feel, and what a confident next chapter looks like to you.</p></div>
+      <div class="pathways">
+        <article class="pathway"><span class="number">01</span><div><h3>Face</h3><p>Facial rejuvenation designed to preserve expression, character, and ease.</p></div><a class="text-link" href="#consultation">Discover face care →</a></article>
+        <article class="pathway"><span class="number">02</span><div><h3>Breast</h3><p>Personalized options grounded in proportion, comfort, and your lifestyle.</p></div><a class="text-link" href="#consultation">Discover breast care →</a></article>
+        <article class="pathway"><span class="number">03</span><div><h3>Body</h3><p>Thoughtful contouring that supports the way you want to move through life.</p></div><a class="text-link" href="#consultation">Discover body care →</a></article>
+      </div>
+    </section>
+
+    <section class="quote-wrap"><blockquote>“The most beautiful results are the ones that allow you to feel <em>entirely at home</em> in yourself.”</blockquote><p>— DR. ELEANOR VALE, FOUNDER</p></section>
+
+    <section class="shell consult" id="consultation">
+      <div class="consult-image" role="img" aria-label="Calm private clinic consultation"></div>
+      <div class="consult-copy"><span class="eyebrow">Your first visit</span><h2>Make space for an honest conversation.</h2><p>Your consultation is a relaxed, private discussion — not a sales appointment. We’ll talk through your goals, answer your questions, and give you time to consider what feels right.</p>
+        <div class="steps"><div class="step"><span>01</span><div><b>Share your goals</b><small>Tell us what you would like to explore.</small></div></div><div class="step"><span>02</span><div><b>Meet with your surgeon</b><small>Review options and a tailored plan together.</small></div></div><div class="step"><span>03</span><div><b>Decide in your own time</b><small>Leave with clarity, never pressure.</small></div></div></div>
+        <a class="btn" href="mailto:hello@atelieraesthetics.example">Request a private consultation →</a><p class="consent">This demonstration site uses fictional practice details. A consultation is required to determine whether any procedure is appropriate.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="shell footer"><span>© Atelier Aesthetics. A considered approach to cosmetic care.</span><span>Privacy · Accessibility · Patient resources</span></footer>
+</body>
+</html>

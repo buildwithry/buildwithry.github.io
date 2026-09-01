@@ -1,4 +1,5 @@
-import { useState, useEffect, type MouseEvent } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const Navigation = () => {
@@ -14,27 +15,14 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { href: "#casestudies", label: "Case Studies" },
-    { href: "#skills", label: "Skills" },
-    { href: "#process", label: "Framework" },
-    { href: "#contact", label: "Contact" },
+    { href: "/case-studies", label: "Case Studies" },
+    { href: "/skills", label: "Skills" },
+    { href: "/framework", label: "Framework" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const closeMenu = () => {
     setIsOpen(false);
-  };
-
-  const navigateToSection = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-    event.preventDefault();
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    window.history.pushState(null, "", href);
-    window.scrollTo({
-      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 88),
-      behavior: "auto",
-    });
-    closeMenu();
   };
 
   return (
@@ -47,29 +35,27 @@ const Navigation = () => {
     >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 flex items-center justify-between">
         {/* Brand Wordmark */}
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <Link
+          to="/"
+          onClick={() => {
             window.scrollTo({ top: 0, behavior: "auto" });
           }}
           className="group flex items-baseline tracking-tight font-medium text-xl sm:text-2xl text-white"
         >
           <span>BUILD WITH RY</span>
           <span className="text-xs font-normal text-[#8a8f98] ml-1 group-hover:text-[#f1eadc] transition-colors">™</span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
-              onClick={(event) => navigateToSection(event, item.href)}
+              to={item.href}
               className="text-[15px] font-normal text-[#8a8f98] hover:text-white transition-colors tracking-tight"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -104,14 +90,14 @@ const Navigation = () => {
       {isOpen && (
         <div id="mobile-navigation" className="lg:hidden border-b border-[#23252a] bg-[#08090a] px-6 py-6 space-y-4">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
-              onClick={(event) => navigateToSection(event, item.href)}
+              to={item.href}
+              onClick={closeMenu}
               className="block w-full text-left text-lg font-normal text-white py-2 border-b border-[#23252a]/50"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <a
             href="https://calendly.com/buildwithry/30min"

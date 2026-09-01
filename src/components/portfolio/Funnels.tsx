@@ -62,9 +62,15 @@ const funnels: FunnelSample[] = [
   },
   {
     file: "sample-vacation-rental-management.html",
-    label: "Vacation Rental Mgmt",
+    label: "Vacation Rental Management",
     tag: "Website",
     desc: "A short-term rental manager - multi-step slider, owner earnings, and a property-onboarding CTA.",
+  },
+  {
+    file: "sample-plastic-surgery-clinic.html",
+    label: "Plastic Surgery Clinic",
+    tag: "Website",
+    desc: "A refined aesthetic clinic - consult-first messaging, procedure pathways, and a calm booking experience.",
   },
   {
     file: "sample-utility-contractor.html",
