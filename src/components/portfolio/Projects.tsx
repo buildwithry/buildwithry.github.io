@@ -1,9 +1,8 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ExternalLink, Eye, Play, ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Hls from "hls.js";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
 
@@ -18,27 +17,6 @@ const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
 const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
 const metaReceptionistThumbnail = "/lovable-uploads/ai-meta-receptionist-v3.png";
 const ghlConversationAiThumbnail = "/lovable-uploads/ghl-conversation-ai-ava.jpg";
-const vapiHlsStream = "https://api.prod.komododecks.com/api/v2/playback/presentations/XxGUQuRANUup1LGh0Tg9/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRXVFOHB3eUxrNlRrN0N2S1MzWHlGZVRGYjhzMi9YeEdVUXVSQU5VdXAxTEdoMFRnOS9pbmRleC5tM3U4IiwiYnVja2V0Ijoia29tb2RvLXByb2QtcmVjb3JkaW5ncyIsInN0b3JhZ2UiOiJiMiIsImlhdCI6MTc4ODIzNzAzNSwiZXhwIjoxNzg4MjczMDM1fQ.iNDmZYWOd2QtLm3i0N0oaTcD1nQNJKyx-sIT-fk0aw0/index.m3u8";
-
-const InlineVideo = ({ src, poster, title }: { src: string; poster: string; title: string }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = src;
-      return;
-    }
-    if (!Hls.isSupported()) return;
-    const hls = new Hls({ enableWorker: true });
-    hls.loadSource(src);
-    hls.attachMedia(video);
-    return () => hls.destroy();
-  }, [src]);
-
-  return <video ref={videoRef} className="block aspect-video w-full bg-[#08090a] object-contain" poster={poster} controls playsInline preload="metadata" aria-label={title} />;
-};
 
 export interface ProjectItem {
   id: string;
@@ -54,7 +32,6 @@ export interface ProjectItem {
   platform: string;
   detailedWorkflow: string[];
   videoUrl?: string;
-  videoStreamUrl?: string;
   sampleLinks?: { label: string; url: string }[];
   isFeatured?: boolean;
 }
@@ -73,7 +50,6 @@ const projects: ProjectItem[] = [
     automationImage: vapiThumbnail,
     platform: "VAPI + n8n + GHL + Supabase",
     videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9?onlyRecording=1",
-    videoStreamUrl: vapiHlsStream,
     detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Refined prompts and integrations for production reliability"],
     isFeatured: true,
   },
@@ -411,7 +387,13 @@ const Projects = () => {
 
                       {project.videoUrl ? (
                         <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                          {project.videoStreamUrl ? <InlineVideo src={project.videoStreamUrl} poster={project.automationImage} title={`${project.title} video demo`} /> : <img src={project.automationImage} alt={`${project.title} demo preview`} className="block w-full aspect-video object-cover" />}
+                          <iframe
+                            src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")}
+                            title={`${project.title} video demo`}
+                            className="block w-full aspect-[640/285] border-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                            allowFullScreen
+                          />
                         </div>
                       ) : (
                         <div className="my-2">
@@ -546,7 +528,13 @@ const Projects = () => {
 
                     {project.videoUrl ? (
                       <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                        {project.videoStreamUrl ? <InlineVideo src={project.videoStreamUrl} poster={project.automationImage} title={`${project.title} video demo`} /> : <img src={project.automationImage} alt={`${project.title} demo preview`} className="block w-full aspect-video object-cover" />}
+                        <iframe
+                          src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")}
+                          title={`${project.title} video demo`}
+                          className="block w-full aspect-[640/285] border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                          allowFullScreen
+                        />
                       </div>
                     ) : (
                       <div className="my-2">
