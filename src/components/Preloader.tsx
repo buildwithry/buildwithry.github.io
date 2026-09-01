@@ -7,6 +7,8 @@ import gsap from "gsap";
 // through a short list before the page reveals. Title and cycling words are this
 // site's own — Xenith's preloader text is that site's brand copy, not reused here,
 // only the structure/timing (static name + fading secondary word).
+export const PRELOADER_DONE_EVENT = "preloader:done";
+
 const TITLE = "Build with Ry";
 const CYCLE_WORDS = ["Automate", "Deploy", "Scale"];
 const WORD_DURATION = 700; // ms each cycling word is shown
@@ -18,6 +20,7 @@ const Preloader = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const barTopRef = useRef<HTMLDivElement>(null);
   const barBottomRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!visible) return;
@@ -35,19 +38,41 @@ const Preloader = () => {
         },
       });
 
-      tl.to([barTopRef.current, barBottomRef.current], {
-        scaleX: 0,
-        duration: 0.5,
-        ease: "power3.inOut",
-      }).to(
-        overlayRef.current,
-        {
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "-=0.15"
-      );
+      // Drawer exit, ported from xenith-design.webflow.io's .preloader: the
+      // content (text + hairlines) fades first, then the whole solid panel
+      // slides up past the top edge — translate3d(0, -150%, 0) there, so it
+      // fully clears rather than stopping flush at -100%.
+      tl.to([barTopRef.current, contentRef.current], {
+        opacity: 0,
+        duration: 0.35,
+        ease: "power2.out",
+      })
+        // The bottom hairline stays lit and brightens — it becomes the drawer's
+        // leading edge, the only thing that reads against an equally dark page.
+        .to(
+          barBottomRef.current,
+          { backgroundColor: "#f1eadc", opacity: 1, duration: 0.3, ease: "power2.out" },
+          0
+        )
+        .to(
+          overlayRef.current,
+          {
+            yPercent: -150,
+            duration: 1.6,
+            ease: "power2.inOut",
+          },
+          "-=0.1"
+        )
+        // Hero letters fire when the panel has visually LEFT the screen, not when
+        // the tween formally ends. The slide travels to -150% but clears the
+        // viewport at -100% — with power2.inOut that is ~59% through, so the last
+        // ~0.65s is the panel already off-screen still easing out. Waiting for
+        // onComplete is what read as a long dead beat before the title appeared.
+        .call(
+          () => window.dispatchEvent(new Event(PRELOADER_DONE_EVENT)),
+          undefined,
+          "-=0.65"
+        );
     }, FINAL_WORD_DELAY);
 
     return () => clearTimeout(exitDelay);
@@ -73,9 +98,9 @@ const Preloader = () => {
       className="fixed inset-0 z-[600] flex items-center justify-center bg-[#08090a] pointer-events-none"
     >
       <div ref={barTopRef} className="absolute top-0 left-0 right-0 h-px bg-[#23252a] origin-left" />
-      <div ref={barBottomRef} className="absolute bottom-0 left-0 right-0 h-px bg-[#23252a] origin-right" />
+      <div ref={barBottomRef} className="absolute bottom-0 left-0 right-0 h-px bg-[#23252a]" />
 
-      <div className="flex items-baseline gap-3">
+      <div ref={contentRef} className="flex items-baseline gap-3">
         <span className="text-2xl sm:text-3xl font-medium tracking-tight text-white">
           {TITLE}
         </span>

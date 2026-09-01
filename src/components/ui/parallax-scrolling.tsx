@@ -5,7 +5,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 import { ArrowUpRight } from 'lucide-react';
-import adrianPhoto from '@/assets/HERO-optimized.jpg';
+import SplitType from 'split-type';
+import { PRELOADER_DONE_EVENT } from '@/components/Preloader';
+import adrianPhoto from '@/assets/HERO-red-optimized.jpg';
 
 interface TrailThumb {
   src: string;
@@ -108,6 +110,53 @@ export function ParallaxComponent() {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [trailEnabled, setTrailEnabled] = useState(false);
   const [trailThumbs, setTrailThumbs] = useState<TrailThumb[]>([]);
+
+  // Hero title letter reveal, ported from xenith-design.webflow.io's .title-hero.home:
+  // GSAP SplitText splits the wordmark into ONE DIV PER LETTER (.gsap_split_letter,
+  // display:inline-block, no overflow mask — confirmed by reading the live DOM), then
+  // each letter tweens translate3d(0, Y%, 0) -> 0% and opacity 0 -> 1 on a stagger.
+  // Xenith fires this as its preloader clears, so this listens for the drawer's
+  // completion event instead of running on mount.
+  useEffect(() => {
+    const titleEl = parallaxRef.current?.querySelector<HTMLElement>('.parallax__title');
+    if (!titleEl) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const split = new SplitType(titleEl, { types: 'chars', charClass: 'parallax__title-char' });
+    const chars = split.chars ?? [];
+    if (!chars.length) return;
+
+    // Hidden until the reveal runs, so the letters never flash in fully-formed
+    // behind the drawer and then animate.
+    gsap.set(chars, { yPercent: 100, opacity: 0 });
+
+    let tween: gsap.core.Tween | undefined;
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return; // event and fallback must never both run
+      revealed = true;
+      tween = gsap.to(chars, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.55,
+        stagger: 0.025,
+        ease: 'power3.out',
+      });
+    };
+
+    window.addEventListener(PRELOADER_DONE_EVENT, reveal, { once: true });
+    // Fallback: if the preloader was skipped or already finished before this
+    // mounted, the letters must not stay stuck at opacity 0.
+    const fallback = window.setTimeout(reveal, 6000);
+
+    return () => {
+      window.removeEventListener(PRELOADER_DONE_EVENT, reveal);
+      window.clearTimeout(fallback);
+      tween?.kill();
+      split.revert();
+    };
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -329,16 +378,6 @@ export function ParallaxComponent() {
       <section className="parallax__header" onMouseEnter={enableTrail}>
         <div className="parallax__visuals">
           <div className="parallax__black-line-overflow"></div>
-
-          {/* Corner labels */}
-          <div className="parallax__corner parallax__corner--tl">AI Automation &amp; GoHighLevel Systems</div>
-          <div className="parallax__corner parallax__corner--bl">Adrian Agdan</div>
-          <a
-            href="https://buildwithry.vercel.app/"
-            className="parallax__corner parallax__corner--br"
-          >
-            buildwithry.vercel.app
-          </a>
 
           <div data-parallax-layers className="parallax__layers">
             <img
