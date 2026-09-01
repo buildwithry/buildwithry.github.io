@@ -108,17 +108,17 @@ const Funnels = () => {
   };
 
   return (
-    <section id="funnels" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top">
+    <section id="funnels" className="relative py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-16">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc]">Live Funnels</span>
             </div>
             <SplitHeading className="text-heading mb-4">
               Funnel systems and landing pages.
             </SplitHeading>
-            <p className="text-lg sm:text-[19px] text-[#8a8f98] max-w-3xl leading-[1.61]">
+            <p className="text-base sm:text-[19px] text-[#8a8f98] max-w-3xl leading-[1.61]">
               Full websites and complete funnel builds. Drag the reel and open any page live.
             </p>
           </div>

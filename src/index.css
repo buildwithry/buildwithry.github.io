@@ -587,9 +587,53 @@ footer[id] {
 }
 
 @media (max-width: 640px) {
+  .parallax__header {
+    min-height: 100svh;
+  }
+
+  .parallax__layer-img--photo,
+  .parallax__scrim,
+  .parallax__thumbs {
+    inset: 6px;
+  }
+
+  .parallax__layer-img--photo {
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    object-position: 54% 18%;
+  }
+
   .parallax__layer-title {
+    left: 1.25rem;
+    right: 1.25rem;
     bottom: 11%;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .parallax__title {
+    font-size: clamp(2.5rem, 13vw, 3.5rem);
+    line-height: 1.02;
+  }
+
+  .parallax__hero-copy {
+    flex-basis: 100%;
+    gap: 16px;
+  }
+
+  .parallax__subtitle {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .parallax__hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .parallax__hero-actions .btn-primary,
+  .parallax__hero-actions .btn-ghost {
+    width: 100%;
+    min-height: 46px;
   }
 }
 

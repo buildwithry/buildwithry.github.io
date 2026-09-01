@@ -79,17 +79,17 @@ const Process = () => {
   };
 
   return (
-    <section id="process" className="py-32 px-6 sm:px-8 bg-[#08090a] hairline-top">
+    <section id="process" className="py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-16">
             <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-2 block">
               How I Work
             </span>
             <SplitHeading className="text-heading mb-4">
               The ARCH Framework.
             </SplitHeading>
-            <p className="text-lg sm:text-[19px] text-[#8a8f98] max-w-2xl leading-[1.61]">
+            <p className="text-base sm:text-[19px] text-[#8a8f98] max-w-2xl leading-[1.61]">
               Every engagement runs through the same four stages: Audit, Route, Connect, Handoff.
             </p>
           </div>

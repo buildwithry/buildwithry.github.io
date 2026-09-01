@@ -30,17 +30,17 @@ const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-[#08090a]/90 backdrop-blur-md border-b border-[#23252a] py-3.5"
-          : "bg-transparent py-5"
+          : "bg-transparent py-3.5 sm:py-5"
       }`}
     >
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 flex items-center justify-between">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 flex items-center justify-between">
         {/* Brand Wordmark */}
         <Link
           to="/"
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "auto" });
           }}
-          className="group flex items-baseline tracking-tight font-medium text-xl sm:text-2xl text-white"
+          className="group flex items-baseline tracking-tight font-medium text-lg sm:text-2xl text-white"
         >
           <span>BUILD WITH RY</span>
           <span className="text-xs font-normal text-[#8a8f98] ml-1 group-hover:text-[#f1eadc] transition-colors">™</span>
@@ -88,7 +88,7 @@ const Navigation = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div id="mobile-navigation" className="lg:hidden border-b border-[#23252a] bg-[#08090a] px-6 py-6 space-y-4">
+        <div id="mobile-navigation" className="lg:hidden border-b border-[#23252a] bg-[#08090a] px-4 py-5 space-y-3">
           {navItems.map((item) => (
             <Link
               key={item.href}

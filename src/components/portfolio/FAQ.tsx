@@ -62,10 +62,10 @@ const FAQ = () => {
   }, []);
 
   return (
-    <section id="faq" className="py-32 px-6 sm:px-8 bg-[#08090a] hairline-top">
+    <section id="faq" className="py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top">
       <div className="max-w-[800px] mx-auto">
         <Reveal>
-          <div className="mb-16 text-center">
+          <div className="mb-10 sm:mb-16 text-center">
             <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-2 block">
               Questions
             </span>
@@ -82,7 +82,7 @@ const FAQ = () => {
                 key={index}
                 value={`item-${index}`}
                 data-faq-item
-                className="border-[#23252a] last:border-b-0 px-6"
+                className="border-[#23252a] last:border-b-0 px-4 sm:px-6"
               >
                 <AccordionTrigger className="text-left text-base font-medium text-white hover:no-underline hover:text-[#f1eadc] py-5 [&>svg]:text-[#62666d] [&[data-state=open]>svg]:text-[#f1eadc]">
                   {faq.question}

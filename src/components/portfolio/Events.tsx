@@ -68,17 +68,17 @@ const Events = () => {
   }, []);
 
   return (
-    <section id="events" className="py-32 px-6 sm:px-8 bg-[#08090a] hairline-top">
+    <section id="events" className="py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-16">
             <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-2 block">
               Community &amp; Events
             </span>
             <SplitHeading className="text-heading">
               Inside the HighLevel community.
             </SplitHeading>
-            <p className="mt-4 max-w-2xl text-lg text-[#8a8f98] leading-[1.61]">
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#8a8f98] leading-[1.61]">
               Conversations and events that keep my client work close to the people shaping the HighLevel ecosystem.
             </p>
           </div>

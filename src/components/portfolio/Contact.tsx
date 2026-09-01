@@ -81,11 +81,11 @@ const Contact = () => {
   }, []);
 
   return (
-    <footer id="contact" className="bg-[#08090a] text-white pt-32 pb-12 px-6 sm:px-8 hairline-top">
+    <footer id="contact" className="bg-[#08090a] text-white pt-20 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-8 hairline-top">
       <div className="max-w-[1200px] mx-auto">
         {/* Main CTA Block — wider vertical rhythm ported from Xenith's Contact/CTA section
             (layout-manifest.json: y:15461, h:990 — split CTA/details layout, already matched structurally) */}
-        <div ref={ctaRef} className="grid lg:grid-cols-12 gap-12 pb-24 border-b border-[#23252a] items-start">
+        <div ref={ctaRef} className="grid lg:grid-cols-12 gap-10 sm:gap-12 pb-16 sm:pb-24 border-b border-[#23252a] items-start">
             <div className="lg:col-span-7 space-y-6">
               <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] block">
                 Start a conversation
@@ -95,16 +95,16 @@ const Contact = () => {
                   Let&apos;s stop leads from slipping through.
                 </SplitHeading>
               </div>
-              <p ref={subtextRef} className="text-lg sm:text-xl text-[#8a8f98] leading-[1.61] max-w-xl">
+              <p ref={subtextRef} className="text-base sm:text-xl text-[#8a8f98] leading-[1.61] max-w-xl">
                 Tell me where leads stall or work gets repeated. I&apos;ll map the next step and recommend the smallest useful build.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4">
                 <a
                   href="https://calendly.com/buildwithry/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary text-base py-3.5 px-7 group"
+                  className="btn-primary w-full sm:w-auto text-base py-3.5 px-5 sm:px-7 group"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book a 30-minute fit call</span>
@@ -113,7 +113,7 @@ const Contact = () => {
 
                 <a
                   href="mailto:buildwithry@gmail.com"
-                  className="btn-ghost text-base py-3.5 px-6"
+                  className="btn-ghost w-full sm:w-auto text-base py-3.5 px-4 sm:px-6"
                 >
                   <Mail className="w-4 h-4 mr-1.5" />
                   <span>buildwithry@gmail.com</span>
@@ -145,7 +145,7 @@ const Contact = () => {
               </div>
 
               {/* Direct Social / Platform Channels */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3 pt-2">
                 <a
                   href="https://www.upwork.com/freelancers/~018dab48b65b2c0233"
                   target="_blank"

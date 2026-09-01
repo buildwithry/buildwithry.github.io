@@ -97,7 +97,7 @@ const Services = () => {
   // and steps forward automatically instead of sitting static.
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || window.matchMedia("(max-width: 767px)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const trigger = ScrollTrigger.create({
       trigger: section,
@@ -121,7 +121,7 @@ const Services = () => {
   }, [count]);
 
   return (
-    <section ref={sectionRef} id="skills" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
+    <section ref={sectionRef} id="skills" className="relative py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
       <div className="max-w-[1200px] mx-auto relative text-center">
         <Reveal>
           <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-3 block">
@@ -130,17 +130,17 @@ const Services = () => {
           <SplitHeading className="text-heading mb-4">
             One system, built around your bottleneck.
           </SplitHeading>
-          <p className="text-lg sm:text-[19px] text-[#8a8f98] mb-16">
+          <p className="text-base sm:text-[19px] text-[#8a8f98] mb-10 sm:mb-16">
             Start with missed calls, slow follow-up, a messy CRM, or a funnel that underperforms. I map the gap and connect the right tools.
           </p>
         </Reveal>
 
-        <div className="relative h-[460px] flex items-center justify-center overflow-visible">
+        <div className="relative h-[400px] sm:h-[460px] flex items-center justify-center overflow-visible">
           <button
             type="button"
             onClick={() => go(-1)}
             aria-label="Previous service"
-            className="absolute left-0 sm:left-4 z-20 w-11 h-11 rounded-full bg-[#0f1011] border border-[#23252a] flex items-center justify-center text-white hover:border-[#383b3f] transition-colors"
+            className="absolute left-0 sm:left-4 z-20 w-11 h-11 rounded-full bg-[#0f1011] border border-[#23252a] flex items-center justify-center text-white hover:border-[#383b3f] transition-colors touch-manipulation"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -149,7 +149,7 @@ const Services = () => {
             type="button"
             onClick={() => go(1)}
             aria-label="Next service"
-            className="absolute right-0 sm:right-4 z-20 w-11 h-11 rounded-full bg-[#0f1011] border border-[#23252a] flex items-center justify-center text-white hover:border-[#383b3f] transition-colors"
+            className="absolute right-0 sm:right-4 z-20 w-11 h-11 rounded-full bg-[#0f1011] border border-[#23252a] flex items-center justify-center text-white hover:border-[#383b3f] transition-colors touch-manipulation"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -179,7 +179,7 @@ const Services = () => {
                 role={isActive ? undefined : "button"}
                 tabIndex={isActive ? -1 : 0}
                 aria-label={isActive ? undefined : `Show ${service.title}`}
-                className="absolute w-[380px] max-w-[80vw] rounded-2xl bg-[#0f1011] border border-[#23252a] transition-all duration-500 ease-out"
+                className="absolute w-[88vw] max-w-[380px] rounded-2xl bg-[#0f1011] border border-[#23252a] transition-all duration-500 ease-out"
                 style={{
                   transform: `translateX(${signedOffset * 300}px) scale(${isActive ? 1 : 0.92})`,
                   zIndex: 10 - distance,
@@ -190,7 +190,7 @@ const Services = () => {
                   cursor: isActive ? "default" : "pointer",
                 }}
               >
-                <div className="p-10 flex flex-col items-center text-center">
+                <div className="p-6 sm:p-10 flex flex-col items-center text-center">
                   <div className="w-16 h-16 rounded-2xl bg-[#f1eadc]/10 flex items-center justify-center text-[#f1eadc] mb-5">
                     {service.icon}
                   </div>
@@ -200,7 +200,7 @@ const Services = () => {
                   <h3
                     id={`service-title-${index}`}
                     tabIndex={isActive ? -1 : undefined}
-                    className="text-2xl font-medium tracking-tight text-white mb-3"
+                    className="text-xl sm:text-2xl font-medium tracking-tight text-white mb-3"
                   >
                     {service.title}
                   </h3>

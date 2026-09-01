@@ -284,29 +284,29 @@ const Projects = () => {
   }, [activeCategory]);
 
   return (
-    <section id="casestudies" ref={sectionRef} className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
+    <section id="casestudies" ref={sectionRef} className="relative py-20 sm:py-32 px-4 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
       <div className="max-w-[1200px] mx-auto relative">
         {/* Section Header — wider vertical rhythm ported from Xenith's Work section
             (layout-manifest.json: y:6334, h:3800 — spacious grid, not dense) */}
         <Reveal>
-          <div className="mb-20">
+          <div className="mb-10 sm:mb-20">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc]">Selected Work</span>
             </div>
             <SplitHeading className="text-heading mb-4">
               Case Studies.
             </SplitHeading>
-            <p className="text-lg sm:text-[19px] text-[#8a8f98] max-w-3xl leading-[1.61]">
+            <p className="text-base sm:text-[19px] text-[#8a8f98] max-w-3xl leading-[1.61]">
               Architected voice agents, CRM automation pipelines, and autonomous workflows designed for operational resilience and verifiable conversion.
             </p>
 
             {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2 pt-8">
+            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pt-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`text-sm font-medium px-4 py-2 rounded-full transition-all tracking-tight ${
+                  className={`shrink-0 text-sm font-medium px-4 py-2 rounded-full transition-all tracking-tight touch-manipulation ${
                     activeCategory === cat
                       ? "bg-[#f1eadc] text-[#08090a]"
                       : "bg-transparent text-[#8a8f98] border border-[#23252a] hover:text-white hover:border-[#383b3f]"
@@ -337,17 +337,17 @@ const Projects = () => {
         ref={railWrapperRef}
         aria-label="Case studies"
         tabIndex={0}
-        className="case-study-scroller relative -mx-6 sm:-mx-8 h-screen flex flex-col items-start justify-center overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory md:overflow-x-hidden md:snap-none"
+        className="case-study-scroller relative -mx-4 sm:-mx-8 h-auto min-h-0 py-2 flex flex-col items-start justify-start overflow-x-auto overflow-y-hidden overscroll-x-contain snap-x snap-mandatory md:h-screen md:py-0 md:items-start md:justify-center md:overflow-x-hidden md:snap-none"
       >
         <div
           ref={railRef}
-          className="relative z-10 flex gap-6 w-max pl-[7.5vw] pr-[7.5vw] sm:pl-[max(24px,calc((100vw-1200px)/2))] sm:pr-[max(24px,calc((100vw-1200px)/2))]"
+          className="relative z-10 flex gap-4 sm:gap-6 w-max px-4 sm:pl-[max(24px,calc((100vw-1200px)/2))] sm:pr-[max(24px,calc((100vw-1200px)/2))]"
         >
           {filteredProjects.map((project, index) => {
             // Check if this project is the featured card
             if (project.isFeatured && activeCategory === "All") {
               return (
-                <div key={project.id} data-project-card className="w-[85vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start">
+                <div key={project.id} data-project-card className="w-[86vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start">
                   {/* Same image-first hover pattern as the regular cards below, with a
                       Flagship Solution tag kept as this project's distinguishing marker. */}
                   <Dialog>
@@ -363,7 +363,7 @@ const Projects = () => {
                         }}
                         className="relative group w-full cursor-pointer overflow-hidden rounded-lg bg-black text-left"
                       >
-                        <div className="relative h-[320px] sm:h-[380px] overflow-hidden">
+                        <div className="relative h-[280px] sm:h-[380px] overflow-hidden">
                           <img
                             src={project.automationImage}
                             alt={project.title}
@@ -378,8 +378,8 @@ const Projects = () => {
                             </span>
                           </div>
 
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-                            <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
+                          <div className="absolute inset-0 bg-black/15 sm:bg-black/0 sm:group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                            <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium shadow-lg">
                               <span>{project.videoUrl ? "Play Project Video" : "View Project Image"}</span>
                               {project.videoUrl ? (
                                 <Play className="w-4 h-4 fill-current" />
@@ -390,20 +390,20 @@ const Projects = () => {
                           </div>
                         </div>
 
-                        <div className="flex items-start justify-between pt-4 min-h-16">
-                          <h3 className="text-lg font-medium tracking-tight text-white">
+                        <div className="flex items-start justify-between gap-3 pt-4 min-h-16">
+                          <h3 className="text-base sm:text-lg font-medium tracking-tight text-white">
                             {project.title}
                           </h3>
-                          <span className="text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
+                          <span className="max-w-[48%] text-right text-[11px] sm:text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
                             {project.platform}
                           </span>
                         </div>
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="!flex !w-[calc(100%-2rem)] !max-w-4xl !max-h-[calc(100dvh-2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-5 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
+                    <DialogContent className="!flex !w-[calc(100%_-_1rem)] sm:!w-[calc(100%_-_2rem)] !max-w-4xl !max-h-[calc(100dvh_-_1rem)] sm:!max-h-[calc(100dvh_-_2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-4 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
                       <DialogHeader className="shrink-0 pr-10">
-                        <DialogTitle className="text-2xl font-medium tracking-tight text-white">
+                        <DialogTitle className="text-xl sm:text-2xl font-medium tracking-tight text-white">
                           {project.title}
                         </DialogTitle>
                         <DialogDescription className="text-[13px] leading-5 text-[#aeb7c3]">
@@ -411,8 +411,8 @@ const Projects = () => {
                         </DialogDescription>
                       </DialogHeader>
 
-          <div
-            className="case-study-dialog-scroll mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-2 sm:pr-3"
+            <div
+            className="case-study-dialog-scroll mt-3 sm:mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-1 sm:pr-3"
             data-lenis-prevent
           >
                       <p className="text-[16px] leading-6 text-[#e2e7ee]">
@@ -483,7 +483,7 @@ const Projects = () => {
               <div
                 key={project.id}
                 data-project-card
-                className="w-[85vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start"
+                className="w-[86vw] max-w-[420px] sm:w-[520px] flex-shrink-0 snap-start"
               >
                 {/* Image-dominant card, ported from Xenith's work-card pattern (confirmed via
                     live DOM read of xenith-design.webflow.io #work: <a> wrapping a full-bleed
@@ -505,7 +505,7 @@ const Projects = () => {
                       }}
                       className="relative group w-full cursor-pointer overflow-hidden rounded-lg bg-black text-left"
                     >
-                      <div className="relative h-[320px] sm:h-[380px] overflow-hidden">
+                      <div className="relative h-[280px] sm:h-[380px] overflow-hidden">
                         <img
                           src={project.automationImage}
                           alt={`${project.title} diagram`}
@@ -521,8 +521,8 @@ const Projects = () => {
                         </div>
 
                         {/* Hover overlay: the CTA states whether this opens a video or image case study. */}
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-                          <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
+                        <div className="absolute inset-0 bg-black/15 sm:bg-black/0 sm:group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                          <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium shadow-lg">
                             <span>{project.videoUrl ? "Play Project Video" : "View Project Image"}</span>
                             {project.videoUrl ? (
                               <Play className="w-4 h-4 fill-current" />
@@ -534,20 +534,20 @@ const Projects = () => {
                       </div>
 
                       {/* Title beneath, no description/tags by default */}
-                      <div className="flex items-start justify-between pt-4 min-h-16">
-                        <h3 className="text-lg font-medium tracking-tight text-white">
+                      <div className="flex items-start justify-between gap-3 pt-4 min-h-16">
+                        <h3 className="text-base sm:text-lg font-medium tracking-tight text-white">
                           {project.title}
                         </h3>
-                        <span className="text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
+                        <span className="max-w-[48%] text-right text-[11px] sm:text-xs font-medium text-[#8a8f98] uppercase tracking-wider">
                           {project.platform}
                         </span>
                       </div>
                     </div>
                   </DialogTrigger>
 
-                  <DialogContent className="!flex !w-[calc(100%-2rem)] !max-w-4xl !max-h-[calc(100dvh-2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-5 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
+                  <DialogContent className="!flex !w-[calc(100%_-_1rem)] sm:!w-[calc(100%_-_2rem)] !max-w-4xl !max-h-[calc(100dvh_-_1rem)] sm:!max-h-[calc(100dvh_-_2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-4 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
                     <DialogHeader className="shrink-0 pr-10">
-                      <DialogTitle className="text-2xl font-medium tracking-tight text-white">
+                      <DialogTitle className="text-xl sm:text-2xl font-medium tracking-tight text-white">
                         {project.title}
                       </DialogTitle>
                       <DialogDescription className="text-[13px] leading-5 text-[#aeb7c3]">
@@ -556,7 +556,7 @@ const Projects = () => {
                     </DialogHeader>
 
           <div
-            className="case-study-dialog-scroll mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-2 sm:pr-3"
+                    className="case-study-dialog-scroll mt-3 sm:mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-1 sm:pr-3"
             data-lenis-prevent
           >
                     <p className="text-[16px] leading-6 text-[#e2e7ee]">
