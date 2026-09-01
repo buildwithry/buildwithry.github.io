@@ -655,6 +655,25 @@ const Projects = () => {
               </div>
             );
           })}
+
+          {activeCategory === "All" && (
+            <div className="w-[86vw] max-w-[420px] flex-shrink-0 snap-start sm:w-[520px]">
+              <div className="flex h-[280px] items-center justify-center sm:h-[380px]">
+                <div className="flex w-full flex-col items-center px-5 text-center sm:px-6">
+                  <h2 className="text-[40px] font-medium leading-none tracking-[-0.055em] text-white sm:text-[42px]">
+                    GOT AN IDEA?
+                  </h2>
+                  <a
+                    href="#contact"
+                    className="group mt-7 inline-flex min-h-11 items-center gap-3 px-3 text-[16px] font-medium tracking-tight text-[#f1eadc] transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f1eadc]"
+                  >
+                    <span>Let&apos;s Talk</span>
+                    <ArrowRight className="h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Ghosted wordmark, ported from Xenith's .text-block (confirmed: 320px,
@@ -666,6 +685,7 @@ const Projects = () => {
           </span>
         </div>
       </div>
+
     </section>
   );
 };
