@@ -74,7 +74,7 @@ const projects: ProjectItem[] = [
     automationImage: vapiThumbnail,
     platform: "VAPI + n8n + GHL + Supabase",
     videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9?onlyRecording=1",
-    videoFileUrl: "/videos/vapi-ai-receptionist-demo-web.mp4",
+    videoFileUrl: "/videos/vapi-ai-receptionist-demo-hd.mp4",
     captionFileUrl: "/videos/vapi-ai-receptionist-demo.vtt",
     detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Refined prompts and integrations for production reliability"],
     isFeatured: true,
@@ -92,7 +92,7 @@ const projects: ProjectItem[] = [
     automationImage: metaReceptionistThumbnail,
     platform: "GHL + n8n + Meta APIs",
     videoUrl: "https://kommodo.ai/recordings/0n2i09stXxdQADTRfDgV?onlyRecording=1",
-    videoFileUrl: "/videos/meta-receptionist-demo-web.mp4",
+    videoFileUrl: "/videos/meta-receptionist-demo-hd.mp4",
     captionFileUrl: "/videos/meta-receptionist-demo.vtt",
     detailedWorkflow: [
       "Monitors Instagram and Facebook comments and direct messages",
@@ -118,7 +118,7 @@ const projects: ProjectItem[] = [
     automationImage: ghlConversationAiThumbnail,
     platform: "GoHighLevel Conversation AI (Ava)",
     videoUrl: "https://kommodo.ai/recordings/xPGDgbjahr1RKd5XzECV?onlyRecording=1",
-    videoFileUrl: "/videos/ghl-agent-ava-demo-web.mp4",
+    videoFileUrl: "/videos/ghl-agent-ava-demo-hd.mp4",
     captionFileUrl: "/videos/ghl-agent-ava-demo.vtt",
     detailedWorkflow: [
       "Lead messages in via SMS, Instagram, Messenger, or web chat",
