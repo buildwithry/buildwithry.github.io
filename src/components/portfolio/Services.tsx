@@ -121,7 +121,7 @@ const Services = () => {
   }, [count]);
 
   return (
-    <section ref={sectionRef} id="services" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
+    <section ref={sectionRef} id="skills" className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-x-hidden">
       <div className="max-w-[1200px] mx-auto relative text-center">
         <Reveal>
           <span className="text-xs font-medium uppercase tracking-widest text-[#f1eadc] mb-3 block">

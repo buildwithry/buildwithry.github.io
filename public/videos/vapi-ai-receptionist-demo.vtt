@@ -1,0 +1,313 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.000
+ All right. Hello, everyone. Adrian Agdan here. You can call me Ryan for short.
+
+00:00:06.000 --> 00:00:16.000
+ So here's the quick demo for the AI Voice Receptionist that we created by the help of Claude, of course.
+
+00:00:16.000 --> 00:00:24.000
+ And let me explain you the whole system and the visual map.
+
+00:00:24.000 --> 00:00:30.000
+ So first, this is the full flow. As you can see, patient fills up the form.
+
+00:00:30.000 --> 00:00:34.000
+ And after five seconds, boom, it will receive an AI call from Vapi.
+
+00:00:34.000 --> 00:00:37.000
+ Appointment will be booked in the CRM.
+
+00:00:37.000 --> 00:00:43.000
+ So under the hood, we are going to use HighLevel as the CRM captures the form, triggers the automation.
+
+00:00:44.000 --> 00:00:49.000
+ And then is the brain in the middle. It connects everything.
+
+00:00:49.000 --> 00:00:54.000
+ It fires the outbound call, handle errors, and logs the data.
+
+00:00:54.000 --> 00:00:59.000
+ And for the Vapi, that's Emma. It's going to be our outbound voice AI.
+
+00:01:00.000 --> 00:01:03.000
+ And she's not reading from a script.
+
+00:01:03.000 --> 00:01:12.000
+ She's thinking. She calls the patient, has a real conversation, and actually checks HighLevel, real-time calendar.
+
+00:01:12.000 --> 00:01:16.000
+ And also Superbase, everything gets logged in here.
+
+00:01:17.000 --> 00:01:22.000
+ Transcript, recording, information, outcome, sentiment, and the full audit trail.
+
+00:01:22.000 --> 00:01:34.000
+ So the reasoning of our receptionist is GPT-40 mini, Deepgram for the voice and listening.
+
+00:01:36.000 --> 00:01:44.000
+ And here for the data trail, after the end of the call, you'll have the appointment, internal notes,
+
+00:01:44.000 --> 00:01:53.000
+ and internal comment on the CRM side, and Superbase for the calls, role, contacts, and appointments.
+
+00:01:54.000 --> 00:02:00.000
+ AI analysis for the outcome sentiment, cost of the Vapi call, and the transcript.
+
+00:02:01.000 --> 00:02:04.000
+ And yeah, so let me show you how this works live.
+
+00:02:06.000 --> 00:02:16.000
+ So let's go ahead and go to the form as the initial entry of our flow.
+
+00:02:16.000 --> 00:02:17.000
+ All right.
+
+00:02:17.000 --> 00:02:19.000
+ So let me click Submit from here.
+
+00:02:21.000 --> 00:02:22.000
+ All right.
+
+00:02:22.000 --> 00:02:28.000
+ And as you can see, it should run on high level on NNN.
+
+00:02:28.000 --> 00:02:33.000
+ And let me quickly prepare my phone here.
+
+00:02:40.000 --> 00:02:41.000
+ All right.
+
+00:02:41.000 --> 00:02:43.000
+ I received the call after a few seconds.
+
+00:02:44.000 --> 00:02:46.000
+ So let me just press any key to connect.
+
+00:02:47.000 --> 00:02:48.000
+ Press any key here.
+
+00:02:50.000 --> 00:02:50.000
+ Hi, Mark.
+
+00:02:50.000 --> 00:02:52.000
+ This is Emma from Riley Coptic Surgery.
+
+00:02:52.000 --> 00:02:55.000
+ I saw the form you just submitted about breast augmentation.
+
+00:02:56.000 --> 00:03:00.000
+ Let us get you booked for a free discovery call with Dr. Riley Smith right now.
+
+00:03:00.000 --> 00:03:02.000
+ I have a few slots available.
+
+00:03:02.000 --> 00:03:04.000
+ Do you prefer mornings or afternoons?
+
+00:03:05.000 --> 00:03:07.000
+ Afternoon work for me.
+
+00:03:13.000 --> 00:03:17.000
+ The nearest opening I have is on Monday, June 8th.
+
+00:03:17.000 --> 00:03:24.000
+ I have slots available at 11 a.m., 12 p.m., or 1 p.m. Pacific time.
+
+00:03:24.000 --> 00:03:24.000
+ Would one of those work?
+
+00:03:24.000 --> 00:03:26.000
+ Do any of those hands work for you?
+
+00:03:29.000 --> 00:03:31.000
+ 8 a.m.?
+
+00:03:34.000 --> 00:03:35.000
+ Of course.
+
+00:03:35.000 --> 00:03:37.000
+ Let me find another option for you.
+
+00:03:37.000 --> 00:03:44.000
+ The next available times on Monday, June 8th, are 11 a.m., 12 p.m., or 1 p.m. Pacific time.
+
+00:03:45.000 --> 00:03:46.000
+ Would one of those work?
+
+00:03:46.000 --> 00:03:48.000
+ How about 1 p.m.?
+
+00:03:50.000 --> 00:03:53.000
+ How about 1 p.m.?
+
+00:03:53.000 --> 00:03:54.000
+ Great.
+
+00:03:55.000 --> 00:04:02.000
+ Just to confirm, we'll schedule your free discovery call for Monday, June 8th at 1 p.m. Pacific time.
+
+00:04:02.000 --> 00:04:03.000
+ Is that correct?
+
+00:04:05.000 --> 00:04:06.000
+ No.
+
+00:04:06.000 --> 00:04:07.000
+ Can we do Wednesday instead?
+
+00:04:08.000 --> 00:04:08.000
+ I'm sorry.
+
+00:04:12.000 --> 00:04:13.000
+ Of course.
+
+00:04:13.000 --> 00:04:14.000
+ Let me find another option for you.
+
+00:04:15.000 --> 00:04:18.000
+ I'll check the availability for Wednesday, June 10th.
+
+00:04:18.000 --> 00:04:19.000
+ One moment, please.
+
+00:04:20.000 --> 00:04:25.000
+ I have found an opening on Wednesday, June 10th at 12 p.m. Pacific time.
+
+00:04:26.000 --> 00:04:27.000
+ Would you like me to book that for you?
+
+00:04:28.000 --> 00:04:28.000
+ All right.
+
+00:04:28.000 --> 00:04:29.000
+ Yes, I think that's fine.
+
+00:04:30.000 --> 00:04:32.000
+ I can do that.
+
+00:04:39.000 --> 00:04:40.000
+ Perfect, Mark.
+
+00:04:41.000 --> 00:04:47.000
+ Your free discovery call is confirmed for Wednesday, June 10th at 12 p.m. Pacific time.
+
+00:04:47.000 --> 00:04:50.000
+ You will receive a confirmation shortly.
+
+00:04:50.000 --> 00:04:54.000
+ If you have any questions or need assistance before then, feel free to reach out.
+
+00:04:55.000 --> 00:04:55.000
+ Have a great day.
+
+00:04:56.000 --> 00:04:57.000
+ You too have a great day.
+
+00:04:57.000 --> 00:04:58.000
+ Bye.
+
+00:05:02.000 --> 00:05:03.000
+ Thank you, Mark.
+
+00:05:03.000 --> 00:05:04.000
+ Have a wonderful day.
+
+00:05:05.000 --> 00:05:05.000
+ All right.
+
+00:05:05.000 --> 00:05:08.000
+ So here, let me check the CRM.
+
+00:05:08.000 --> 00:05:11.000
+ Let's see if Emma really books our appointment.
+
+00:05:12.000 --> 00:05:13.000
+ And all right.
+
+00:05:13.000 --> 00:05:16.000
+ The account was created under Mark Mas.
+
+00:05:16.000 --> 00:05:18.000
+ It's the same name on the form.
+
+00:05:18.000 --> 00:05:20.000
+ Let's see the CRM, how it looks like.
+
+00:05:22.000 --> 00:05:22.000
+ Okay.
+
+00:05:22.000 --> 00:05:30.000
+ So it seems like it created an opportunity and also an internal comment that we are interested
+
+00:05:30.000 --> 00:05:37.000
+ in the best augmentation and the summary of what we just talked about, which is changing
+
+00:05:37.000 --> 00:05:42.000
+ the day, the time, and ultimately agreed to June 10th at 12 p.m.
+
+00:05:42.000 --> 00:05:45.000
+ So let's check the appointment here.
+
+00:05:46.000 --> 00:05:57.000
+ So here, yeah, I can see it's correct, which is June 10th, 12 p.m. to 1 p.m. Pacific time.
+
+00:05:57.000 --> 00:05:58.000
+ That's great.
+
+00:05:58.000 --> 00:06:13.000
+ So let's go ahead and check now the CRM or the Superbase real quick if it's noted there.
+
+00:06:13.000 --> 00:06:14.000
+ Okay.
+
+00:06:14.000 --> 00:06:19.000
+ Let me show you the most recent one here.
+
+00:06:19.000 --> 00:06:19.000
+ Yeah.
+
+00:06:19.000 --> 00:06:26.000
+ So you can see under appointment table, you will be able to see here the schedule, appointment
+
+00:06:26.000 --> 00:06:32.000
+ ID, calendar ID, schedule time, duration of the call, and other information.
+
+00:06:32.000 --> 00:06:35.000
+ So you can see the name here under markmask.
+
+00:06:36.000 --> 00:06:37.000
+ That's our name.
+
+00:06:38.000 --> 00:06:43.000
+ And if you're going to go to the calls, you will see the information from Vapi as well
+
+00:06:43.000 --> 00:06:53.000
+ that the status was completed, the full transcript of our call, and the summary and other information
+
+00:06:53.000 --> 00:06:58.000
+ that will be really useful for our metrics.
+
+00:06:58.000 --> 00:07:07.000
+ And also the contact name will be here under contacts, the name, phone number, email, GHL
+
+00:07:07.000 --> 00:07:11.000
+ ID, and other important information as well.
+
+00:07:12.000 --> 00:07:17.000
+ So yeah, it perfectly shows us the database as well that it really works.
+
+00:07:19.000 --> 00:07:21.000
+ And yeah, that's it.
+
+00:07:21.000 --> 00:07:28.000
+ And hope that I'll be able to help you with your automation needs as well.
+
+00:07:29.000 --> 00:07:30.000
+ Thank you so much for watching.
+
+00:07:30.000 --> 00:07:31.000
+ Have a good one.
+
+00:07:31.000 --> 00:07:31.000
+ Bye-bye.

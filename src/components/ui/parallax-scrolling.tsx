@@ -407,7 +407,7 @@ export function ParallaxComponent() {
                   that need every lead answered, routed, and followed up automatically.
                 </p>
                 <div className="parallax__hero-actions">
-                  <a href="#projects" className="btn-primary">
+                  <a href="#casestudies" className="btn-primary">
                     View case studies
                     <ArrowUpRight className="w-4 h-4" aria-hidden />
                   </a>

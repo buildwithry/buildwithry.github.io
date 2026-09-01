@@ -32,9 +32,33 @@ export interface ProjectItem {
   platform: string;
   detailedWorkflow: string[];
   videoUrl?: string;
+  videoFileUrl?: string;
+  captionFileUrl?: string;
   sampleLinks?: { label: string; url: string }[];
   isFeatured?: boolean;
 }
+
+const CaseStudyVideo = ({ src, captions, poster, title }: { src: string; captions?: string; poster: string; title: string }) => (
+  <video
+    src={src}
+    poster={poster}
+    className="block w-full aspect-[640/285] bg-[#08090a] object-contain"
+    controls
+    playsInline
+    autoPlay
+    preload="metadata"
+    aria-label={title}
+    onLoadedMetadata={(event) => {
+      event.currentTarget.defaultPlaybackRate = 1.5;
+      event.currentTarget.playbackRate = 1.5;
+      // The dialog opens from the card click, so this remains a user-initiated
+      // playback request while avoiding an extra click on the video controls.
+      void event.currentTarget.play().catch(() => undefined);
+    }}
+  >
+    {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
+  </video>
+);
 
 const projects: ProjectItem[] = [
   {
@@ -50,6 +74,8 @@ const projects: ProjectItem[] = [
     automationImage: vapiThumbnail,
     platform: "VAPI + n8n + GHL + Supabase",
     videoUrl: "https://kommodo.ai/recordings/XxGUQuRANUup1LGh0Tg9?onlyRecording=1",
+    videoFileUrl: "/videos/vapi-ai-receptionist-demo-web.mp4",
+    captionFileUrl: "/videos/vapi-ai-receptionist-demo.vtt",
     detailedWorkflow: ["Inbound call routed to VAPI AI receptionist", "AI greets caller and qualifies the inquiry", "n8n webhook triggered with structured call data", "Contact created or updated in GoHighLevel", "Appointment booked into GHL calendar via voice", "Conversation transcript stored in Supabase", "Follow-up SMS/email sequence triggered in GHL", "Refined prompts and integrations for production reliability"],
     isFeatured: true,
   },
@@ -66,6 +92,8 @@ const projects: ProjectItem[] = [
     automationImage: metaReceptionistThumbnail,
     platform: "GHL + n8n + Meta APIs",
     videoUrl: "https://kommodo.ai/recordings/0n2i09stXxdQADTRfDgV?onlyRecording=1",
+    videoFileUrl: "/videos/meta-receptionist-demo-web.mp4",
+    captionFileUrl: "/videos/meta-receptionist-demo.vtt",
     detailedWorkflow: [
       "Monitors Instagram and Facebook comments and direct messages",
       "AI classifies intent and identifies interested leads",
@@ -90,6 +118,8 @@ const projects: ProjectItem[] = [
     automationImage: ghlConversationAiThumbnail,
     platform: "GoHighLevel Conversation AI (Ava)",
     videoUrl: "https://kommodo.ai/recordings/xPGDgbjahr1RKd5XzECV?onlyRecording=1",
+    videoFileUrl: "/videos/ghl-agent-ava-demo-web.mp4",
+    captionFileUrl: "/videos/ghl-agent-ava-demo.vtt",
     detailedWorkflow: [
       "Lead messages in via SMS, Instagram, Messenger, or web chat",
       "Ava responds instantly with a natural, on-brand greeting",
@@ -254,7 +284,7 @@ const Projects = () => {
   }, [activeCategory]);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
+    <section id="casestudies" ref={sectionRef} className="relative py-32 px-6 sm:px-8 bg-[#08090a] hairline-top overflow-hidden">
       <div className="max-w-[1200px] mx-auto relative">
         {/* Section Header — wider vertical rhythm ported from Xenith's Work section
             (layout-manifest.json: y:6334, h:3800 — spacious grid, not dense) */}
@@ -350,7 +380,7 @@ const Projects = () => {
 
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                             <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
-                              <span>View Project</span>
+                              <span>{project.videoUrl ? "Play Project Video" : "View Project Image"}</span>
                               {project.videoUrl ? (
                                 <Play className="w-4 h-4 fill-current" />
                               ) : (
@@ -371,29 +401,31 @@ const Projects = () => {
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="!block !w-[calc(100%-2rem)] !max-w-4xl !max-h-[min(90vh,900px)] !overflow-y-scroll overscroll-y-contain touch-pan-y bg-[#0f1011] p-5 sm:p-6 pr-6 sm:pr-8 text-[#d0d6e0] border border-[#23252a] rounded-xl">
-                      <DialogHeader>
+                    <DialogContent className="!flex !w-[calc(100%-2rem)] !max-w-4xl !max-h-[calc(100dvh-2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-5 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
+                      <DialogHeader className="shrink-0 pr-10">
                         <DialogTitle className="text-2xl font-medium tracking-tight text-white">
                           {project.title}
                         </DialogTitle>
-                        <DialogDescription className="text-sm text-[#8a8f98]">
+                        <DialogDescription className="text-[13px] leading-5 text-[#aeb7c3]">
                           {project.client} • {project.category} • {project.platform}
                         </DialogDescription>
                       </DialogHeader>
 
-                      <p className="text-base text-[#d0d6e0] leading-[1.61]">
+          <div
+            className="case-study-dialog-scroll mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-2 sm:pr-3"
+            data-lenis-prevent
+          >
+                      <p className="text-[16px] leading-6 text-[#e2e7ee]">
                         {project.description}
                       </p>
 
                       {project.videoUrl ? (
                         <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                          <iframe
-                            src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")}
-                            title={`${project.title} video demo`}
-                            className="block w-full aspect-[640/285] border-0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                            allowFullScreen
-                          />
+                          {project.videoFileUrl ? (
+                            <CaseStudyVideo src={project.videoFileUrl} captions={project.captionFileUrl} poster={project.automationImage} title={`${project.title} video demo`} />
+                          ) : (
+                            <iframe src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")} title={`${project.title} video demo`} className="block w-full aspect-[640/285] border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
+                          )}
                         </div>
                       ) : (
                         <div className="my-2">
@@ -408,18 +440,18 @@ const Projects = () => {
                       <div className="grid md:grid-cols-2 gap-6 mt-2 pt-4 hairline-top">
                         <div className="space-y-4">
                           <div>
-                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Challenge</h4>
-                            <p className="text-sm text-[#8a8f98] leading-relaxed">{project.problem}</p>
+                            <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Challenge</h4>
+                            <p className="text-[15px] leading-6 text-[#b8c0cc]">{project.problem}</p>
                           </div>
                           <div>
-                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Solution</h4>
-                            <p className="text-sm text-[#8a8f98] leading-relaxed">{project.solution}</p>
+                            <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Solution</h4>
+                            <p className="text-[15px] leading-6 text-[#b8c0cc]">{project.solution}</p>
                           </div>
                           <div>
-                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">What the system does</h4>
+                          <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">What the system does</h4>
                             <ul className="space-y-1.5">
                               {project.features.map((feat, fIndex) => (
-                                <li key={fIndex} className="text-xs text-[#8a8f98] flex items-start">
+                                <li key={fIndex} className="flex items-start text-[15px] leading-6 text-[#b8c0cc]">
                                   <span className="text-[#f1eadc] mr-1.5">✓</span>
                                   <span>{feat}</span>
                                 </li>
@@ -429,16 +461,17 @@ const Projects = () => {
                         </div>
 
                         <div>
-                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-2">Architecture Details</h4>
+                          <h4 className="mb-2 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Architecture Details</h4>
                           <ol className="space-y-2">
                             {project.detailedWorkflow.map((step, sIdx) => (
-                              <li key={sIdx} className="text-xs text-[#8a8f98] flex items-start">
+                              <li key={sIdx} className="flex items-start text-[15px] leading-6 text-[#b8c0cc]">
                                 <span className="font-medium text-white mr-2 flex-shrink-0">{sIdx + 1}.</span>
                                 <span>{step}</span>
                               </li>
                             ))}
                           </ol>
                         </div>
+                      </div>
                       </div>
                     </DialogContent>
                   </Dialog>
@@ -457,7 +490,7 @@ const Projects = () => {
                     image + a small discipline-tag overlay, subtle scale(1.002) on hover — no
                     body copy on the card itself; cards sit in a fixed-width horizontal rail,
                     694px each in the original, scaled here to fit this repo's content). Full
-                    case-study text stays in the dialog below; "View Project" is revealed on
+                    case-study text stays in the dialog below; a media-specific CTA is revealed on
                     hover instead of sitting on the page by default. */}
                 <Dialog>
                   <DialogTrigger asChild>
@@ -487,10 +520,10 @@ const Projects = () => {
                           </span>
                         </div>
 
-                        {/* Hover overlay: View Project */}
+                        {/* Hover overlay: the CTA states whether this opens a video or image case study. */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                           <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f1eadc] text-[#08090a] text-sm font-medium">
-                            <span>View Project</span>
+                            <span>{project.videoUrl ? "Play Project Video" : "View Project Image"}</span>
                             {project.videoUrl ? (
                               <Play className="w-4 h-4 fill-current" />
                             ) : (
@@ -512,29 +545,31 @@ const Projects = () => {
                     </div>
                   </DialogTrigger>
 
-                  <DialogContent className="!block !w-[calc(100%-2rem)] !max-w-4xl !max-h-[min(90vh,900px)] !overflow-y-scroll overscroll-y-contain touch-pan-y bg-[#0f1011] p-5 sm:p-6 pr-6 sm:pr-8 text-[#d0d6e0] border border-[#23252a] rounded-xl">
-                    <DialogHeader>
+                  <DialogContent className="!flex !w-[calc(100%-2rem)] !max-w-4xl !max-h-[calc(100dvh-2rem)] !flex-col !overflow-hidden bg-[#0f1011] p-5 sm:p-6 text-[#d0d6e0] border border-[#23252a] rounded-xl">
+                    <DialogHeader className="shrink-0 pr-10">
                       <DialogTitle className="text-2xl font-medium tracking-tight text-white">
                         {project.title}
                       </DialogTitle>
-                      <DialogDescription className="text-sm text-[#8a8f98]">
+                      <DialogDescription className="text-[13px] leading-5 text-[#aeb7c3]">
                         {project.client} • {project.category} • {project.platform}
                       </DialogDescription>
                     </DialogHeader>
 
-                    <p className="text-base text-[#d0d6e0] leading-[1.61]">
+          <div
+            className="case-study-dialog-scroll mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-2 sm:pr-3"
+            data-lenis-prevent
+          >
+                    <p className="text-[16px] leading-6 text-[#e2e7ee]">
                       {project.description}
                     </p>
 
                     {project.videoUrl ? (
                       <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                        <iframe
-                          src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")}
-                          title={`${project.title} video demo`}
-                          className="block w-full aspect-[640/285] border-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                          allowFullScreen
-                        />
+                        {project.videoFileUrl ? (
+                          <CaseStudyVideo src={project.videoFileUrl} captions={project.captionFileUrl} poster={project.automationImage} title={`${project.title} video demo`} />
+                        ) : (
+                          <iframe src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")} title={`${project.title} video demo`} className="block w-full aspect-[640/285] border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
+                        )}
                       </div>
                     ) : (
                       <div className="my-2">
@@ -551,7 +586,7 @@ const Projects = () => {
                       {project.technologies.map((tech, tIndex) => (
                         <span
                           key={tIndex}
-                          className="text-xs font-medium px-3 py-1 rounded-full border border-[#23252a] text-[#d0d6e0] bg-transparent"
+                          className="rounded-full border border-[#23252a] bg-transparent px-3 py-1 text-[13px] font-medium text-[#d0d6e0]"
                         >
                           {tech}
                         </span>
@@ -561,18 +596,18 @@ const Projects = () => {
                     <div className="grid md:grid-cols-2 gap-6 mt-2 pt-4 hairline-top">
                       <div className="space-y-4">
                         <div>
-                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Challenge</h4>
-                          <p className="text-sm text-[#8a8f98] leading-relaxed">{project.problem}</p>
+                          <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Challenge</h4>
+                          <p className="text-[15px] leading-6 text-[#b8c0cc]">{project.problem}</p>
                         </div>
                         <div>
-                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Solution</h4>
-                          <p className="text-sm text-[#8a8f98] leading-relaxed">{project.solution}</p>
+                          <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Solution</h4>
+                          <p className="text-[15px] leading-6 text-[#b8c0cc]">{project.solution}</p>
                         </div>
                         <div>
-                          <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">What the system does</h4>
+                          <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">What the system does</h4>
                           <ul className="space-y-1.5">
                             {project.features.map((feat, fIdx) => (
-                              <li key={fIdx} className="text-xs text-[#8a8f98] flex items-start">
+                              <li key={fIdx} className="flex items-start text-[15px] leading-6 text-[#b8c0cc]">
                                 <span className="text-[#f1eadc] mr-1.5">✓</span>
                                 <span>{feat}</span>
                               </li>
@@ -581,7 +616,7 @@ const Projects = () => {
                         </div>
                         {project.sampleLinks && (
                           <div>
-                            <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-1">Live Samples</h4>
+                            <h4 className="mb-1 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Live Samples</h4>
                             <div className="space-y-1">
                               {project.sampleLinks.map((link, lIndex) => (
                                 <a
@@ -589,7 +624,7 @@ const Projects = () => {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-xs text-[#f1eadc] hover:underline"
+                                  className="inline-flex items-center gap-1.5 text-[15px] leading-6 text-[#f1eadc] hover:underline"
                                 >
                                   <ExternalLink className="w-3.5 h-3.5" />
                                   <span>{link.label}</span>
@@ -601,10 +636,10 @@ const Projects = () => {
                       </div>
 
                       <div>
-                        <h4 className="font-medium text-sm text-white uppercase tracking-wider mb-2">Workflow Execution</h4>
+                        <h4 className="mb-2 text-[13px] font-semibold uppercase leading-5 tracking-wider text-white">Workflow Execution</h4>
                         <ol className="space-y-2">
                           {project.detailedWorkflow.map((step, sIndex) => (
-                            <li key={sIndex} className="text-xs text-[#8a8f98] flex items-start">
+                            <li key={sIndex} className="flex items-start text-[15px] leading-6 text-[#b8c0cc]">
                               <span className="font-medium text-white mr-2 flex-shrink-0">
                                 {sIndex + 1}.
                               </span>
@@ -613,6 +648,7 @@ const Projects = () => {
                           ))}
                         </ol>
                       </div>
+                    </div>
                     </div>
                   </DialogContent>
                 </Dialog>
