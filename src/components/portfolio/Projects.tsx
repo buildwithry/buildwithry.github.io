@@ -371,7 +371,7 @@ const Projects = () => {
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-[#0f1011] p-6 border border-[#23252a] rounded-xl">
+                    <DialogContent className="w-[calc(100%-2rem)] max-w-4xl max-h-[min(90vh,900px)] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#0f1011] p-5 sm:p-6 pr-6 sm:pr-8 text-[#d0d6e0] border border-[#23252a] rounded-xl">
                       <DialogHeader>
                         <DialogTitle className="text-2xl font-medium tracking-tight text-white">
                           {project.title}
@@ -386,15 +386,15 @@ const Projects = () => {
                       </p>
 
                       {project.videoUrl ? (
-                        <div className="relative w-full my-2 border border-[#23252a] overflow-hidden rounded-md" style={{ paddingBottom: "56.25%" }}>
-                          <iframe
-                            src={project.videoUrl}
-                            title={project.title}
-                            className="absolute inset-0 w-full h-full border-0 overflow-hidden"
-                            allow="autoplay; fullscreen"
-                            allowFullScreen
-                            scrolling="no"
-                          />
+                        <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
+                          <img src={project.automationImage} alt={`${project.title} demo preview`} className="block w-full aspect-video object-cover opacity-80" />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                            <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#f1eadc] px-5 py-2.5 text-sm font-medium text-[#08090a] transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f1eadc]">
+                              <Play className="h-4 w-4 fill-current" />
+                              Open video demo
+                              <ExternalLink className="h-4 w-4" />
+                            </a>
+                          </div>
                         </div>
                       ) : (
                         <div className="my-2">
@@ -513,7 +513,7 @@ const Projects = () => {
                     </div>
                   </DialogTrigger>
 
-                  <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-[#0f1011] p-6 border border-[#23252a] rounded-xl">
+                  <DialogContent className="w-[calc(100%-2rem)] max-w-4xl max-h-[min(90vh,900px)] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#0f1011] p-5 sm:p-6 pr-6 sm:pr-8 text-[#d0d6e0] border border-[#23252a] rounded-xl">
                     <DialogHeader>
                       <DialogTitle className="text-2xl font-medium tracking-tight text-white">
                         {project.title}
@@ -528,15 +528,15 @@ const Projects = () => {
                     </p>
 
                     {project.videoUrl ? (
-                      <div className="relative w-full my-2 border border-[#23252a] overflow-hidden rounded-md" style={{ paddingBottom: "56.25%" }}>
-                        <iframe
-                          src={project.videoUrl}
-                          title={project.title}
-                          className="absolute inset-0 w-full h-full border-0 overflow-hidden"
-                          allow="autoplay; fullscreen"
-                          allowFullScreen
-                          scrolling="no"
-                        />
+                      <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
+                        <img src={project.automationImage} alt={`${project.title} demo preview`} className="block w-full aspect-video object-cover opacity-80" />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/35">
+                          <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#f1eadc] px-5 py-2.5 text-sm font-medium text-[#08090a] transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f1eadc]">
+                            <Play className="h-4 w-4 fill-current" />
+                            Open video demo
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        </div>
                       </div>
                     ) : (
                       <div className="my-2">
