@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ExternalLink, Eye, Play, ArrowRight, Sparkles } from "lucide-react";
+import { ExternalLink, Eye, Play, ArrowRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,6 +12,10 @@ import zapierCaseStudy from "/lovable-uploads/2f07a1c7-8827-4169-9c4d-6353aa8245
 import makeCaseStudy from "/lovable-uploads/833c006f-8a7a-4522-8686-83e73cd9afa2.png";
 import n8nCaseStudy from "/lovable-uploads/7d1106cf-f77a-469f-9c81-5dbbcf6626a8.png";
 import ghlCaseStudy from "/lovable-uploads/0382c638-b3db-4b63-806e-a772fbaeb008.png";
+import a2pTwilio from "@/assets/A2P-Twilio.png";
+import a2pTwilioTwo from "@/assets/A2P-TWILIO2.png";
+import a2pTwilioThree from "@/assets/A2P-TWILIO3.png";
+import a2pLeadConnector from "@/assets/A2P-LC1.png";
 
 const vapiThumbnail = "/lovable-uploads/vapi-ai-receptionist.jpg";
 const asmrThumbnail = "/lovable-uploads/asmr-ai-video-creator-thumbnail.png";
@@ -34,6 +38,7 @@ export interface ProjectItem {
   videoUrl?: string;
   videoFileUrl?: string;
   captionFileUrl?: string;
+  galleryImages?: { src: string; alt: string }[];
   sampleLinks?: { label: string; url: string }[];
   isFeatured?: boolean;
 }
@@ -59,6 +64,102 @@ const CaseStudyVideo = ({ src, captions, poster, title }: { src: string; caption
     {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
   </video>
 );
+
+const ProjectMedia = ({ project }: { project: ProjectItem }) => {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
+  const scrollGallery = (direction: "left" | "right") => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+
+    const slides = Array.from(gallery.children) as HTMLElement[];
+    const currentIndex = slides.reduce((nearestIndex, slide, index) => (
+      Math.abs(slide.offsetLeft - gallery.offsetLeft - gallery.scrollLeft) <
+      Math.abs(slides[nearestIndex].offsetLeft - gallery.offsetLeft - gallery.scrollLeft)
+        ? index
+        : nearestIndex
+    ), 0);
+    const nextIndex = Math.min(Math.max(currentIndex + (direction === "left" ? -1 : 1), 0), slides.length - 1);
+
+    gallery.scrollTo({
+      left: slides[nextIndex].offsetLeft - gallery.offsetLeft,
+      behavior: "smooth",
+    });
+  };
+
+  if (project.videoUrl) {
+    return (
+      <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
+        {project.videoFileUrl ? (
+          <CaseStudyVideo src={project.videoFileUrl} captions={project.captionFileUrl} poster={project.automationImage} title={`${project.title} video demo`} />
+        ) : (
+          <iframe src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")} title={`${project.title} video demo`} className="block w-full aspect-[640/285] border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
+        )}
+      </div>
+    );
+  }
+
+  if (project.galleryImages?.length) {
+    return (
+      <div className="my-2 space-y-2">
+        <div className="group relative">
+          <div
+            ref={galleryRef}
+            aria-label={`${project.title} approval screenshots`}
+            className="flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            data-lenis-prevent
+          >
+            {project.galleryImages.map((image) => (
+              <figure key={image.src} className="w-full flex-none snap-start">
+                <button
+                  type="button"
+                  onClick={() => setSelectedImage(image)}
+                  aria-label={`Enlarge ${image.alt}`}
+                  className="group/image block w-full cursor-zoom-in overflow-hidden rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1eadc]"
+                >
+                  <img src={image.src} alt={image.alt} className="block w-full max-h-[60vh] rounded-md border border-[#23252a] object-contain transition-transform duration-300 group-hover/image:scale-[1.02]" />
+                </button>
+              </figure>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => scrollGallery("left")}
+            aria-label="Show previous approval screenshot"
+            className="absolute left-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/70 text-white opacity-100 shadow-lg transition-all duration-300 hover:-translate-x-1 hover:scale-110 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1eadc] sm:left-4 sm:opacity-0 sm:group-hover:opacity-100"
+          >
+            <ChevronLeft className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-0.5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollGallery("right")}
+            aria-label="Show next approval screenshot"
+            className="absolute right-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/70 text-white opacity-100 shadow-lg transition-all duration-300 hover:translate-x-1 hover:scale-110 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f1eadc] sm:right-4 sm:opacity-0 sm:group-hover:opacity-100"
+          >
+            <ChevronRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+          </button>
+        </div>
+        <p className="text-xs text-[#8a8f98]">Click a screenshot to enlarge. Swipe, scroll, or use the arrows to view all approvals.</p>
+        <Dialog open={Boolean(selectedImage)} onOpenChange={(open) => !open && setSelectedImage(null)}>
+          <DialogContent className="!w-[calc(100%_-_1rem)] !max-w-6xl !border-[#23252a] !bg-[#08090a] p-3 sm:p-5">
+            <DialogHeader className="sr-only">
+              <DialogTitle>{selectedImage?.alt}</DialogTitle>
+              <DialogDescription>Enlarged A2P approval screenshot</DialogDescription>
+            </DialogHeader>
+            {selectedImage && <img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[85dvh] w-full object-contain" />}
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
+
+  return (
+    <div className="my-2">
+      <img src={project.automationImage} alt={project.title} className="w-full max-h-[60vh] object-contain border border-[#23252a] rounded-md" />
+    </div>
+  );
+};
 
 const projects: ProjectItem[] = [
   {
@@ -217,6 +318,26 @@ const projects: ProjectItem[] = [
     automationImage: n8nCaseStudy,
     platform: "n8n + Telegram",
     detailedWorkflow: ["Expense submitted via Telegram message", "n8n extracts expense data and categorizes", "Data mapped and added to Google Sheets", "Daily expense summary generated at 8PM", "Weekly reports compiled every Sunday", "Monthly reports created on 1st of each month", "Automated Telegram notifications sent with summaries", "Budget alerts triggered when limits exceeded"]
+  },
+  {
+    id: "a2p-compliance-submissions",
+    title: "Twilio & LeadConnector A2P 10DLC Compliance",
+    description: "Service Businesses: Submitted and secured approval for Twilio and LeadConnector A2P 10DLC brands and campaigns, enabling compliant business messaging.",
+    technologies: ["Twilio", "LeadConnector", "A2P 10DLC", "GoHighLevel"],
+    features: ["Twilio A2P campaign approvals", "LeadConnector A2P 10DLC verification", "Campaign use-case submissions", "Compliant messaging setup"],
+    category: "Business Operations",
+    client: "Service Businesses",
+    problem: "Unregistered messaging brands and campaigns can restrict business SMS delivery and make it harder to communicate with leads and customers.",
+    solution: "Prepared and submitted A2P brand and campaign registrations in Twilio and LeadConnector, then verified approved status and messaging readiness.",
+    automationImage: a2pTwilio,
+    platform: "Twilio + LeadConnector",
+    detailedWorkflow: ["Gathered business, brand, and messaging use-case details", "Registered the business brand for A2P 10DLC", "Created campaign submissions aligned with the approved use case", "Configured the Twilio messaging service or LeadConnector phone system", "Monitored review status and corrected submission details where needed", "Verified approved campaigns and compliant messaging readiness"],
+    galleryImages: [
+      { src: a2pTwilio, alt: "Twilio A2P campaign approval status" },
+      { src: a2pTwilioTwo, alt: "Twilio A2P approved campaigns" },
+      { src: a2pTwilioThree, alt: "Twilio A2P campaign approval details" },
+      { src: a2pLeadConnector, alt: "LeadConnector A2P 10DLC compliance verified" }
+    ]
   }
 ];
 
@@ -367,7 +488,6 @@ const Projects = () => {
                           <img
                             src={project.automationImage}
                             alt={project.title}
-                            fetchPriority="high"
                             className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                           />
 
@@ -419,23 +539,7 @@ const Projects = () => {
                         {project.description}
                       </p>
 
-                      {project.videoUrl ? (
-                        <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                          {project.videoFileUrl ? (
-                            <CaseStudyVideo src={project.videoFileUrl} captions={project.captionFileUrl} poster={project.automationImage} title={`${project.title} video demo`} />
-                          ) : (
-                            <iframe src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")} title={`${project.title} video demo`} className="block w-full aspect-[640/285] border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
-                          )}
-                        </div>
-                      ) : (
-                        <div className="my-2">
-                          <img
-                            src={project.automationImage}
-                            alt={project.title}
-                            className="w-full max-h-[60vh] object-contain border border-[#23252a] rounded-md"
-                          />
-                        </div>
-                      )}
+                      <ProjectMedia project={project} />
 
                       <div className="grid md:grid-cols-2 gap-6 mt-2 pt-4 hairline-top">
                         <div className="space-y-4">
@@ -563,23 +667,7 @@ const Projects = () => {
                       {project.description}
                     </p>
 
-                    {project.videoUrl ? (
-                      <div className="relative w-full my-2 overflow-hidden rounded-md border border-[#2b3038] bg-[#08090a]">
-                        {project.videoFileUrl ? (
-                          <CaseStudyVideo src={project.videoFileUrl} captions={project.captionFileUrl} poster={project.automationImage} title={`${project.title} video demo`} />
-                        ) : (
-                          <iframe src={project.videoUrl.replace("https://kommodo.ai/recordings/", "https://kommodo.ai/embed/recordings/")} title={`${project.title} video demo`} className="block w-full aspect-[640/285] border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
-                        )}
-                      </div>
-                    ) : (
-                      <div className="my-2">
-                        <img
-                          src={project.automationImage}
-                          alt={`${project.title} full diagram`}
-                          className="w-full max-h-[60vh] object-contain border border-[#23252a] rounded-md"
-                        />
-                      </div>
-                    )}
+                    <ProjectMedia project={project} />
 
                     {/* Tech stack pill tags */}
                     <div className="flex flex-wrap gap-2">

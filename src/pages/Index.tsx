@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Preloader from "@/components/Preloader";
 import Navigation from "@/components/portfolio/Navigation";
 import { ParallaxComponent } from "@/components/ui/parallax-scrolling";
+import SteppedLogoMarquee from "@/components/ui/stepped-logo-marquee";
 import Projects from "@/components/portfolio/Projects";
 import Funnels from "@/components/portfolio/Funnels";
 import Services from "@/components/portfolio/Services";
@@ -48,6 +49,7 @@ const Index = () => {
       <Navigation />
       <main id="main-content" tabIndex={-1}>
         <ParallaxComponent />
+        <SteppedLogoMarquee />
         <Projects />
         <Services />
         <Process />
